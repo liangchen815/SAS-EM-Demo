@@ -1,0 +1,164 @@
+ 
+                                                                                                                                                                                                                                                                
+ 
+区间型变量的过滤限制
+（最多打印 500 个观测）
+
+变量             角色         最小值       最大值    过滤方法    保留缺失值    标签
+
+Age              INPUT         11.44        54.82     STDDEV         N         Age          
+CustomerID       INPUT     857712.45    940457.81     STDDEV         N         CustomerID   
+Num_Bathrooms    INPUT         -0.36         4.56     STDDEV         N         Num Bathrooms
+Num_Bedrooms     INPUT         -0.64         6.41     STDDEV         N         Num Bedrooms 
+Num_Cars         INPUT         -0.74         4.09     STDDEV         N         Num Cars     
+Num_Children     INPUT         -2.54         4.15     STDDEV         N         Num Children 
+Num_TVs          INPUT         -1.58         5.76     STDDEV         N         Num TVs      
+ 
+                                                                                                                                                                                                                                                                
+ 
+排除的分类值
+（最多打印 500 个观测）
+
+变量                   角色     水平                  训练计数    训练百分比    标签                   过滤方法
+
+Actor                  INPUT    _BLANK_                   8800      19.4162     Actor                          
+Director               INPUT    _BLANK_                  27720      61.1610     Director                       
+Education_Level        INPUT    GRADE SCHOOL                31       0.0684     Education Level         MINPCT 
+Education_Level        INPUT    TRADE SCHOOL                18       0.0397     Education Level         MINPCT 
+Education_Level        INPUT    _BLANK_                  42136      92.9683     Education Level                
+Gender                 INPUT    _BLANK_                  42170      93.0433     Gender                         
+Home_Ownership         INPUT    _BLANK_                  42136      92.9683     Home Ownership                 
+Internet_Connection    INPUT    _BLANK_                  42136      92.9683     Internet Connection            
+Marital_Status         INPUT    SEPARATED                   31       0.0684     Marital Status          MINPCT 
+Marital_Status         INPUT    _BLANK_                  42174      93.0521     Marital Status                 
+Movie                  INPUT    _BLANK_                      0       0.0000     Movie                          
+Movie_Selector         INPUT    _BLANK_                  42136      92.9683     Movie Selector                 
+PPV_Freq               INPUT    DAILY                        7       0.0154     PPV Freq                MINPCT 
+PPV_Freq               INPUT    _BLANK_                  42136      92.9683     PPV Freq                       
+Prerec_Buying_Freq     INPUT    DAILY                        2       0.0044     Prerec Buying Freq      MINPCT 
+Prerec_Buying_Freq     INPUT    _BLANK_                  42136      92.9683     Prerec Buying Freq             
+Prerec_Format          INPUT    BETAMAX                      9       0.0199     Prerec Format           MINPCT 
+Prerec_Format          INPUT    LASERDISK                    4       0.0088     Prerec Format           MINPCT 
+Prerec_Format          INPUT    OTHER                       19       0.0419     Prerec Format           MINPCT 
+Prerec_Format          INPUT    VIDEO CD                    21       0.0463     Prerec Format           MINPCT 
+Prerec_Format          INPUT    _BLANK_                  42136      92.9683     Prerec Format                  
+Prerec_Renting_Freq    INPUT    DAILY                       29       0.0640     Prerec Renting Freq     MINPCT 
+Prerec_Renting_Freq    INPUT    _BLANK_                  42136      92.9683     Prerec Renting Freq            
+Prerec_Viewing_Freq    INPUT    NEVER                       11       0.0243     Prerec Viewing Freq     MINPCT 
+Prerec_Viewing_Freq    INPUT    _BLANK_                  42136      92.9683     Prerec Viewing Freq            
+TV_Movie_Freq          INPUT    _BLANK_                  42136      92.9683     TV Movie Freq                  
+TV_Signal              INPUT    ANALOG SATELLITE            26       0.0574     TV Signal               MINPCT 
+TV_Signal              INPUT    _BLANK_                  42136      92.9683     TV Signal                      
+Theater_Freq           INPUT    DAILY                        3       0.0066     Theater Freq            MINPCT 
+Theater_Freq           INPUT    _BLANK_                  42136      92.9683     Theater Freq                   
+ 
+                                                                                                                                                                                                                                                                
+ 
+ 
+观测数
+
+数据角色    已过滤    已排除     DATA
+
+ TRAIN       2782      42541    45323
+ 
+                                                                                                                                                                                                                                                                
+ 
+原始数据和 FILTERED 数据的统计量
+（最多打印 500 个观测）
+
+数据角色=TRAIN 变量=Age
+
+统计量        原始的      已过滤
+
+非缺失值     3177.00     2782.00
+缺失值      42146.00        0.00
+最小值         20.00       20.00
+最大值         62.00       54.00
+均值           33.13       32.72
+标准差          7.23        6.81
+偏度            0.74        0.62
+峰度            0.32       -0.03
+
+
+数据角色=TRAIN 变量=CustomerID
+
+统计量          原始的       已过滤
+
+非缺失值      45323.00      2782.00
+缺失值            0.00         0.00
+最小值       877687.00    908397.00
+最大值       927818.00    927818.00
+均值         899085.13    915626.52
+标准差        13790.89      2822.00
+偏度              0.26         0.76
+峰度             -1.59         1.74
+
+
+数据角色=TRAIN 变量=Num_Bathrooms
+
+统计量        原始的      已过滤
+
+非缺失值     3187.00     2782.00
+缺失值      42136.00        0.00
+最小值          0.50        0.50
+最大值          5.00        4.50
+均值            2.10        2.06
+标准差          0.82        0.77
+偏度            0.46        0.23
+峰度            0.46       -0.26
+
+
+数据角色=TRAIN 变量=Num_Bedrooms
+
+统计量        原始的      已过滤
+
+非缺失值     3187.00     2782.00
+缺失值      42136.00        0.00
+最小值          1.00        1.00
+最大值         10.00        6.00
+均值            2.88        2.85
+标准差          1.18        1.13
+偏度            0.32        0.05
+峰度            0.67       -0.67
+
+
+数据角色=TRAIN 变量=Num_Cars
+
+统计量        原始的     已过滤
+
+非缺失值     3178.00    2782.00
+缺失值      42145.00       0.00
+最小值          0.00       0.00
+最大值          6.00       4.00
+均值            1.68       1.65
+标准差          0.81       0.73
+偏度            1.03       0.53
+峰度            2.84       0.63
+
+
+数据角色=TRAIN 变量=Num_Children
+
+统计量        原始的     已过滤
+
+非缺失值     3137.00    2782.00
+缺失值      42186.00       0.00
+最小值          0.00       0.00
+最大值          6.00       4.00
+均值            0.81       0.77
+标准差          1.11       1.06
+偏度            1.27       1.15
+峰度            1.06       0.29
+
+
+数据角色=TRAIN 变量=Num_TVs
+
+统计量        原始的     已过滤
+
+非缺失值     3167.00    2782.00
+缺失值      42156.00       0.00
+最小值          0.00       0.00
+最大值         10.00       5.00
+均值            2.09       2.01
+标准差          1.22       1.07
+偏度            1.38       0.83
+峰度            3.25       0.19

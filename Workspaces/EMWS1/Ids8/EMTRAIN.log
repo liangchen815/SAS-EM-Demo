@@ -1,0 +1,453 @@
+*------------------------------------------------------------*
+* 训练日志
+日期:       2013年05月18日
+时间:       15时23分56秒
+*------------------------------------------------------------*
+10564  proc freq data=EMWS1.Ids8_VariableSet noprint;
+10565  table ROLE*LEVEL/out=WORK.Ids8META;
+10566  run;
+
+NOTE: 从数据集 EMWS1.IDS8_VARIABLESET. 读取了 2 个观测
+NOTE: 数据集 WORK.IDS8META 有 2 个观测和 4 个变量。
+NOTE: “PROCEDURE FREQ”所用时间（总处理时间）:
+      实际时间          0.11 秒
+      CPU 时间          0.03 秒
+      
+
+10567  proc print data=WORK.Ids8META label noobs;
+10568  var ROLE LEVEL COUNT;
+10569  label ROLE = "%sysfunc(sasmsg(sashelp.dmine, meta_role_vlabel, NOQUOTE))" LEVEL = "%sysfunc(sasmsg(sashelp.dmine, meta_level_vlabel, NOQUOTE))" COUNT = "%sysfunc(sasmsg(sashelp.dmine, rpt_count_vlabel, NOQUOTE))";
+10570  title9 ' ';
+10571  title10 "%sysfunc(sasmsg(sashelp.dmine, rpt_varSummary_title  , NOQUOTE))";
+10572  run;
+
+NOTE: 从数据集 WORK.IDS8META. 读取了 2 个观测
+NOTE: PROCEDURE PRINT 已打印第 1 页。
+NOTE: “PROCEDURE PRINT”所用时间（总处理时间）:
+      实际时间          0.02 秒
+      CPU 时间          0.01 秒
+      
+
+10573  title10;
+
+10574  data _null_;
+10575  rc = libref("DATA");
+10576  call symput('_librc', strip(put(rc, best.)));
+10577  run;
+
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+10578  %let _engineTable =;
+10579  data _null_;
+10580  dsid = open("DATA.TECHNOLOGY");
+10581  if dsid then do;
+10582  call symput('_engineTable', attrc(dsid, 'ENGINE'));
+10583  dsid = close(dsid);
+10584  end;
+10585  run;
+
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+10586  %let _lasrFile=;
+10587  %let _sasiolaFile=;
+10588  data null_;
+10589  length lasrfile sasiolaFile $2000;
+10590  LASRFile = pathname("EMWS1")!!"\"!!"HPDM\"!!"hpdmlasr";
+10591  SASIOLAFile = pathname("EMWS1")!!"\"!!"HPDM\"!!'sasiola.sas';
+10592  call symput('_lasrFile', strip(lasrfile));
+10593  call symput('_sasiolaFile', strip(sasiolafile));
+10594  run;
+
+NOTE: 数据集 WORK.NULL_ 有 1 个观测和 2 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+10595  %let _UseGrid = 0;
+10596  %hpdm_performance(data=DATA.TECHNOLOGY, isGrid=_UseGrid);
+PERFORMANCE  DETAILS
+10597  %put &_UseGrid;
+0
+10598  %let em_idskey =;
+10599  data _null_;
+10600  set EMWS1.Ids8_VariableSet;
+10601  where ROLE = 'KEY';
+10602  call symput('em_idskey', strip(name));
+10603  run;
+
+NOTE: 从数据集 EMWS1.IDS8_VARIABLESET. 读取了 0 个观测
+      WHERE ROLE='KEY';
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.01 秒
+      
+
+10604  %let emexceptionstring=;
+10605  %EmAdviseColumns(DATA.TECHNOLOGY, adviseMode=BASIC, applyIntervalLevelLowerLimit=N, applyMaxPercentMissing=N, applyMaxClassLevels=N, identifyEmptyColumns=N, maxLevelDetection=0, outdata=EMWS1.Ids8_EMCMETADEFAULT, newdataflag=N);
+
+10606  %let SYSCC = 0;
+10607  %let _dsidTable = 0;
+10608  %let _engineTable =;
+10609  data _null_;
+10610  dsid = open('DATA.TECHNOLOGY');
+10611  call symput('_dsidTable', strip(put(dsid, best.)));
+10612  if dsid then do;
+10613  call symput('_engineTable', attrc(dsid, 'ENGINE'));
+10614  dsid = close(dsid);
+10615  end;
+10616  run;
+
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+10617  options fmterr;
+10618  data _metaTestView;
+10619  set DATA.TECHNOLOGY;
+10620  if _N_=1 then do;
+10621  output;
+10622  stop;
+10623  end;
+10624  run;
+
+NOTE: 从数据集 DATA.TECHNOLOGY. 读取了 1 个观测
+NOTE: 数据集 WORK._METATESTVIEW 有 1 个观测和 2 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+10625  proc contents data=DATA.TECHNOLOGY
+10626  out=WORK.M34ZOI45 noprint;
+10627  run;
+
+NOTE: 数据集 WORK.M34ZOI45 有 2 个观测和 40 个变量。
+NOTE: “PROCEDURE CONTENTS”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+10628  data WORK.M34ZOI45;
+10629  length NAME $ 64 TYPE $ 1 LABEL $ 200 FORMAT $ 20 INFORMAT $20 INDEX $ 1 INDEXTYPE $ 9;
+10630  label NAME =;
+10631  set WORK.M34ZOI45(keep=name type length label format formatl formatd informat informl informd idxusage rename=(type=itype));
+10632  if itype = 1 then type = 'N';
+10633  else type = 'C';
+10634  if formatl > 0 then do;
+10635  if format ne ' ' then format = strip(format)!!strip(put(formatl, best12.))!!'.'!!strip(put(formatd, best12.));
+10636  else format = strip(put(formatl, best12.))!!'.'!!strip(put(formatd, best12.));
+10637  end;
+10638  else if format ne '' then format = strip(format)!!'.';
+10639  if informl > 0 then do;
+10640  if informat ne ' ' then informat = strip(informat)!!strip(put(informl, best12.))!!'.'!!strip(put(informd, best12.));
+10641  else informat = strip(put(informl, best12.))!!'.'!!strip(put(informd, best12.));
+10642  end;
+10643  else if informat ne '' then informat = strip(informat)!!'.';
+10644  if idxusage = 'NONE' then index ="N";
+10645  else index = "Y";
+10646  indextype = idxusage;
+10647  drop idxusage itype formatl formatd informl informd;
+10648  run;
+
+NOTE: 从数据集 WORK.M34ZOI45. 读取了 2 个观测
+NOTE: 数据集 WORK.M34ZOI45 有 2 个观测和 8 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.01 秒
+      CPU 时间          0.00 秒
+      
+
+10649  data WORK.M2NVJUKS;
+10650  length UNAME $64;
+10651  set WORK.M2NVJUKS;
+10652  UNAME = upcase(NAME);
+10653  run;
+
+NOTE: 从数据集 WORK.M2NVJUKS. 读取了 2 个观测
+NOTE: 数据集 WORK.M2NVJUKS 有 2 个观测和 22 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.02 秒
+      CPU 时间          0.00 秒
+      
+
+10654  data WORK.M34ZOI45;
+10655  length UNAME $64;
+10656  set WORK.M34ZOI45;
+10657  UNAME = upcase(NAME);
+10658  run;
+
+NOTE: 从数据集 WORK.M34ZOI45. 读取了 2 个观测
+NOTE: 数据集 WORK.M34ZOI45 有 2 个观测和 9 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.01 秒
+      CPU 时间          0.00 秒
+      
+
+10670  data WORK.M2NVJUKS;
+10671  drop UNAME;
+10672  set WORK.M2NVJUKS;
+10673  run;
+
+NOTE: 从数据集 WORK.M2NVJUKS. 读取了 2 个观测
+NOTE: 数据集 WORK.M2NVJUKS 有 2 个观测和 21 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.01 秒
+      
+
+NOTE: “PROCEDURE DISPLAY”所用时间（总处理时间）:
+      实际时间          0.66 秒
+      CPU 时间          0.29 秒
+      
+
+
+10891  %EmAdviseTable(DATA.TECHNOLOGY, outdata=EMWS1.Ids8_EMTMETADEFAULT, newdataflag=N);
+
+10892  %let SYSCC = 0;
+10893  data EMWS1.Ids8_EMTMETADEFAULT;
+10894  set EMWS1.Ids8_EMTMETADEFAULT;
+10895  length LIBNAME $8;
+10896  LIBNAME = "DATA";
+10897  run;
+
+NOTE: 从数据集 EMWS1.IDS8_EMTMETADEFAULT. 读取了 1 个观测
+NOTE: 数据集 EMWS1.IDS8_EMTMETADEFAULT 有 1 个观测和 15 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.03 秒
+      CPU 时间          0.01 秒
+      
+
+NOTE: “PROCEDURE DISPLAY”所用时间（总处理时间）:
+      实际时间          0.61 秒
+      CPU 时间          0.15 秒
+      
+
+
+10926  data EMWS1.Ids8_EMCMETADEFAULT;
+10927  set EMWS1.Ids8_EMCMETADEFAULT;
+10928  label DROP = "%sysfunc(sasmsg(sashelp.dmine, meta_drop_vlabel, NOQUOTE))";
+10929  if DROP='' then DROP='N';
+10930  if type='C' and level='INTERVAL' then level='NOMINAL';
+10931  if type='C' and role='FREQ' then role='INPUT';
+10932  run;
+
+NOTE: 从数据集 EMWS1.IDS8_EMCMETADEFAULT. 读取了 2 个观测
+NOTE: 数据集 EMWS1.IDS8_EMCMETADEFAULT 有 2 个观测和 21 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.01 秒
+      CPU 时间          0.01 秒
+      
+
+10933  proc sort data=EMWS1.Ids8_EMCMETADEFAULT;
+10934  by NAME;
+10935  run;
+
+NOTE: 从数据集 EMWS1.IDS8_EMCMETADEFAULT. 读取了 2 个观测
+NOTE: 数据集 EMWS1.IDS8_EMCMETADEFAULT 有 2 个观测和 21 个变量。
+NOTE: “PROCEDURE SORT”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+10936  proc sort data=EMWS1.Ids8_VariableSet;
+10937  by NAME;
+10938  run;
+
+NOTE: 从数据集 EMWS1.IDS8_VARIABLESET. 读取了 2 个观测
+NOTE: 数据集 EMWS1.IDS8_VARIABLESET 有 2 个观测和 21 个变量。
+NOTE: “PROCEDURE SORT”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+10939  data EMWS1.Ids8_VariableSet;
+10940  merge EMWS1.Ids8_EMCMETADEFAULT(in=_a) EMWS1.Ids8_VariableSet(keep=NAME ROLE LEVEL ORDER DROP TYPE LOWERLIMIT UPPERLIMIT rename=(TYPE=OLDTYPE) in=_b);
+10941  by NAME;
+10942  if ^_a and _b then delete;
+10943  if type='C' and level='INTERVAL' then level='NOMINAL';
+10944  if type='C' and role='FREQ' then role='INPUT';
+10945  if (type ne oldtype) and (_a and _b) then do;
+10946  if type ='N' then level='INTERVAL';
+10947  end;
+10948  drop oldtype;
+10949  run;
+
+NOTE: 从数据集 EMWS1.IDS8_EMCMETADEFAULT. 读取了 2 个观测
+NOTE: 从数据集 EMWS1.IDS8_VARIABLESET. 读取了 2 个观测
+NOTE: 数据集 EMWS1.IDS8_VARIABLESET 有 2 个观测和 21 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.01 秒
+      CPU 时间          0.00 秒
+      
+
+A LIST()[11077] 
+10950  data EMWS1.Ids8_CMeta_DATA;
+10951  set WORK.M1YLWO_9;
+10952  drop DROP;
+10953  where DROP='N';
+10954  run;
+
+NOTE: 从数据集 WORK.M1YLWO_9. 读取了 2 个观测
+      WHERE DROP='N';
+NOTE: 数据集 EMWS1.IDS8_CMETA_DATA 有 2 个观测和 20 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.01 秒
+      CPU 时间          0.01 秒
+      
+
+A LIST()[11077] 
+*------------------------------------------------------------* 
+Ids8: 使用“DATA.TECHNOLOGY”数据源 
+*------------------------------------------------------------* 
+10955  *------------------------------------------------------------*;
+10956  * Ids8: 正在创建“DATA”数据;
+10957  *------------------------------------------------------------*;
+10958  data EMWS1.Ids8_DATA (label="")
+10959  / view=EMWS1.Ids8_DATA
+10960  ;
+10961  set DATA.TECHNOLOGY;
+10962  run;
+
+NOTE: DATA STEP 视图已保存在文件 EMWS1.IDS8_DATA 中。
+NOTE: 存储的 DATA STEP 视图无法在不同的操作系统下运行。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.01 秒
+      CPU 时间          0.01 秒
+      
+
+10963  data WORK.IDSOUTPUT;
+10964  length ATTRIBUTE $20 LABEL $50 VALUE $50;
+10965  label LABEL= "%sysfunc(sasmsg(sashelp.dmine, rpt_attribute_vlabel,   NOQUOTE))";
+10966  label VALUE= "%sysfunc(sasmsg(sashelp.dmine, rpt_value_vlabel,       NOQUOTE))";
+10967  ATTRIBUTE = 'OUTPUT';
+10968  LABEL = "%sysfunc(sasmsg(sashelp.dmine, rpt_labeloutput_value , NOQUOTE))";
+10969  VALUE = "EMWS1.Ids8_DATA";
+10970  output;
+10971  ATTRIBUTE = 'OUTPUTTYPE';
+10972  LABEL = "%sysfunc(sasmsg(sashelp.dmine, rpt_labeloutputtype_value, NOQUOTE))";
+10973  VALUE = "视图";
+10974  output;
+10975  ATTRIBUTE = 'DROPVARS';
+10976  LABEL = "%sysfunc(sasmsg(sashelp.dmine, rpt_labeldropvars_value, NOQUOTE))";
+10977  VALUE = "0";
+10978  output;
+10979  ATTRIBUTE = 'ROLE';
+10980  LABEL = "%sysfunc(sasmsg(sashelp.dmine, rpt_labelrole_value , NOQUOTE))";
+10981  VALUE = "原始";
+10982  output;
+10983  run;
+
+NOTE: 数据集 WORK.IDSOUTPUT 有 4 个观测和 3 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.01 秒
+      CPU 时间          0.01 秒
+      
+
+10984  proc print data=WORK.IDSOUTPUT noobs label;
+10985  var label value;
+10986  title9 ' ';
+10987  title10 "%sysfunc(sasmsg(sashelp.dmine, rpt_outTableAttr_title, NOQUOTE))";
+10988  run;
+
+NOTE: 从数据集 WORK.IDSOUTPUT. 读取了 4 个观测
+NOTE: PROCEDURE PRINT 已打印第 2 页。
+NOTE: “PROCEDURE PRINT”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+10989  title10;
+
+10990  proc contents noprint data=DATA.TECHNOLOGY out=WORK.IDSCONTENT(drop=NAME TYPE LENGTH VARNUM LABEL FORMAT FORMATL FORMATD INFORMAT INFORML INFORMD JUST NPOS);
+10991  run;
+
+NOTE: 数据集 WORK.IDSCONTENT 有 2 个观测和 27 个变量。
+NOTE: “PROCEDURE CONTENTS”所用时间（总处理时间）:
+      实际时间          0.01 秒
+      CPU 时间          0.00 秒
+      
+
+10992  data WORK.IDSCONTENT;
+10993  set WORK.IDSCONTENT end=eof;
+10994  if eof then do;
+10995  NVARS = _n_;
+10996  output;
+10997  end;
+10998  run;
+
+NOTE: 从数据集 WORK.IDSCONTENT. 读取了 2 个观测
+NOTE: 数据集 WORK.IDSCONTENT 有 1 个观测和 28 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.01 秒
+      CPU 时间          0.00 秒
+      
+
+10999  data WORK.IDSOUTPUT(keep=ATTRIBUTE LABEL VALUE);
+11000  length ATTRIBUTE $20 LABEL $50 VALUE $80;
+11001  label LABEL= "%sysfunc(sasmsg(sashelp.dmine, rpt_attribute_vlabel,   NOQUOTE))";
+11002  label VALUE= "%sysfunc(sasmsg(sashelp.dmine, rpt_value_vlabel,       NOQUOTE))";
+11003  ;
+11004  dsid = open("WORK.IDSCONTENT");
+11005  rc = fetch(dsid);
+11006  nvars = attrn(dsid, 'NVARS');
+11007  nobs = attrn(dsid, 'NOBS');
+11008  ATTRIBUTE = 'DATASOURCE';
+11009  LABEL = "%sysfunc(sasmsg(sashelp.dmine, meta_datasource_vlabel, NOQUOTE))";
+11010  VALUE="technology";
+11011  output;
+11012  ATTRIBUTE = '';
+11013  LABEL = '';
+11014  VALUE='';
+11015  output;
+11016  do i=1 to nvars;
+11017  ATTRIBUTE = varname(dsid, i);
+11018  LABEL = varlabel(dsid, i);
+11019  if vartype(dsid,i)='C' then do;
+11020  VALUE = getvarc(dsid, i);
+11021  end;
+11022  else do;
+11023  NVALUE = getvarn(dsid, i);
+11024  if ATTRIBUTE in('CRDATE', 'MODATE') then VALUE = left(put(NVALUE, NLDATM20.));
+11025  else VALUE = left(put(NVALUE, BEST12.));
+11026  end;
+11027  if ATTRIBUTE = 'NVARS' then do;
+11028  LABEL = "%sysfunc(sasmsg(sashelp.dmine, rpt_labelvariables_value, NOQUOTE))";
+11029  end;
+11030  output;
+11031  end;
+11032  dsid=close(dsid);
+11033  run;
+
+NOTE: 数据集 WORK.IDSOUTPUT 有 30 个观测和 3 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.01 秒
+      CPU 时间          0.01 秒
+      
+
+11034  proc print data=WORK.IDSOUTPUT noobs label;
+11035  var label value;
+11036  title9 ' ';
+11037  title10 "%sysfunc(sasmsg(sashelp.dmine, rpt_inTableAttr_title, NOQUOTE))";
+11038  run;
+
+NOTE: 从数据集 WORK.IDSOUTPUT. 读取了 30 个观测
+NOTE: PROCEDURE PRINT 已打印第 3 页。
+NOTE: “PROCEDURE PRINT”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+WORK_TPTRAIN WORK.WORK_TPTRAIN 
+WORK_TPTRAIN WORK.WORK_TPTRAIN WORK WORK_TPTRAIN 
+WORK.WORK_TPTRAIN WORK.WORK_TPTRAIN 
+WORK.WORK_TPTRAIN WORK.WORK_TPTRAIN WORK WORK_TPTRAIN 
+PERFORMANCE  DETAILS
+WORK.EM_DMDB WORK.EM_DMDB 
+WORK.EM_DMDB WORK.EM_DMDB WORK EM_DMDB 

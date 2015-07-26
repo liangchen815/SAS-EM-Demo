@@ -1,0 +1,1498 @@
+NOTE: “PROCEDURE PRINTTO”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+Traverser: 已调用 Traverser，MPCONNECT 命令是 !sascmdv -nosyntaxcheck -noasynchio -noobjectserver。 
+Traverser: 开始过程流遍历 
+11646      data _null_;
+MPRINT(EM_DIAGRAM):    data _null_;
+11647      file emwipmsg;
+MPRINT(EM_DIAGRAM):   file emwipmsg;
+11648      put '<Node Id="Ids8" Event="Update" Pid="" Gridid=""/>';
+MPRINT(EM_DIAGRAM):   put '<Node Id="Ids8" Event="Update" Pid="" Gridid=""/>';
+11649      run;
+MPRINT(EM_DIAGRAM):   run;
+
+NOTE: FILE EMWIPMSG 是:
+      Local Host Name=Leon-PC,
+      Local Host IP addr=fe80::9dbd:1e21:4c5d:e84e%15,
+      Peer Hostname Name=Leon-PC,
+      Peer IP addr=127.0.0.1,Peer Name=N/A,
+      Peer Portno=58181,Lrecl=256,Recfm=Variable
+
+NOTE: 有 1 条记录写入到 FILE EMWIPMSG 中。
+      最小记录长度是 49。
+      最大记录长度是 49。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.01 秒
+      CPU 时间          0.01 秒
+      
+
+11650      %let emloopmode =;
+*------------------------------------------------------------* 
+* 
+* Ids8 : Beginning update before running 
+* datetime : 18MAY2013:15:29:23 
+* 
+*------------------------------------------------------------* 
+MPRINT(EM_DIAGRAM):     filename _emtool_ 'E:\SASWorkSpace\MovieEM\Workspaces\EMWS1\Ids8\PROPERTIES.xml' encoding="UTF-8" NOBOM;
+*------------------------------------------------------------* 
+* 
+* Ids8 : End update 
+* datetime : 18MAY2013:15:29:23 
+* 
+*------------------------------------------------------------* 
+11652      %let _emdsep = \;
+11653      %em_getactionstatus(emlib =EMWS1, nodeid=Ids8);
+MPRINT(EM_DIAGRAM):   
+MPRINT(EM_GETACTIONSTATUS):   proc display c=sashelp.emutil.getactionstatus.scl;
+MPRINT(EM_GETACTIONSTATUS):   run;
+
+11654      %let em_Train = N;
+11655      %let em_Score = N;
+11656      %let em_Report = N;
+11657      %let em_Run = N;
+NOTE: “PROCEDURE DISPLAY”所用时间（总处理时间）:
+      实际时间          0.02 秒
+      CPU 时间          0.00 秒
+      
+
+MPRINT(EM_GETACTIONSTATUS):   
+MPRINT(EM_DIAGRAM):  ;
+
+11658      data _null_;
+MPRINT(EM_DIAGRAM):    data _null_;
+11659      file emwipmsg;
+MPRINT(EM_DIAGRAM):   file emwipmsg;
+11660      put '<Node Id="Ids8" Event="Complete" Pid="" Gridid=""/>';
+MPRINT(EM_DIAGRAM):   put '<Node Id="Ids8" Event="Complete" Pid="" Gridid=""/>';
+11661      run;
+MPRINT(EM_DIAGRAM):   run;
+
+NOTE: FILE EMWIPMSG 是:
+      Local Host Name=Leon-PC,
+      Local Host IP addr=fe80::9dbd:1e21:4c5d:e84e%15,
+      Peer Hostname Name=Leon-PC,
+      Peer IP addr=127.0.0.1,Peer Name=N/A,
+      Peer Portno=58181,Lrecl=256,Recfm=Variable
+
+NOTE: 有 1 条记录写入到 FILE EMWIPMSG 中。
+      最小记录长度是 51。
+      最大记录长度是 51。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+11662      data _null_;
+MPRINT(EM_DIAGRAM):    data _null_;
+11663      file emwipmsg;
+MPRINT(EM_DIAGRAM):   file emwipmsg;
+11664      put '<Node Id="Ids7" Event="Update" Pid="" Gridid=""/>';
+MPRINT(EM_DIAGRAM):   put '<Node Id="Ids7" Event="Update" Pid="" Gridid=""/>';
+11665      run;
+MPRINT(EM_DIAGRAM):   run;
+
+NOTE: FILE EMWIPMSG 是:
+      Local Host Name=Leon-PC,
+      Local Host IP addr=fe80::9dbd:1e21:4c5d:e84e%15,
+      Peer Hostname Name=Leon-PC,
+      Peer IP addr=127.0.0.1,Peer Name=N/A,
+      Peer Portno=58181,Lrecl=256,Recfm=Variable
+
+NOTE: 有 1 条记录写入到 FILE EMWIPMSG 中。
+      最小记录长度是 49。
+      最大记录长度是 49。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+11666      %let emloopmode =;
+*------------------------------------------------------------* 
+* 
+* Ids7 : Beginning update before running 
+* datetime : 18MAY2013:15:29:23 
+* 
+*------------------------------------------------------------* 
+MPRINT(EM_DIAGRAM):     filename _emtool_ 'E:\SASWorkSpace\MovieEM\Workspaces\EMWS1\Ids7\PROPERTIES.xml' encoding="UTF-8" NOBOM;
+*------------------------------------------------------------* 
+* 
+* Ids7 : End update 
+* datetime : 18MAY2013:15:29:23 
+* 
+*------------------------------------------------------------* 
+11668      %let _emdsep = \;
+11669      %em_getactionstatus(emlib =EMWS1, nodeid=Ids7);
+MPRINT(EM_DIAGRAM):   
+MPRINT(EM_GETACTIONSTATUS):   proc display c=sashelp.emutil.getactionstatus.scl;
+MPRINT(EM_GETACTIONSTATUS):   run;
+
+11670      %let em_Train = N;
+11671      %let em_Score = N;
+11672      %let em_Report = N;
+11673      %let em_Run = N;
+NOTE: “PROCEDURE DISPLAY”所用时间（总处理时间）:
+      实际时间          0.01 秒
+      CPU 时间          0.01 秒
+      
+
+MPRINT(EM_GETACTIONSTATUS):   
+MPRINT(EM_DIAGRAM):  ;
+
+11674      data _null_;
+MPRINT(EM_DIAGRAM):    data _null_;
+11675      file emwipmsg;
+MPRINT(EM_DIAGRAM):   file emwipmsg;
+11676      put '<Node Id="Ids7" Event="Complete" Pid="" Gridid=""/>';
+MPRINT(EM_DIAGRAM):   put '<Node Id="Ids7" Event="Complete" Pid="" Gridid=""/>';
+11677      run;
+MPRINT(EM_DIAGRAM):   run;
+
+NOTE: FILE EMWIPMSG 是:
+      Local Host Name=Leon-PC,
+      Local Host IP addr=fe80::9dbd:1e21:4c5d:e84e%15,
+      Peer Hostname Name=Leon-PC,
+      Peer IP addr=127.0.0.1,Peer Name=N/A,
+      Peer Portno=58181,Lrecl=256,Recfm=Variable
+
+NOTE: 有 1 条记录写入到 FILE EMWIPMSG 中。
+      最小记录长度是 51。
+      最大记录长度是 51。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+11678      data _null_;
+MPRINT(EM_DIAGRAM):    data _null_;
+11679      file emwipmsg;
+MPRINT(EM_DIAGRAM):   file emwipmsg;
+11680      put '<Node Id="Ids6" Event="Update" Pid="" Gridid=""/>';
+MPRINT(EM_DIAGRAM):   put '<Node Id="Ids6" Event="Update" Pid="" Gridid=""/>';
+11681      run;
+MPRINT(EM_DIAGRAM):   run;
+
+NOTE: FILE EMWIPMSG 是:
+      Local Host Name=Leon-PC,
+      Local Host IP addr=fe80::9dbd:1e21:4c5d:e84e%15,
+      Peer Hostname Name=Leon-PC,
+      Peer IP addr=127.0.0.1,Peer Name=N/A,
+      Peer Portno=58181,Lrecl=256,Recfm=Variable
+
+NOTE: 有 1 条记录写入到 FILE EMWIPMSG 中。
+      最小记录长度是 49。
+      最大记录长度是 49。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+11682      %let emloopmode =;
+*------------------------------------------------------------* 
+* 
+* Ids6 : Beginning update before running 
+* datetime : 18MAY2013:15:29:23 
+* 
+*------------------------------------------------------------* 
+MPRINT(EM_DIAGRAM):     filename _emtool_ 'E:\SASWorkSpace\MovieEM\Workspaces\EMWS1\Ids6\PROPERTIES.xml' encoding="UTF-8" NOBOM;
+*------------------------------------------------------------* 
+* 
+* Ids6 : End update 
+* datetime : 18MAY2013:15:29:23 
+* 
+*------------------------------------------------------------* 
+11684      %let _emdsep = \;
+11685      %em_getactionstatus(emlib =EMWS1, nodeid=Ids6);
+MPRINT(EM_DIAGRAM):   
+MPRINT(EM_GETACTIONSTATUS):   proc display c=sashelp.emutil.getactionstatus.scl;
+MPRINT(EM_GETACTIONSTATUS):   run;
+
+11686      %let em_Train = N;
+11687      %let em_Score = N;
+11688      %let em_Report = N;
+11689      %let em_Run = N;
+NOTE: “PROCEDURE DISPLAY”所用时间（总处理时间）:
+      实际时间          0.01 秒
+      CPU 时间          0.00 秒
+      
+
+MPRINT(EM_GETACTIONSTATUS):   
+MPRINT(EM_DIAGRAM):  ;
+
+11690      data _null_;
+MPRINT(EM_DIAGRAM):    data _null_;
+11691      file emwipmsg;
+MPRINT(EM_DIAGRAM):   file emwipmsg;
+11692      put '<Node Id="Ids6" Event="Complete" Pid="" Gridid=""/>';
+MPRINT(EM_DIAGRAM):   put '<Node Id="Ids6" Event="Complete" Pid="" Gridid=""/>';
+11693      run;
+MPRINT(EM_DIAGRAM):   run;
+
+NOTE: FILE EMWIPMSG 是:
+      Local Host Name=Leon-PC,
+      Local Host IP addr=fe80::9dbd:1e21:4c5d:e84e%15,
+      Peer Hostname Name=Leon-PC,
+      Peer IP addr=127.0.0.1,Peer Name=N/A,
+      Peer Portno=58181,Lrecl=256,Recfm=Variable
+
+NOTE: 有 1 条记录写入到 FILE EMWIPMSG 中。
+      最小记录长度是 51。
+      最大记录长度是 51。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+11694      data _null_;
+MPRINT(EM_DIAGRAM):    data _null_;
+11695      file emwipmsg;
+MPRINT(EM_DIAGRAM):   file emwipmsg;
+11696      put '<Node Id="Ids5" Event="Update" Pid="" Gridid=""/>';
+MPRINT(EM_DIAGRAM):   put '<Node Id="Ids5" Event="Update" Pid="" Gridid=""/>';
+11697      run;
+MPRINT(EM_DIAGRAM):   run;
+
+NOTE: FILE EMWIPMSG 是:
+      Local Host Name=Leon-PC,
+      Local Host IP addr=fe80::9dbd:1e21:4c5d:e84e%15,
+      Peer Hostname Name=Leon-PC,
+      Peer IP addr=127.0.0.1,Peer Name=N/A,
+      Peer Portno=58181,Lrecl=256,Recfm=Variable
+
+NOTE: 有 1 条记录写入到 FILE EMWIPMSG 中。
+      最小记录长度是 49。
+      最大记录长度是 49。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.01 秒
+      
+
+11698      %let emloopmode =;
+*------------------------------------------------------------* 
+* 
+* Ids5 : Beginning update before running 
+* datetime : 18MAY2013:15:29:23 
+* 
+*------------------------------------------------------------* 
+MPRINT(EM_DIAGRAM):     filename _emtool_ 'E:\SASWorkSpace\MovieEM\Workspaces\EMWS1\Ids5\PROPERTIES.xml' encoding="UTF-8" NOBOM;
+*------------------------------------------------------------* 
+* 
+* Ids5 : End update 
+* datetime : 18MAY2013:15:29:23 
+* 
+*------------------------------------------------------------* 
+11700      %let _emdsep = \;
+11701      %em_getactionstatus(emlib =EMWS1, nodeid=Ids5);
+MPRINT(EM_DIAGRAM):   
+MPRINT(EM_GETACTIONSTATUS):   proc display c=sashelp.emutil.getactionstatus.scl;
+MPRINT(EM_GETACTIONSTATUS):   run;
+
+11702      %let em_Train = N;
+11703      %let em_Score = N;
+11704      %let em_Report = N;
+11705      %let em_Run = N;
+NOTE: “PROCEDURE DISPLAY”所用时间（总处理时间）:
+      实际时间          0.01 秒
+      CPU 时间          0.01 秒
+      
+
+MPRINT(EM_GETACTIONSTATUS):   
+MPRINT(EM_DIAGRAM):  ;
+
+11706      data _null_;
+MPRINT(EM_DIAGRAM):    data _null_;
+11707      file emwipmsg;
+MPRINT(EM_DIAGRAM):   file emwipmsg;
+11708      put '<Node Id="Ids5" Event="Complete" Pid="" Gridid=""/>';
+MPRINT(EM_DIAGRAM):   put '<Node Id="Ids5" Event="Complete" Pid="" Gridid=""/>';
+11709      run;
+MPRINT(EM_DIAGRAM):   run;
+
+NOTE: FILE EMWIPMSG 是:
+      Local Host Name=Leon-PC,
+      Local Host IP addr=fe80::9dbd:1e21:4c5d:e84e%15,
+      Peer Hostname Name=Leon-PC,
+      Peer IP addr=127.0.0.1,Peer Name=N/A,
+      Peer Portno=58181,Lrecl=256,Recfm=Variable
+
+NOTE: 有 1 条记录写入到 FILE EMWIPMSG 中。
+      最小记录长度是 51。
+      最大记录长度是 51。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+11710      data _null_;
+MPRINT(EM_DIAGRAM):    data _null_;
+11711      run;
+MPRINT(EM_DIAGRAM):   run;
+
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+节点 Ids8 是最新的，无需运行。 
+节点 Ids7 是最新的，无需运行。 
+节点 Ids6 是最新的，无需运行。 
+节点 Ids5 是最新的，无需运行。 
+Traverser: 正在等待节点 MERGE 
+Traverser: 正在等待节点 FILTER 
+Traverser: 正在等待节点 PART 
+Traverser: 正在等待节点 NEURAL 
+traverser_readyNode_note 
+traverser_readyNode_note 
+traverser_readyNode_note 
+traverser_readyNode_note 
+11712      data _null_;
+MPRINT(EM_DIAGRAM):    data _null_;
+11713      file emwipmsg;
+MPRINT(EM_DIAGRAM):   file emwipmsg;
+11714      put '<Node Id="Ids4" Event="Update" Pid="" Gridid=""/>';
+MPRINT(EM_DIAGRAM):   put '<Node Id="Ids4" Event="Update" Pid="" Gridid=""/>';
+11715      run;
+MPRINT(EM_DIAGRAM):   run;
+
+NOTE: FILE EMWIPMSG 是:
+      Local Host Name=Leon-PC,
+      Local Host IP addr=fe80::9dbd:1e21:4c5d:e84e%15,
+      Peer Hostname Name=Leon-PC,
+      Peer IP addr=127.0.0.1,Peer Name=N/A,
+      Peer Portno=58181,Lrecl=256,Recfm=Variable
+
+NOTE: 有 1 条记录写入到 FILE EMWIPMSG 中。
+      最小记录长度是 49。
+      最大记录长度是 49。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+11716      %let emloopmode =;
+*------------------------------------------------------------* 
+* 
+* Ids4 : Beginning update before running 
+* datetime : 18MAY2013:15:29:24 
+* 
+*------------------------------------------------------------* 
+MPRINT(EM_DIAGRAM):     filename _emtool_ 'E:\SASWorkSpace\MovieEM\Workspaces\EMWS1\Ids4\PROPERTIES.xml' encoding="UTF-8" NOBOM;
+*------------------------------------------------------------* 
+* 
+* Ids4 : End update 
+* datetime : 18MAY2013:15:29:24 
+* 
+*------------------------------------------------------------* 
+11718      %let _emdsep = \;
+11719      %em_getactionstatus(emlib =EMWS1, nodeid=Ids4);
+MPRINT(EM_DIAGRAM):   
+MPRINT(EM_GETACTIONSTATUS):   proc display c=sashelp.emutil.getactionstatus.scl;
+MPRINT(EM_GETACTIONSTATUS):   run;
+
+11720      %let em_Train = N;
+11721      %let em_Score = N;
+11722      %let em_Report = N;
+11723      %let em_Run = N;
+NOTE: “PROCEDURE DISPLAY”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+MPRINT(EM_GETACTIONSTATUS):   
+MPRINT(EM_DIAGRAM):  ;
+
+11724      data _null_;
+MPRINT(EM_DIAGRAM):    data _null_;
+11725      file emwipmsg;
+MPRINT(EM_DIAGRAM):   file emwipmsg;
+11726      put '<Node Id="Ids4" Event="Complete" Pid="" Gridid=""/>';
+MPRINT(EM_DIAGRAM):   put '<Node Id="Ids4" Event="Complete" Pid="" Gridid=""/>';
+11727      run;
+MPRINT(EM_DIAGRAM):   run;
+
+NOTE: FILE EMWIPMSG 是:
+      Local Host Name=Leon-PC,
+      Local Host IP addr=fe80::9dbd:1e21:4c5d:e84e%15,
+      Peer Hostname Name=Leon-PC,
+      Peer IP addr=127.0.0.1,Peer Name=N/A,
+      Peer Portno=58181,Lrecl=256,Recfm=Variable
+
+NOTE: 有 1 条记录写入到 FILE EMWIPMSG 中。
+      最小记录长度是 51。
+      最大记录长度是 51。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+11728      data _null_;
+MPRINT(EM_DIAGRAM):    data _null_;
+11729      file emwipmsg;
+MPRINT(EM_DIAGRAM):   file emwipmsg;
+11730      put '<Node Id="Ids3" Event="Update" Pid="" Gridid=""/>';
+MPRINT(EM_DIAGRAM):   put '<Node Id="Ids3" Event="Update" Pid="" Gridid=""/>';
+11731      run;
+MPRINT(EM_DIAGRAM):   run;
+
+NOTE: FILE EMWIPMSG 是:
+      Local Host Name=Leon-PC,
+      Local Host IP addr=fe80::9dbd:1e21:4c5d:e84e%15,
+      Peer Hostname Name=Leon-PC,
+      Peer IP addr=127.0.0.1,Peer Name=N/A,
+      Peer Portno=58181,Lrecl=256,Recfm=Variable
+
+NOTE: 有 1 条记录写入到 FILE EMWIPMSG 中。
+      最小记录长度是 49。
+      最大记录长度是 49。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.01 秒
+      
+
+11732      %let emloopmode =;
+*------------------------------------------------------------* 
+* 
+* Ids3 : Beginning update before running 
+* datetime : 18MAY2013:15:29:24 
+* 
+*------------------------------------------------------------* 
+MPRINT(EM_DIAGRAM):     filename _emtool_ 'E:\SASWorkSpace\MovieEM\Workspaces\EMWS1\Ids3\PROPERTIES.xml' encoding="UTF-8" NOBOM;
+*------------------------------------------------------------* 
+* 
+* Ids3 : End update 
+* datetime : 18MAY2013:15:29:24 
+* 
+*------------------------------------------------------------* 
+11734      %let _emdsep = \;
+11735      %em_getactionstatus(emlib =EMWS1, nodeid=Ids3);
+MPRINT(EM_DIAGRAM):   
+MPRINT(EM_GETACTIONSTATUS):   proc display c=sashelp.emutil.getactionstatus.scl;
+MPRINT(EM_GETACTIONSTATUS):   run;
+
+11736      %let em_Train = N;
+11737      %let em_Score = N;
+11738      %let em_Report = N;
+11739      %let em_Run = N;
+NOTE: “PROCEDURE DISPLAY”所用时间（总处理时间）:
+      实际时间          0.01 秒
+      CPU 时间          0.01 秒
+      
+
+MPRINT(EM_GETACTIONSTATUS):   
+MPRINT(EM_DIAGRAM):  ;
+
+11740      data _null_;
+MPRINT(EM_DIAGRAM):    data _null_;
+11741      file emwipmsg;
+MPRINT(EM_DIAGRAM):   file emwipmsg;
+11742      put '<Node Id="Ids3" Event="Complete" Pid="" Gridid=""/>';
+MPRINT(EM_DIAGRAM):   put '<Node Id="Ids3" Event="Complete" Pid="" Gridid=""/>';
+11743      run;
+MPRINT(EM_DIAGRAM):   run;
+
+NOTE: FILE EMWIPMSG 是:
+      Local Host Name=Leon-PC,
+      Local Host IP addr=fe80::9dbd:1e21:4c5d:e84e%15,
+      Peer Hostname Name=Leon-PC,
+      Peer IP addr=127.0.0.1,Peer Name=N/A,
+      Peer Portno=58181,Lrecl=256,Recfm=Variable
+
+NOTE: 有 1 条记录写入到 FILE EMWIPMSG 中。
+      最小记录长度是 51。
+      最大记录长度是 51。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+11744      data _null_;
+MPRINT(EM_DIAGRAM):    data _null_;
+11745      file emwipmsg;
+MPRINT(EM_DIAGRAM):   file emwipmsg;
+11746      put '<Node Id="Ids2" Event="Update" Pid="" Gridid=""/>';
+MPRINT(EM_DIAGRAM):   put '<Node Id="Ids2" Event="Update" Pid="" Gridid=""/>';
+11747      run;
+MPRINT(EM_DIAGRAM):   run;
+
+NOTE: FILE EMWIPMSG 是:
+      Local Host Name=Leon-PC,
+      Local Host IP addr=fe80::9dbd:1e21:4c5d:e84e%15,
+      Peer Hostname Name=Leon-PC,
+      Peer IP addr=127.0.0.1,Peer Name=N/A,
+      Peer Portno=58181,Lrecl=256,Recfm=Variable
+
+NOTE: 有 1 条记录写入到 FILE EMWIPMSG 中。
+      最小记录长度是 49。
+      最大记录长度是 49。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+11748      %let emloopmode =;
+*------------------------------------------------------------* 
+* 
+* Ids2 : Beginning update before running 
+* datetime : 18MAY2013:15:29:24 
+* 
+*------------------------------------------------------------* 
+MPRINT(EM_DIAGRAM):     filename _emtool_ 'E:\SASWorkSpace\MovieEM\Workspaces\EMWS1\Ids2\PROPERTIES.xml' encoding="UTF-8" NOBOM;
+*------------------------------------------------------------* 
+* 
+* Ids2 : End update 
+* datetime : 18MAY2013:15:29:24 
+* 
+*------------------------------------------------------------* 
+11750      %let _emdsep = \;
+11751      %em_getactionstatus(emlib =EMWS1, nodeid=Ids2);
+MPRINT(EM_DIAGRAM):   
+MPRINT(EM_GETACTIONSTATUS):   proc display c=sashelp.emutil.getactionstatus.scl;
+MPRINT(EM_GETACTIONSTATUS):   run;
+
+11752      %let em_Train = N;
+11753      %let em_Score = N;
+11754      %let em_Report = N;
+11755      %let em_Run = N;
+NOTE: “PROCEDURE DISPLAY”所用时间（总处理时间）:
+      实际时间          0.01 秒
+      CPU 时间          0.00 秒
+      
+
+MPRINT(EM_GETACTIONSTATUS):   
+MPRINT(EM_DIAGRAM):  ;
+
+11756      data _null_;
+MPRINT(EM_DIAGRAM):    data _null_;
+11757      file emwipmsg;
+MPRINT(EM_DIAGRAM):   file emwipmsg;
+11758      put '<Node Id="Ids2" Event="Complete" Pid="" Gridid=""/>';
+MPRINT(EM_DIAGRAM):   put '<Node Id="Ids2" Event="Complete" Pid="" Gridid=""/>';
+11759      run;
+MPRINT(EM_DIAGRAM):   run;
+
+NOTE: FILE EMWIPMSG 是:
+      Local Host Name=Leon-PC,
+      Local Host IP addr=fe80::9dbd:1e21:4c5d:e84e%15,
+      Peer Hostname Name=Leon-PC,
+      Peer IP addr=127.0.0.1,Peer Name=N/A,
+      Peer Portno=58181,Lrecl=256,Recfm=Variable
+
+NOTE: 有 1 条记录写入到 FILE EMWIPMSG 中。
+      最小记录长度是 51。
+      最大记录长度是 51。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+11760      data _null_;
+MPRINT(EM_DIAGRAM):    data _null_;
+11761      file emwipmsg;
+MPRINT(EM_DIAGRAM):   file emwipmsg;
+11762      put '<Node Id="Ids" Event="Update" Pid="" Gridid=""/>';
+MPRINT(EM_DIAGRAM):   put '<Node Id="Ids" Event="Update" Pid="" Gridid=""/>';
+11763      run;
+MPRINT(EM_DIAGRAM):   run;
+
+NOTE: FILE EMWIPMSG 是:
+      Local Host Name=Leon-PC,
+      Local Host IP addr=fe80::9dbd:1e21:4c5d:e84e%15,
+      Peer Hostname Name=Leon-PC,
+      Peer IP addr=127.0.0.1,Peer Name=N/A,
+      Peer Portno=58181,Lrecl=256,Recfm=Variable
+
+NOTE: 有 1 条记录写入到 FILE EMWIPMSG 中。
+      最小记录长度是 48。
+      最大记录长度是 48。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+11764      %let emloopmode =;
+*------------------------------------------------------------* 
+* 
+* Ids : Beginning update before running 
+* datetime : 18MAY2013:15:29:24 
+* 
+*------------------------------------------------------------* 
+MPRINT(EM_DIAGRAM):     filename _emtool_ 'E:\SASWorkSpace\MovieEM\Workspaces\EMWS1\Ids\PROPERTIES.xml' encoding="UTF-8" NOBOM;
+*------------------------------------------------------------* 
+* 
+* Ids : End update 
+* datetime : 18MAY2013:15:29:24 
+* 
+*------------------------------------------------------------* 
+11766      %let _emdsep = \;
+11767      %em_getactionstatus(emlib =EMWS1, nodeid=Ids);
+MPRINT(EM_DIAGRAM):   
+MPRINT(EM_GETACTIONSTATUS):   proc display c=sashelp.emutil.getactionstatus.scl;
+MPRINT(EM_GETACTIONSTATUS):   run;
+
+11768      %let em_Train = N;
+11769      %let em_Score = N;
+11770      %let em_Report = N;
+11771      %let em_Run = N;
+NOTE: “PROCEDURE DISPLAY”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+MPRINT(EM_GETACTIONSTATUS):   
+MPRINT(EM_DIAGRAM):  ;
+
+11772      data _null_;
+MPRINT(EM_DIAGRAM):    data _null_;
+11773      file emwipmsg;
+MPRINT(EM_DIAGRAM):   file emwipmsg;
+11774      put '<Node Id="Ids" Event="Complete" Pid="" Gridid=""/>';
+MPRINT(EM_DIAGRAM):   put '<Node Id="Ids" Event="Complete" Pid="" Gridid=""/>';
+11775      run;
+MPRINT(EM_DIAGRAM):   run;
+
+NOTE: FILE EMWIPMSG 是:
+      Local Host Name=Leon-PC,
+      Local Host IP addr=fe80::9dbd:1e21:4c5d:e84e%15,
+      Peer Hostname Name=Leon-PC,
+      Peer IP addr=127.0.0.1,Peer Name=N/A,
+      Peer Portno=58181,Lrecl=256,Recfm=Variable
+
+NOTE: 有 1 条记录写入到 FILE EMWIPMSG 中。
+      最小记录长度是 50。
+      最大记录长度是 50。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+11776      data _null_;
+MPRINT(EM_DIAGRAM):    data _null_;
+11777      run;
+MPRINT(EM_DIAGRAM):   run;
+
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+节点 Ids4 是最新的，无需运行。 
+节点 Ids3 是最新的，无需运行。 
+节点 Ids2 是最新的，无需运行。 
+节点 Ids 是最新的，无需运行。 
+Traverser: 正在等待节点 FILTER 
+Traverser: 正在等待节点 PART 
+Traverser: 正在等待节点 NEURAL 
+traverser_readyNode_note 
+11778      data _null_;
+MPRINT(EM_DIAGRAM):    data _null_;
+11779      file emwipmsg;
+MPRINT(EM_DIAGRAM):   file emwipmsg;
+11780      put '<Node Id="Merge" Event="Update" Pid="" Gridid=""/>';
+MPRINT(EM_DIAGRAM):   put '<Node Id="Merge" Event="Update" Pid="" Gridid=""/>';
+11781      run;
+MPRINT(EM_DIAGRAM):   run;
+
+NOTE: FILE EMWIPMSG 是:
+      Local Host Name=Leon-PC,
+      Local Host IP addr=fe80::9dbd:1e21:4c5d:e84e%15,
+      Peer Hostname Name=Leon-PC,
+      Peer IP addr=127.0.0.1,Peer Name=N/A,
+      Peer Portno=58181,Lrecl=256,Recfm=Variable
+
+NOTE: 有 1 条记录写入到 FILE EMWIPMSG 中。
+      最小记录长度是 50。
+      最大记录长度是 50。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.01 秒
+      
+
+11782      %let emloopmode =;
+*------------------------------------------------------------* 
+* 
+* Merge : Beginning update before running 
+* datetime : 18MAY2013:15:29:24 
+* 
+*------------------------------------------------------------* 
+MPRINT(EM_DIAGRAM):     data WORK.Merge_FILTERSET;
+MPRINT(EM_DIAGRAM):   length PORT $32 USE $1;
+MPRINT(EM_DIAGRAM):   DROP DELTACODE APPLYDELTA APPLYSCORE IMPORTPORT export needupdate;
+MPRINT(EM_DIAGRAM):   set EMWS1.Ids_exportSet EMWS1.Ids2_exportSet EMWS1.Ids3_exportSet EMWS1.Ids4_exportSet EMWS1.Ids5_exportSet EMWS1.Ids6_exportSet EMWS1.Ids7_exportSet EMWS1.Ids8_exportSet ;
+MPRINT(EM_DIAGRAM):   where EXPORT = 'Y' ;
+MPRINT(EM_DIAGRAM):   drop export needupdate;
+MPRINT(EM_DIAGRAM):   port = upcase(trim(NODELABEL)!!'_'!!left(NODEPORT));
+MPRINT(EM_DIAGRAM):   if port = upcase("IDS_DATA") then USE="Y";
+MPRINT(EM_DIAGRAM):   else if port = upcase("IDS2_DATA") then USE="Y";
+MPRINT(EM_DIAGRAM):   else if port = upcase("IDS3_DATA") then USE="Y";
+MPRINT(EM_DIAGRAM):   else if port = upcase("IDS4_DATA") then USE="Y";
+MPRINT(EM_DIAGRAM):   else if port = upcase("IDS5_DATA") then USE="Y";
+MPRINT(EM_DIAGRAM):   else if port = upcase("IDS6_DATA") then USE="Y";
+MPRINT(EM_DIAGRAM):   else if port = upcase("IDS7_DATA") then USE="Y";
+MPRINT(EM_DIAGRAM):   else if port = upcase("IDS8_DATA") then USE="Y";
+MPRINT(EM_DIAGRAM):   else USE="Y";
+MPRINT(EM_DIAGRAM):   run;
+MPRINT(EM_DIAGRAM):   run;
+MPRINT(EM_DIAGRAM):    proc sql;
+MPRINT(EM_DIAGRAM):   create view work._base2JKJLPD as select * from WORK.M01UWOXZ order by PORT;
+MPRINT(EM_DIAGRAM):   create view work._comp2JKJLPD as select * from WORK.M3783MV2 order by PORT;
+MPRINT(EM_DIAGRAM):   quit;
+MPRINT(EM_DIAGRAM):    proc compare data=work._base2JKJLPD compare=work._comp2JKJLPD out=WORK._DIFF2Y2CJY2 noprint outnoequal outbase outcomp outdiff;
+MPRINT(EM_DIAGRAM):   id PORT;
+MPRINT(EM_DIAGRAM):   run;
+MPRINT(EM_DIAGRAM):    filename _emtool_ 'E:\SASWorkSpace\MovieEM\Workspaces\EMWS1\Merge\PROPERTIES.xml' encoding="UTF-8" NOBOM;
+*------------------------------------------------------------* 
+* 
+* Merge : End update 
+* datetime : 18MAY2013:15:29:24 
+* 
+*------------------------------------------------------------* 
+11827      %let _emdsep = \;
+11828      %em_getactionstatus(emlib =EMWS1, nodeid=Merge);
+MPRINT(EM_DIAGRAM):   
+MPRINT(EM_GETACTIONSTATUS):   proc display c=sashelp.emutil.getactionstatus.scl;
+MPRINT(EM_GETACTIONSTATUS):   run;
+
+11829      %let em_Train = N;
+11830      %let em_Score = N;
+11831      %let em_Report = N;
+11832      %let em_Run = N;
+NOTE: “PROCEDURE DISPLAY”所用时间（总处理时间）:
+      实际时间          0.01 秒
+      CPU 时间          0.01 秒
+      
+
+MPRINT(EM_GETACTIONSTATUS):   
+MPRINT(EM_DIAGRAM):  ;
+
+11833      data _null_;
+MPRINT(EM_DIAGRAM):    data _null_;
+11834      file emwipmsg;
+MPRINT(EM_DIAGRAM):   file emwipmsg;
+11835      put '<Node Id="Merge" Event="Complete" Pid="" Gridid=""/>';
+MPRINT(EM_DIAGRAM):   put '<Node Id="Merge" Event="Complete" Pid="" Gridid=""/>';
+11836      run;
+MPRINT(EM_DIAGRAM):   run;
+
+NOTE: FILE EMWIPMSG 是:
+      Local Host Name=Leon-PC,
+      Local Host IP addr=fe80::9dbd:1e21:4c5d:e84e%15,
+      Peer Hostname Name=Leon-PC,
+      Peer IP addr=127.0.0.1,Peer Name=N/A,
+      Peer Portno=58181,Lrecl=256,Recfm=Variable
+
+NOTE: 有 1 条记录写入到 FILE EMWIPMSG 中。
+      最小记录长度是 52。
+      最大记录长度是 52。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+11837      data _null_;
+MPRINT(EM_DIAGRAM):    data _null_;
+11838      run;
+MPRINT(EM_DIAGRAM):   run;
+
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+节点 Merge 是最新的，无需运行。 
+Traverser: 正在等待节点 PART 
+Traverser: 正在等待节点 NEURAL 
+traverser_readyNode_note 
+11839      data _null_;
+MPRINT(EM_DIAGRAM):    data _null_;
+11840      file emwipmsg;
+MPRINT(EM_DIAGRAM):   file emwipmsg;
+11841      put '<Node Id="Filter" Event="Update" Pid="" Gridid=""/>';
+MPRINT(EM_DIAGRAM):   put '<Node Id="Filter" Event="Update" Pid="" Gridid=""/>';
+11842      run;
+MPRINT(EM_DIAGRAM):   run;
+
+NOTE: FILE EMWIPMSG 是:
+      Local Host Name=Leon-PC,
+      Local Host IP addr=fe80::9dbd:1e21:4c5d:e84e%15,
+      Peer Hostname Name=Leon-PC,
+      Peer IP addr=127.0.0.1,Peer Name=N/A,
+      Peer Portno=58181,Lrecl=256,Recfm=Variable
+
+NOTE: 有 1 条记录写入到 FILE EMWIPMSG 中。
+      最小记录长度是 51。
+      最大记录长度是 51。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.01 秒
+      
+
+11843      %let emloopmode =;
+*------------------------------------------------------------* 
+* 
+* Filter : Beginning update before running 
+* datetime : 18MAY2013:15:29:25 
+* 
+*------------------------------------------------------------* 
+MPRINT(EM_DIAGRAM):     data WORK.Filter_FILTERSET;
+MPRINT(EM_DIAGRAM):   length PORT $32 USE $1;
+MPRINT(EM_DIAGRAM):   DROP DELTACODE APPLYDELTA APPLYSCORE IMPORTPORT;
+MPRINT(EM_DIAGRAM):   set EMWS1.Merge_exportSet ;
+MPRINT(EM_DIAGRAM):   PORT = '';
+MPRINT(EM_DIAGRAM):   USE = '';
+MPRINT(EM_DIAGRAM):   where role in( "RAW" "TRAIN" "VALIDATE" "TEST" ) and EXPORT = 'Y' ;
+MPRINT(EM_DIAGRAM):   run;
+MPRINT(EM_DIAGRAM):    filename _emtool_ 'E:\SASWorkSpace\MovieEM\Workspaces\EMWS1\Filter\PROPERTIES.xml' encoding="UTF-8" NOBOM;
+*------------------------------------------------------------* 
+* 
+* Filter : End update 
+* datetime : 18MAY2013:15:29:25 
+* 
+*------------------------------------------------------------* 
+11863      %let _emdsep = \;
+11864      %em_getactionstatus(emlib =EMWS1, nodeid=Filter);
+MPRINT(EM_DIAGRAM):   
+MPRINT(EM_GETACTIONSTATUS):   proc display c=sashelp.emutil.getactionstatus.scl;
+MPRINT(EM_GETACTIONSTATUS):   run;
+
+11865      %let em_Train = N;
+11866      %let em_Score = N;
+11867      %let em_Report = N;
+11868      %let em_Run = N;
+NOTE: “PROCEDURE DISPLAY”所用时间（总处理时间）:
+      实际时间          0.01 秒
+      CPU 时间          0.01 秒
+      
+
+MPRINT(EM_GETACTIONSTATUS):   
+MPRINT(EM_DIAGRAM):  ;
+
+11869      data _null_;
+MPRINT(EM_DIAGRAM):    data _null_;
+11870      file emwipmsg;
+MPRINT(EM_DIAGRAM):   file emwipmsg;
+11871      put '<Node Id="Filter" Event="Complete" Pid="" Gridid=""/>';
+MPRINT(EM_DIAGRAM):   put '<Node Id="Filter" Event="Complete" Pid="" Gridid=""/>';
+11872      run;
+MPRINT(EM_DIAGRAM):   run;
+
+NOTE: FILE EMWIPMSG 是:
+      Local Host Name=Leon-PC,
+      Local Host IP addr=fe80::9dbd:1e21:4c5d:e84e%15,
+      Peer Hostname Name=Leon-PC,
+      Peer IP addr=127.0.0.1,Peer Name=N/A,
+      Peer Portno=58181,Lrecl=256,Recfm=Variable
+
+NOTE: 有 1 条记录写入到 FILE EMWIPMSG 中。
+      最小记录长度是 53。
+      最大记录长度是 53。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+11873      data _null_;
+MPRINT(EM_DIAGRAM):    data _null_;
+11874      run;
+MPRINT(EM_DIAGRAM):   run;
+
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+节点 Filter 是最新的，无需运行。 
+Traverser: 正在等待节点 NEURAL 
+traverser_readyNode_note 
+11875      data _null_;
+MPRINT(EM_DIAGRAM):    data _null_;
+11876      file emwipmsg;
+MPRINT(EM_DIAGRAM):   file emwipmsg;
+11877      put '<Node Id="Part" Event="Update" Pid="" Gridid=""/>';
+MPRINT(EM_DIAGRAM):   put '<Node Id="Part" Event="Update" Pid="" Gridid=""/>';
+11878      run;
+MPRINT(EM_DIAGRAM):   run;
+
+NOTE: FILE EMWIPMSG 是:
+      Local Host Name=Leon-PC,
+      Local Host IP addr=fe80::9dbd:1e21:4c5d:e84e%15,
+      Peer Hostname Name=Leon-PC,
+      Peer IP addr=127.0.0.1,Peer Name=N/A,
+      Peer Portno=58181,Lrecl=256,Recfm=Variable
+
+NOTE: 有 1 条记录写入到 FILE EMWIPMSG 中。
+      最小记录长度是 49。
+      最大记录长度是 49。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+11879      %let emloopmode =;
+*------------------------------------------------------------* 
+* 
+* Part : Beginning update before running 
+* datetime : 18MAY2013:15:29:26 
+* 
+*------------------------------------------------------------* 
+MPRINT(EM_DIAGRAM):     data WORK.Part_FILTERSET;
+MPRINT(EM_DIAGRAM):   length PORT $32 USE $1;
+MPRINT(EM_DIAGRAM):   DROP DELTACODE APPLYDELTA APPLYSCORE IMPORTPORT;
+MPRINT(EM_DIAGRAM):   set EMWS1.Filter_exportSet ;
+MPRINT(EM_DIAGRAM):   PORT = '';
+MPRINT(EM_DIAGRAM):   USE = '';
+MPRINT(EM_DIAGRAM):   where role in( "RAW" "TRAIN" "DOCUMENT" ) and EXPORT = 'Y' ;
+MPRINT(EM_DIAGRAM):   run;
+MPRINT(EM_DIAGRAM):    filename _emtool_ 'E:\SASWorkSpace\MovieEM\Workspaces\EMWS1\Part\PROPERTIES.xml' encoding="UTF-8" NOBOM;
+*------------------------------------------------------------* 
+* 
+* Part : End update 
+* datetime : 18MAY2013:15:29:26 
+* 
+*------------------------------------------------------------* 
+11898      %let _emdsep = \;
+11899      %em_getactionstatus(emlib =EMWS1, nodeid=Part);
+MPRINT(EM_DIAGRAM):   
+MPRINT(EM_GETACTIONSTATUS):   proc display c=sashelp.emutil.getactionstatus.scl;
+MPRINT(EM_GETACTIONSTATUS):   run;
+
+11900      %let em_Train = N;
+11901      %let em_Score = N;
+11902      %let em_Report = N;
+11903      %let em_Run = N;
+NOTE: “PROCEDURE DISPLAY”所用时间（总处理时间）:
+      实际时间          0.01 秒
+      CPU 时间          0.00 秒
+      
+
+MPRINT(EM_GETACTIONSTATUS):   
+MPRINT(EM_DIAGRAM):  ;
+
+11904      data _null_;
+MPRINT(EM_DIAGRAM):    data _null_;
+11905      file emwipmsg;
+MPRINT(EM_DIAGRAM):   file emwipmsg;
+11906      put '<Node Id="Part" Event="Complete" Pid="" Gridid=""/>';
+MPRINT(EM_DIAGRAM):   put '<Node Id="Part" Event="Complete" Pid="" Gridid=""/>';
+11907      run;
+MPRINT(EM_DIAGRAM):   run;
+
+NOTE: FILE EMWIPMSG 是:
+      Local Host Name=Leon-PC,
+      Local Host IP addr=fe80::9dbd:1e21:4c5d:e84e%15,
+      Peer Hostname Name=Leon-PC,
+      Peer IP addr=127.0.0.1,Peer Name=N/A,
+      Peer Portno=58181,Lrecl=256,Recfm=Variable
+
+NOTE: 有 1 条记录写入到 FILE EMWIPMSG 中。
+      最小记录长度是 51。
+      最大记录长度是 51。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+11908      data _null_;
+MPRINT(EM_DIAGRAM):    data _null_;
+11909      run;
+MPRINT(EM_DIAGRAM):   run;
+
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+节点 Part 是最新的，无需运行。 
+traverser_readyNode_note 
+11910      data _null_;
+MPRINT(EM_DIAGRAM):    data _null_;
+11911      file emwipmsg;
+MPRINT(EM_DIAGRAM):   file emwipmsg;
+11912      put '<Node Id="Neural" Event="Update" Pid="" Gridid=""/>';
+MPRINT(EM_DIAGRAM):   put '<Node Id="Neural" Event="Update" Pid="" Gridid=""/>';
+11913      run;
+MPRINT(EM_DIAGRAM):   run;
+
+NOTE: FILE EMWIPMSG 是:
+      Local Host Name=Leon-PC,
+      Local Host IP addr=fe80::9dbd:1e21:4c5d:e84e%15,
+      Peer Hostname Name=Leon-PC,
+      Peer IP addr=127.0.0.1,Peer Name=N/A,
+      Peer Portno=58181,Lrecl=256,Recfm=Variable
+
+NOTE: 有 1 条记录写入到 FILE EMWIPMSG 中。
+      最小记录长度是 51。
+      最大记录长度是 51。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+11914      %let emloopmode =;
+*------------------------------------------------------------* 
+* 
+* Neural : Beginning update before running 
+* datetime : 18MAY2013:15:29:26 
+* 
+*------------------------------------------------------------* 
+MPRINT(EM_DIAGRAM):     data WORK.Neural_FILTERSET;
+MPRINT(EM_DIAGRAM):   length PORT $32 USE $1;
+MPRINT(EM_DIAGRAM):   DROP DELTACODE APPLYDELTA APPLYSCORE IMPORTPORT;
+MPRINT(EM_DIAGRAM):   set EMWS1.Part_exportSet ;
+MPRINT(EM_DIAGRAM):   PORT = '';
+MPRINT(EM_DIAGRAM):   USE = '';
+MPRINT(EM_DIAGRAM):   where role in( "RAW" "TRAIN" "VALIDATE" "TEST" ) and EXPORT = 'Y' ;
+MPRINT(EM_DIAGRAM):   run;
+NOTE: 该 SAS 会话使用的是 WORK 中的注册表，结束会话时将不会保存任何更改。
+11933      data _null_;
+MPRINT(EM_DIAGRAM):    data _null_;
+11934      set EMWS1.Part_CMeta_TRAIN (obs=1);
+MPRINT(EM_DIAGRAM):   set EMWS1.Part_CMeta_TRAIN (obs=1);
+11935      run;
+MPRINT(EM_DIAGRAM):   run;
+
+NOTE: 从数据集 EMWS1.PART_CMETA_TRAIN. 读取了 1 个观测
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+11936      data _null_;
+MPRINT(EM_DIAGRAM):    data _null_;
+11937      set EMWS1.Part_CMeta_TRAIN (obs=1);
+MPRINT(EM_DIAGRAM):   set EMWS1.Part_CMeta_TRAIN (obs=1);
+11938      run;
+MPRINT(EM_DIAGRAM):   run;
+
+NOTE: 从数据集 EMWS1.PART_CMETA_TRAIN. 读取了 1 个观测
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+11939      *------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):    *------------------------------------------------------------*;
+11940      * Neural: Update Variables Set;
+MPRINT(EM_DIAGRAM):   * Neural: Update Variables Set;
+11941      *------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+
+11942      data EMWS1.Neural_VariableSet;
+MPRINT(EM_DIAGRAM):    data EMWS1.Neural_VariableSet;
+11943      length USE $1;
+MPRINT(EM_DIAGRAM):   length USE $1;
+11944      label USE = "使用";
+MPRINT(EM_DIAGRAM):   label USE = "使用";
+11945      length REPORT $1;
+MPRINT(EM_DIAGRAM):   length REPORT $1;
+11946      label REPORT = "报表";
+MPRINT(EM_DIAGRAM):   label REPORT = "报表";
+11947      set EMWS1.Part_CMeta_TRAIN;
+MPRINT(EM_DIAGRAM):   set EMWS1.Part_CMeta_TRAIN;
+11948      where((ROLE="TARGET" and LEVEL ne "UNARY") or ROLE in("INPUT" "REJECTED" "FREQ"));
+MPRINT(EM_DIAGRAM):   where((ROLE="TARGET" and LEVEL ne "UNARY") or ROLE in("INPUT" "REJECTED" "FREQ"));
+11949      run;
+MPRINT(EM_DIAGRAM):   run;
+
+NOTE: 变量 USE 未初始化。
+NOTE: 从数据集 EMWS1.PART_CMETA_TRAIN. 读取了 25 个观测
+      WHERE ((ROLE='TARGET') and (LEVEL not = 'UNARY')) or ROLE in ('FREQ', 'INPUT', 'REJECTED');
+NOTE: 数据集 EMWS1.NEURAL_VARIABLESET 有 25 个观测和 21 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.01 秒
+      
+
+11950      * Neural: End of Update Variables Set;
+MPRINT(EM_DIAGRAM):    * Neural: End of Update Variables Set;
+11951      *------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+
+MPRINT(EM_DIAGRAM):    filename _emtool_ 'E:\SASWorkSpace\MovieEM\Workspaces\EMWS1\Neural\PROPERTIES.xml' encoding="UTF-8" NOBOM;
+*------------------------------------------------------------* 
+* 
+* Neural : End update 
+* datetime : 18MAY2013:15:29:27 
+* 
+*------------------------------------------------------------* 
+11953      %let _emdsep = \;
+11954      %em_getactionstatus(emlib =EMWS1, nodeid=Neural);
+MPRINT(EM_DIAGRAM):   
+MPRINT(EM_GETACTIONSTATUS):   proc display c=sashelp.emutil.getactionstatus.scl;
+MPRINT(EM_GETACTIONSTATUS):   run;
+
+11955      %let em_Train = Y;
+11956      %let em_Report = Y;
+11957      %let em_Score = Y;
+11958      %let em_Run = Y;
+NOTE: “PROCEDURE DISPLAY”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+MPRINT(EM_GETACTIONSTATUS):   
+MPRINT(EM_DIAGRAM):  ;
+
+11959      data _null_;
+MPRINT(EM_DIAGRAM):    data _null_;
+11960      file emwipmsg;
+MPRINT(EM_DIAGRAM):   file emwipmsg;
+11961      put '<Node Id="Neural" Event="Run" Pid="" Gridid=""/>';
+MPRINT(EM_DIAGRAM):   put '<Node Id="Neural" Event="Run" Pid="" Gridid=""/>';
+11962      run;
+MPRINT(EM_DIAGRAM):   run;
+
+NOTE: FILE EMWIPMSG 是:
+      Local Host Name=Leon-PC,
+      Local Host IP addr=fe80::9dbd:1e21:4c5d:e84e%15,
+      Peer Hostname Name=Leon-PC,
+      Peer IP addr=127.0.0.1,Peer Name=N/A,
+      Peer Portno=58181,Lrecl=256,Recfm=Variable
+
+NOTE: 有 1 条记录写入到 FILE EMWIPMSG 中。
+      最小记录长度是 48。
+      最大记录长度是 48。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+11963      options sascmd="!sascmdv -nosyntaxcheck -noasynchio -noobjectserver";
+MPRINT(EM_DIAGRAM):    options sascmd="!sascmdv -nosyntaxcheck -noasynchio -noobjectserver";
+11964      %let SYSCC=0;
+11965      signon C1BW3BLO macvar=C1BW3BLO;
+MPRINT(EM_DIAGRAM):   signon macvar=C1BW3BLO;
+NOTE: 正在使用的默认 SASCMD 值: "E:\Program Files\SAS\x86\SASFoundation\9.3\SAS.EXE" -nologo -noterminal -noxcmd -objectserver -objectserverparms "protocol=bridge dnsname=127.0.0.1 jcbp=58182" -sspi -secpackage NTLM -logconfigloc logconfig.xml -xcmd。
+NOTE: 开始远程登录“C1BW3BLO”（SAS 发行版“9.03.01M2P081512”）。
+NOTE: Copyright (c) 2002-2010 by SAS Institute Inc., Cary, NC, USA. 
+NOTE: SAS (r) Proprietary Software 9.3 (TS1M2 DBCS3060) 
+      Licensed to NEW CHINA LIFE INSURANCE, Site 11202901.
+NOTE: 该会话正在平台 XP_PRO  上执行。
+
+
+
+NOTE: Enhanced analytical products:
+
+SAS/STAT 12.1
+
+WARNING: 您的系统预定在 May 23, 2013 到期，距今还有 5 天。 SAS 系统从该日起将不再可用。请与 SAS 安装代表联系以获取更新的 SAS 安装数据 (SID) 文件，该文件包含 SETINIT 信息。
+要查找 SAS 安装代表的姓名，请访问 http://support.sas.com/repfinder 并提供您的软件安装点编号 11202901 以及公司名称“NEW CHINA LIFE INSURANCE”。在提供的 SAS REP 列表中，查找操作系统 Windows 的 REP。
+NOTE: “SAS 初始化”所用时间:
+      实际时间          0.68 秒
+      CPU 时间          0.40 秒
+      
+NOTE: 远程登录“C1BW3BLO”完毕。
+11966      rsubmit C1BW3BLO wait=N persist=N  ;
+MPRINT(EM_DIAGRAM):    rsubmit wait=N persist=N ;
+SAS 系统
+
+NOTE: 正从后台向“C1BW3BLO”远程提交。
+NOTE: 开始向“C1BW3BLO”远程提交。
+MPRINT(EM_DIAGRAM):   %global emexceptionstring emloopmode emloopnumber;
+MPRINT(EM_DIAGRAM):   %let EMUSERID = %bquote(Leon);
+MPRINT(EM_DIAGRAM):   %let EMLDSPATH = %nrstr(E:\SASWorkSpace\MovieEM\DataSources);
+MPRINT(EM_DIAGRAM):   %let EMFLOWMODE = Y;
+MPRINT(EM_DIAGRAM):   %let EMONODE = %bquote(Neural);
+MPRINT(EM_DIAGRAM):   %let EMPATH = %nrstr(E:\SASWorkSpace\MovieEM\Workspaces\EMWS1);
+MPRINT(EM_DIAGRAM):   %let EMWS = EMWS1;
+MPRINT(EM_DIAGRAM):   %let EMNODECLASS = SASHELP.EMMODL.NEURAL.CLASS;
+MPRINT(EM_DIAGRAM):   %let EMSTATUSDIR = %nrstr(E:\SASWorkSpace\MovieEM\Workspaces\EMWS1\System);
+MPRINT(EM_DIAGRAM):   %let EM_DEBUG =;
+MPRINT(EM_DIAGRAM):   %let EMPROJECTCODE = %nrstr(E:\SASWorkSpace\MovieEM\System\STARTUP.sas);
+MPRINT(EM_DIAGRAM):   %let EMSERVERCODE = %nrstr();
+MPRINT(EM_DIAGRAM):   %let EM_USERID = %bquote(Leon);
+MPRINT(EM_DIAGRAM):   %let EM_METAHOST =;
+MPRINT(EM_DIAGRAM):   %let EM_METAPORT =;
+MPRINT(EM_DIAGRAM):   %let EM_JAVAPACKAGE = %bquote();
+MPRINT(EM_DIAGRAM):   %let EMPROJECTPATH = %nrstr(E:\SASWorkSpace\MovieEM);
+MPRINT(EM_DIAGRAM):   %let EMPROJNAME = %nrstr(MovieEM);
+MPRINT(EM_DIAGRAM):   %let EMPROJPATH = %nrstr(E:\SASWorkSpace);
+MPRINT(EM_DIAGRAM):   %let em_Train = Y;
+MPRINT(EM_DIAGRAM):   %let em_Score = Y;
+MPRINT(EM_DIAGRAM):   %let em_Report = Y;
+MPRINT(EM_DIAGRAM):   %let emloopmode =;
+MPRINT(EM_DIAGRAM):   %let emloopnumber =0;
+MPRINT(EM_DIAGRAM):   %let emloopId =Neural;
+MPRINT(EM_DIAGRAM):   %let emexceptionstring=;
+MPRINT(EM_DIAGRAM):   options VBUFSIZE= 64M;
+MPRINT(EM_DIAGRAM):   %em5run();
+MPRINT(EM_DIAGRAM):   %put &&emexceptionstring;
+MPRINT(EM_DIAGRAM):   %sysrput emerror_Neural = &&emexceptionstring;
+MPRINT(EM_DIAGRAM):   %put &&emloopmode;
+MPRINT(EM_DIAGRAM):   %sysrput emloopmode_Neural = &&emloopmode;
+MPRINT(EM_DIAGRAM):   endrsubmit;
+11967      data _null_;
+MPRINT(EM_DIAGRAM):    data _null_;
+11968      file emwipmsg;
+MPRINT(EM_DIAGRAM):   file emwipmsg;
+11969      put '<Node Id="Neural" Event="Run" Pid=" " Gridid=""/>';
+MPRINT(EM_DIAGRAM):   put '<Node Id="Neural" Event="Run" Pid=" " Gridid=""/>';
+11970      run;
+MPRINT(EM_DIAGRAM):   run;
+
+NOTE: FILE EMWIPMSG 是:
+      Local Host Name=Leon-PC,
+      Local Host IP addr=fe80::9dbd:1e21:4c5d:e84e%15,
+      Peer Hostname Name=Leon-PC,
+      Peer IP addr=127.0.0.1,Peer Name=N/A,
+      Peer Portno=58181,Lrecl=256,Recfm=Variable
+
+NOTE: 有 1 条记录写入到 FILE EMWIPMSG 中。
+      最小记录长度是 49。
+      最大记录长度是 49。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+11971      data _null_;
+MPRINT(EM_DIAGRAM):    data _null_;
+11972      run;
+MPRINT(EM_DIAGRAM):   run;
+
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+traverser_runingNode_note 
+11973      data _null_;
+MPRINT(EM_DIAGRAM):    data _null_;
+11974      run;
+MPRINT(EM_DIAGRAM):   run;
+
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+traverser_runingNode_note 
+11975      data _null_;
+MPRINT(EM_DIAGRAM):    data _null_;
+11976      run;
+MPRINT(EM_DIAGRAM):   run;
+
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+traverser_runingNode_note 
+11977      data _null_;
+MPRINT(EM_DIAGRAM):    data _null_;
+11978      run;
+MPRINT(EM_DIAGRAM):   run;
+
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+traverser_runingNode_note 
+11979      data _null_;
+MPRINT(EM_DIAGRAM):    data _null_;
+11980      run;
+MPRINT(EM_DIAGRAM):   run;
+
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+traverser_runingNode_note 
+11981      data _null_;
+MPRINT(EM_DIAGRAM):    data _null_;
+11982      run;
+MPRINT(EM_DIAGRAM):   run;
+
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.01 秒
+      
+
+traverser_runingNode_note 
+11983      data _null_;
+MPRINT(EM_DIAGRAM):    data _null_;
+11984      run;
+MPRINT(EM_DIAGRAM):   run;
+
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+traverser_runingNode_note 
+11985      data _null_;
+MPRINT(EM_DIAGRAM):    data _null_;
+11986      run;
+MPRINT(EM_DIAGRAM):   run;
+
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+traverser_runingNode_note 
+11987      data _null_;
+MPRINT(EM_DIAGRAM):    data _null_;
+11988      run;
+MPRINT(EM_DIAGRAM):   run;
+
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+traverser_runingNode_note 
+11989      data _null_;
+MPRINT(EM_DIAGRAM):    data _null_;
+11990      run;
+MPRINT(EM_DIAGRAM):   run;
+
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+1     %global emexceptionstring emloopmode emloopnumber;
+2     %let EMUSERID = %bquote(Leon);
+3     %let EMLDSPATH = %nrstr(E:\SASWorkSpace\MovieEM\DataSources);
+4     %let EMFLOWMODE = Y;
+5     %let EMONODE = %bquote(Neural);
+6     %let EMPATH = %nrstr(E:\SASWorkSpace\MovieEM\Workspaces\EMWS1);
+7     %let EMWS = EMWS1;
+8     %let EMNODECLASS = SASHELP.EMMODL.NEURAL.CLASS;
+9     %let EMSTATUSDIR = %nrstr(E:\SASWorkSpace\MovieEM\Workspaces\EMWS1\System);
+10    %let EM_DEBUG =;
+11    %let EMPROJECTCODE = %nrstr(E:\SASWorkSpace\MovieEM\System\STARTUP.sas);
+12    %let EMSERVERCODE = %nrstr();
+13    %let EM_USERID = %bquote(Leon);
+14    %let EM_METAHOST =;
+15    %let EM_METAPORT =;
+16    %let EM_JAVAPACKAGE = %bquote();
+17    %let EMPROJECTPATH = %nrstr(E:\SASWorkSpace\MovieEM);
+18    %let EMPROJNAME = %nrstr(MovieEM);
+19    %let EMPROJPATH = %nrstr(E:\SASWorkSpace);
+20    %let em_Train = Y;
+21    %let em_Score = Y;
+22    %let em_Report = Y;
+23    %let emloopmode =;
+24    %let emloopnumber =0;
+25    %let emloopId =Neural;
+26    %let emexceptionstring=;
+27    options VBUFSIZE= 64M;
+28    %em5run();
+
+*------------------------------------------------------------* 
+* 
+* Neural : Running 
+* datetime : 18MAY2013:15:29:29 
+* 
+*------------------------------------------------------------* 
+5722   %let SYSCC =0;
+5723   %let EMGROUPMODE =;
+5724   %let EMGROUPID =;
+10976  data EMWS1.Neural_EMTRAINVARIABLE;
+10977  length NAME $64;
+10978  set EMWS1.Neural_VariableSet;
+10979  label NAME = "%sysfunc(sasmsg(sashelp.dmine, meta_name_vlabel, NOQUOTE))" ROLE = "%sysfunc(sasmsg(sashelp.dmine, meta_role_vlabel, NOQUOTE))" LEVEL = "%sysfunc(sasmsg(sashelp.dmine, meta_level_vlabel, NOQUOTE))" LABEL =
+10980     "%sysfunc(sasmsg(sashelp.dmine, meta_label_vlabel, NOQUOTE))";
+10981  label USE = "%sysfunc(sasmsg(sashelp.dmine, META_USE_VLABEL, NOQUOTE))";
+10982  label REPORT = "%sysfunc(sasmsg(sashelp.dmine, META_REPORT_VLABEL, NOQUOTE))";
+10983  drop order lowerlimit upperlimit creator--type format--length;
+10984  run;
+
+NOTE: 从数据集 EMWS1.NEURAL_VARIABLESET. 读取了 25 个观测
+NOTE: 数据集 EMWS1.NEURAL_EMTRAINVARIABLE 有 25 个观测和 6 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.04 秒
+      CPU 时间          0.04 秒
+      
+
+*------------------------------------------------------------* 
+* 
+* Neural : End run 
+* datetime : 18MAY2013:15:29:33 
+* 
+*------------------------------------------------------------* 
+ERROR: 抛出异常。
+exception.server.DMDBFACTORY.EXCEEDMAXLEVEL,512 in SASHELP.EMCORE.TOOLDRIVER.SCL at line 912.
+程序过早地从第 220 行返回
+AF 程序: SASHELP.EMCORE.RUNNODEDETACH.SCL
+NOTE: PROCEDURE DISPLAY 已打印第 1-3 页。
+NOTE: “PROCEDURE DISPLAY”所用时间（总处理时间）:
+      实际时间          5.03 秒
+      CPU 时间          2.40 秒
+      
+
+10987   %put &&emexceptionstring;
+exception.server.DMDBFACTORY.EXCEEDMAXLEVEL,512
+10988   %sysrput emerror_Neural = &&emexceptionstring;
+10989   %put &&emloopmode;
+ 
+10990   %sysrput emloopmode_Neural = &&emloopmode;
+NOTE: 向“C1BW3BLO”远程提交完毕。
+NOTE: 开始从“C1BW3BLO”远程注销。
+NOTE: SAS Institute Inc., SAS Campus Drive, Cary, NC USA 27513-2414
+NOTE: “SAS 系统”所用时间:
+      实际时间          5.88 秒
+      CPU 时间          2.85 秒
+      
+NOTE: 从“C1BW3BLO”远程注销完毕。
+traverser_runingNode_note 
+11991      data _null_;
+MPRINT(EM_DIAGRAM):    data _null_;
+11992      run;
+MPRINT(EM_DIAGRAM):   run;
+
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+节点 Neural 已运行。 
+MPRINT(EM_DIAGRAM):    filename _emtool_ 'E:\SASWorkSpace\MovieEM\Workspaces\EMWS1\Neural\TRAINPROPERTIES.xml' encoding="UTF-8" NOBOM;
+节点 Neural 失败。 
+11994      data _null_;
+MPRINT(EM_DIAGRAM):    data _null_;
+11995      file emwipmsg;
+MPRINT(EM_DIAGRAM):   file emwipmsg;
+11996      put '<Node Id="Neural" Event="Fail" Pid="8976" Gridid=""/>';
+MPRINT(EM_DIAGRAM):   put '<Node Id="Neural" Event="Fail" Pid="8976" Gridid=""/>';
+11997      run;
+MPRINT(EM_DIAGRAM):   run;
+
+NOTE: FILE EMWIPMSG 是:
+      Local Host Name=Leon-PC,
+      Local Host IP addr=fe80::9dbd:1e21:4c5d:e84e%15,
+      Peer Hostname Name=Leon-PC,
+      Peer IP addr=127.0.0.1,Peer Name=N/A,
+      Peer Portno=58181,Lrecl=256,Recfm=Variable
+
+NOTE: 有 1 条记录写入到 FILE EMWIPMSG 中。
+      最小记录长度是 53。
+      最大记录长度是 53。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+Traverser: 已收到停止请求，暂停遍历。 
+Traverser: 正在提交 KILLTASK _ALL_ 
+NOTE: There are no active tasks/transactions.
+11998      waitfor _all_ C1BW3BLO;
+MPRINT(EM_DIAGRAM):    waitfor _all_ C1BW3BLO;
+11999      signoff C1BW3BLO;
+MPRINT(EM_DIAGRAM):   signoff;
+NOTE: 不存在与“C1BW3BLO”的链接。无需 SIGNOFF。
+NOTE: 没有活动的任务/事务。
+12000      KILLTASK _ALL_;
+MPRINT(EM_DIAGRAM):   KILLTASK _ALL_;
+Traverser: 已完成 KILLTASK 调用 
+Traverser: 运行完毕 
+12001      proc printto;
+MPRINT(EM_DIAGRAM):    proc printto;
+12002      run;
+MPRINT(EM_DIAGRAM):   run;
+

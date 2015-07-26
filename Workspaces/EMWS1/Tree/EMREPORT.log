@@ -1,0 +1,453 @@
+*------------------------------------------------------------*
+* 报表日志
+日期:       2013年05月18日
+时间:       15时25分01秒
+*------------------------------------------------------------*
+12744  data work.Tree_tarmetads;
+12745  set EMWS1.Part_CMeta_TRAIN(where=(ROLE='TARGET'));
+12746  run;
+
+NOTE: 从数据集 EMWS1.PART_CMETA_TRAIN. 读取了 1 个观测
+      WHERE ROLE='TARGET';
+NOTE: 数据集 WORK.TREE_TARMETADS 有 1 个观测和 20 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.02 秒
+      CPU 时间          0.01 秒
+      
+
+12747  data EMWS1.Tree_EMOUTFIT;
+12748  length target $32;
+12749  set EMWS1.Tree_OUTFIT;
+12750  drop _NW_ _SUMW_
+12751  ;
+12752  target = "Technology";
+12753  run;
+
+NOTE: 从数据集 EMWS1.TREE_OUTFIT. 读取了 1 个观测
+NOTE: 数据集 EMWS1.TREE_EMOUTFIT 有 1 个观测和 17 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.01 秒
+      CPU 时间          0.01 秒
+      
+
+12754  data EMWS1.Tree_EMOUTFIT;
+12755  set EMWS1.Tree_EMOUTFIT;
+12756  length TargetLabel $200;
+12757  label targetLabel = "%sysfunc(sasmsg(sashelp.dmine, meta_targetlabel_vlabel, NOQUOTE))";
+12758  if upcase(TARGET) eq "TECHNOLOGY" then TargetLabel = 'Technology';
+12759  run;
+
+NOTE: 从数据集 EMWS1.TREE_EMOUTFIT. 读取了 1 个观测
+NOTE: 数据集 EMWS1.TREE_EMOUTFIT 有 1 个观测和 18 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.01 秒
+      CPU 时间          0.01 秒
+      
+
+12760  proc sort data=EMWS1.Tree_EMREPORTFIT nothreads;
+12761  by TARGET;
+12762  run;
+
+NOTE: 从数据集 EMWS1.TREE_EMREPORTFIT. 读取了 8 个观测
+NOTE: 数据集 EMWS1.TREE_EMREPORTFIT 有 8 个观测和 7 个变量。
+NOTE: “PROCEDURE SORT”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.01 秒
+      
+
+12763  %let _EMwarndup = 0;
+12764  %let _EMtargetdup =;
+12765  %let _EMASEtargetdup =;
+12766  data _null_;
+12767  set EMWS1.Tree_EMOUTFIT;
+12768  if .<_ASE_<0.000001 then do;
+12769  call symput('_EMwarndup', '1');
+12770  call symput('_EMtargetdup', target);
+12771  call symput('_EMASEtargetdup', put(_ASE_, best.));
+12772  end;
+12773  run;
+
+NOTE: 从数据集 EMWS1.TREE_EMOUTFIT. 读取了 1 个观测
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+12774  proc sort data=EMWS1.Part_CMeta_TRAIN out=WORK.SUBSETINMETA;
+12775  by NAME;
+12776  run;
+
+NOTE: 从数据集 EMWS1.PART_CMETA_TRAIN. 读取了 29 个观测
+NOTE: 数据集 WORK.SUBSETINMETA 有 29 个观测和 20 个变量。
+NOTE: “PROCEDURE SORT”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.01 秒
+      
+
+12777  proc sort data=EMWS1.Tree_VariableSet out=WORK.SUBSETVARSET(keep=NAME REPORT);
+12778  by NAME;
+12779  run;
+
+NOTE: 从数据集 EMWS1.TREE_VARIABLESET. 读取了 25 个观测
+NOTE: 数据集 WORK.SUBSETVARSET 有 25 个观测和 2 个变量。
+NOTE: “PROCEDURE SORT”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.01 秒
+      
+
+12780  data WORK.ASSESS_META;
+12781  merge WORK.SUBSETINMETA WORK.SUBSETVARSET;
+12782  by NAME;
+12783  run;
+
+NOTE: 从数据集 WORK.SUBSETINMETA. 读取了 29 个观测
+NOTE: 从数据集 WORK.SUBSETVARSET. 读取了 25 个观测
+NOTE: 数据集 WORK.ASSESS_META 有 29 个观测和 20 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+12784  data EM_temp_assessMeta;
+12785  set EMWS1.Tree_CMeta_TRAIN;
+12786  where role in('DECISION', 'PREDICT', 'RESIDUAL', 'CLASSIFICATION', 'ASSESS', 'COST');
+12787  run;
+
+NOTE: 从数据集 EMWS1.TREE_CMETA_TRAIN. 读取了 46 个观测
+      WHERE role in ('ASSESS', 'CLASSIFICATION', 'COST', 'DECISION', 'PREDICT', 'RESIDUAL');
+NOTE: 数据集 WORK.EM_TEMP_ASSESSMETA 有 46 个观测和 21 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.01 秒
+      
+
+12788  data EM_temp_assessdata;
+12789  set EMWS1.Tree_TRAIN(keep=
+12790  F_Technology
+12791  I_Technology
+12792  P_TechnologyAnalog_Satellite
+12793  P_TechnologyBetamax
+12794  P_TechnologyConsole_Game_System_
+12795  P_TechnologyDVD
+12796  P_TechnologyDigital_Satellite
+12797  P_TechnologyFlat_Screen_TV
+12798  P_TechnologyFront_Projection_TV
+12799  P_TechnologyHDTV
+12800  P_TechnologyLaserdisk
+12801  P_TechnologyPVR_Tivo_UltimateTV
+12802  P_TechnologyRear_Projection_TV
+12803  P_TechnologySurround_Sound
+12804  P_TechnologyVHS
+12805  P_TechnologyVideo_capable_Automo
+12806  R_TechnologyAnalog_Satellite
+12807  R_TechnologyBetamax
+12808  R_TechnologyConsole_Game_System_
+12809  R_TechnologyDVD
+12810  R_TechnologyDigital_Satellite
+12811  R_TechnologyFlat_Screen_TV
+12812  R_TechnologyFront_Projection_TV
+12813  R_TechnologyHDTV
+12814  R_TechnologyLaserdisk
+12815  R_TechnologyPVR_Tivo_UltimateTV
+12816  R_TechnologyRear_Projection_TV
+12817  R_TechnologySurround_Sound
+12818  R_TechnologyVHS
+12819  R_TechnologyVideo_capable_Automo
+12820  U_Technology
+12821  V_TechnologyAnalog_Satellite
+12822  V_TechnologyBetamax
+12823  V_TechnologyConsole_Game_System_
+12824  V_TechnologyDVD
+12825  V_TechnologyDigital_Satellite
+12826  V_TechnologyFlat_Screen_TV
+12827  V_TechnologyFront_Projection_TV
+12828  V_TechnologyHDTV
+12829  V_TechnologyLaserdisk
+12830  V_TechnologyPVR_Tivo_UltimateTV
+12831  V_TechnologyRear_Projection_TV
+12832  V_TechnologySurround_Sound
+12833  V_TechnologyVHS
+12834  V_TechnologyVideo_capable_Automo
+12835  _WARN_
+12836  Technology
+12837  );
+12838  run;
+
+NOTE: 变量 _WARN_ 未初始化。
+NOTE: “视图 EMWS1.TREE_TRAIN.VIEW”所用时间（总处理时间）:
+      实际时间          0.05 秒
+      CPU 时间          0.04 秒
+      
+NOTE: 从数据集 EMWS1.PART_TRAIN. 读取了 2214 个观测
+NOTE: 从数据集 EMWS1.TREE_TRAIN. 读取了 2214 个观测
+NOTE: 数据集 WORK.EM_TEMP_ASSESSDATA 有 2214 个观测和 47 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.06 秒
+      CPU 时间          0.07 秒
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+ 
+
+
+
+17104  data EM_temp_assessMeta;
+17105  set EMWS1.Tree_CMeta_TRAIN;
+17106  where role in('DECISION', 'PREDICT', 'RESIDUAL', 'CLASSIFICATION', 'ASSESS', 'COST');
+17107  run;
+
+NOTE: 从数据集 EMWS1.TREE_CMETA_TRAIN. 读取了 46 个观测
+      WHERE role in ('ASSESS', 'CLASSIFICATION', 'COST', 'DECISION', 'PREDICT', 'RESIDUAL');
+NOTE: 数据集 WORK.EM_TEMP_ASSESSMETA 有 46 个观测和 21 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.01 秒
+      CPU 时间          0.01 秒
+      
+
+17108  data EM_temp_assessdata;
+17109  set EMWS1.Tree_VALIDATE(keep=
+17110  F_Technology
+17111  I_Technology
+17112  P_TechnologyAnalog_Satellite
+17113  P_TechnologyBetamax
+17114  P_TechnologyConsole_Game_System_
+17115  P_TechnologyDVD
+17116  P_TechnologyDigital_Satellite
+17117  P_TechnologyFlat_Screen_TV
+17118  P_TechnologyFront_Projection_TV
+17119  P_TechnologyHDTV
+17120  P_TechnologyLaserdisk
+17121  P_TechnologyPVR_Tivo_UltimateTV
+17122  P_TechnologyRear_Projection_TV
+17123  P_TechnologySurround_Sound
+17124  P_TechnologyVHS
+17125  P_TechnologyVideo_capable_Automo
+17126  R_TechnologyAnalog_Satellite
+17127  R_TechnologyBetamax
+17128  R_TechnologyConsole_Game_System_
+17129  R_TechnologyDVD
+17130  R_TechnologyDigital_Satellite
+17131  R_TechnologyFlat_Screen_TV
+17132  R_TechnologyFront_Projection_TV
+17133  R_TechnologyHDTV
+17134  R_TechnologyLaserdisk
+17135  R_TechnologyPVR_Tivo_UltimateTV
+17136  R_TechnologyRear_Projection_TV
+17137  R_TechnologySurround_Sound
+17138  R_TechnologyVHS
+17139  R_TechnologyVideo_capable_Automo
+17140  U_Technology
+17141  V_TechnologyAnalog_Satellite
+17142  V_TechnologyBetamax
+17143  V_TechnologyConsole_Game_System_
+17144  V_TechnologyDVD
+17145  V_TechnologyDigital_Satellite
+17146  V_TechnologyFlat_Screen_TV
+17147  V_TechnologyFront_Projection_TV
+17148  V_TechnologyHDTV
+17149  V_TechnologyLaserdisk
+17150  V_TechnologyPVR_Tivo_UltimateTV
+17151  V_TechnologyRear_Projection_TV
+17152  V_TechnologySurround_Sound
+17153  V_TechnologyVHS
+17154  V_TechnologyVideo_capable_Automo
+17155  _WARN_
+17156  Technology
+17157  );
+17158  run;
+
+NOTE: 变量 _WARN_ 未初始化。
+NOTE: “视图 EMWS1.TREE_VALIDATE.VIEW”所用时间（总处理时间）:
+      实际时间          0.04 秒
+      CPU 时间          0.04 秒
+      
+NOTE: 从数据集 EMWS1.PART_VALIDATE. 读取了 568 个观测
+NOTE: 从数据集 EMWS1.TREE_VALIDATE. 读取了 568 个观测
+NOTE: 数据集 WORK.EM_TEMP_ASSESSDATA 有 568 个观测和 47 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.06 秒
+      CPU 时间          0.06 秒
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+21433  %let _cn = %sysfunc(getoption(CENTER));
+21434  options nocenter;
+21435  proc print data=EMWS1.Tree_EMREPORTFIT noobs label;
+21436  var STAT LABEL TRAIN
+21437  VALIDATE
+21438  ;
+21439  by TARGET TARGETLABEL;
+21440  title9 ' ';
+21441  title10 "%sysfunc(sasmsg(sashelp.dmine, rpt_fitstat_title  , NOQUOTE))";
+21442  run;
+
+NOTE: 从数据集 EMWS1.TREE_EMREPORTFIT. 读取了 8 个观测
+NOTE: PROCEDURE PRINT 已打印第 5 页。
+NOTE: “PROCEDURE PRINT”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+21443  title10;
+21444  options &_cn;
+
+21445  proc sort data=EMWS1.Tree_EMCLASSIFICATION nothreads;
+21446  by DATAROLE TARGET TARGETLABEL;
+21447  run;
+
+NOTE: 从数据集 EMWS1.TREE_EMCLASSIFICATION. 读取了 28 个观测
+NOTE: 数据集 EMWS1.TREE_EMCLASSIFICATION 有 28 个观测和 12 个变量。
+NOTE: “PROCEDURE SORT”所用时间（总处理时间）:
+      实际时间          0.01 秒
+      CPU 时间          0.00 秒
+      
+
+21448  %let _cn = %sysfunc(getoption(CENTER));
+21449  options nocenter;
+21450  proc print data=EMWS1.Tree_EMCLASSIFICATION noobs label;
+21451  var from into pct_row pct_col count percent
+21452  ;
+21453  by DATAROLE TARGET TARGETLABEL;
+21454  label FROM = "%sysfunc(sasmsg(sashelp.dmine, rpt_target_vlabel ,     NOQUOTE))";
+21455  label INTO = "%sysfunc(sasmsg(sashelp.dmine, rpt_outcome_vlabel ,    NOQUOTE))";
+21456  label PCT_ROW = "%sysfunc(sasmsg(sashelp.dmine, rpt_targetpct_vlabel ,  NOQUOTE))";
+21457  label PCT_COL = "%sysfunc(sasmsg(sashelp.dmine, rpt_outcomepct_vlabel , NOQUOTE))";
+21458  label COUNT = "%sysfunc(sasmsg(sashelp.dmine, rpt_count_vlabel ,      NOQUOTE))";
+21459  label PERCENT = "%sysfunc(sasmsg(sashelp.dmine, rpt_totalpct_vlabel ,   NOQUOTE))";
+21460  where _TYPE_='PREDICTION';
+21461  title9 ' ';
+21462  title10 "%sysfunc(sasmsg(sashelp.dmine, rpt_classification_title    , NOQUOTE))";
+21463  run;
+
+NOTE: 从数据集 EMWS1.TREE_EMCLASSIFICATION. 读取了 28 个观测
+      WHERE _TYPE_='PREDICTION';
+NOTE: PROCEDURE PRINT 已打印第 6 页。
+NOTE: “PROCEDURE PRINT”所用时间（总处理时间）:
+      实际时间          0.02 秒
+      CPU 时间          0.03 秒
+      
+
+21464  title9;
+21465  title10;
+21466  options &_cn;
+
+21467  %let _cn = %sysfunc(getoption(CENTER));
+21468  options nocenter;
+21469  data EMWS1.Tree_EMEVENTREPORT;
+21470  length DATAROLE TARGET $32 TARGETLABEL $200 FALSENEVENT TRUENEVENT FALSEEVENT TRUEEVENT
+21470! 8;
+21471  label DATAROLE = "%sysfunc(sasmsg(sashelp.dmine, rpt_datarole_vlabel ,    NOQUOTE))"
+21471! TARGET = "%sysfunc(sasmsg(sashelp.dmine, rpt_target_vlabel ,      NOQUOTE))" TARGETLABEL
+21471!  = "%sysfunc(sasmsg(sashelp.dmine, meta_targetlabel_vlabel, NOQUOTE))" FALSEEVENT
+21472  = "%sysfunc(sasmsg(sashelp.dmine, rpt_falseevent_vlabel ,  NOQUOTE))" FALSENEVENT =
+21472! "%sysfunc(sasmsg(sashelp.dmine, rpt_falsenevent_vlabel , NOQUOTE))" TRUEEVENT =
+21472! "%sysfunc(sasmsg(sashelp.dmine, rpt_trueevent_vlabel ,   NOQUOTE))" TRUENEVENT =
+21473     "%sysfunc(sasmsg(sashelp.dmine, rpt_truenevent_vlabel ,  NOQUOTE))";
+21474  FALSEEVENT=0;
+21475  FALSENEVENT=0;
+21476  TRUEEVENT=0;
+21477  TRUENEVENT=0;
+21478  set EMWS1.Tree_EMEVENTREPORT;
+21479  run;
+
+NOTE: 从数据集 EMWS1.TREE_EMEVENTREPORT. 读取了 2 个观测
+NOTE: 数据集 EMWS1.TREE_EMEVENTREPORT 有 2 个观测和 7 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.02 秒
+      CPU 时间          0.01 秒
+      
+
+21480  proc print data=EMWS1.Tree_EMEVENTREPORT noobs label;
+21481  title9 ' ';
+21482  title10 "%sysfunc(sasmsg(sashelp.dmine, rpt_eventtable_title    , NOQUOTE))";
+21483  by notsorted DATAROLE notsorted TARGET notsorted TARGETLABEL;
+21484  run;
+
+NOTE: 从数据集 EMWS1.TREE_EMEVENTREPORT. 读取了 2 个观测
+NOTE: PROCEDURE PRINT 已打印第 7 页。
+NOTE: “PROCEDURE PRINT”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+21485  title10;
+21486  options &_cn;
+
+21487  proc datasets library=EMWS1 nolist;
+21488  modify Tree_EMRANK;
+21489  label target = "%sysfunc(sasmsg(sashelp.dmine, rpt_targetvar_vlabel ,   NOQUOTE))";
+21490  label datarole = "%sysfunc(sasmsg(sashelp.dmine, rpt_datarole_vlabel ,    NOQUOTE))";
+21491  run;
+
+NOTE: EMWS1.TREE_EMRANK.DATA 修改成功。
+21492  quit;
+
+NOTE: “PROCEDURE DATASETS”所用时间（总处理时间）:
+      实际时间          0.05 秒
+      CPU 时间          0.06 秒
+      
+
+21493  %let _cn = %sysfunc(getoption(CENTER));
+21494  options nocenter;
+21495  proc print data=EMWS1.Tree_EMRANK label noobs;
+21496  var
+21497  decile gain lift liftc resp respc N _meanP_;
+21498  by
+21499  notsorted DATAROLE
+21500  notsorted TARGET
+21501  notsorted TARGETLABEL
+21502  ;
+21503  title9 ' ';
+21504  title10 "%sysfunc(sasmsg(sashelp.dmine, rpt_scoreranking_title , NOQUOTE))";
+21505  run;
+
+NOTE: 从数据集 EMWS1.TREE_EMRANK. 读取了 40 个观测
+NOTE: PROCEDURE PRINT 已打印第 8 页。
+NOTE: “PROCEDURE PRINT”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.01 秒
+      
+
+21506  title10;
+21507  options &_cn;
+
+21508  proc datasets library=EMWS1 nolist;
+21509  modify Tree_EMSCOREDIST;
+21510  label target = "%sysfunc(sasmsg(sashelp.dmine, rpt_targetvar_vlabel ,      NOQUOTE))";
+21511  label datarole = "%sysfunc(sasmsg(sashelp.dmine, rpt_datarole_vlabel ,    NOQUOTE))";
+21512  run;
+
+NOTE: EMWS1.TREE_EMSCOREDIST.DATA 修改成功。
+21513  quit;
+
+NOTE: “PROCEDURE DATASETS”所用时间（总处理时间）:
+      实际时间          0.03 秒
+      CPU 时间          0.03 秒
+      
+

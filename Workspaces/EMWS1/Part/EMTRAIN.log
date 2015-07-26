@@ -1,0 +1,407 @@
+*------------------------------------------------------------*
+* 训练日志
+日期:       2013年05月18日
+时间:       15时24分40秒
+*------------------------------------------------------------*
+10564  proc freq data=EMWS1.Part_VariableSet noprint;
+10565  table ROLE*LEVEL/out=WORK.PartMETA;
+10566  run;
+
+NOTE: 从数据集 EMWS1.PART_VARIABLESET. 读取了 28 个观测
+NOTE: 数据集 WORK.PARTMETA 有 4 个观测和 4 个变量。
+NOTE: “PROCEDURE FREQ”所用时间（总处理时间）:
+      实际时间          0.02 秒
+      CPU 时间          0.01 秒
+      
+
+10567  proc print data=WORK.PartMETA label noobs;
+10568  var ROLE LEVEL COUNT;
+10569  label ROLE = "%sysfunc(sasmsg(sashelp.dmine, meta_role_vlabel, NOQUOTE))" LEVEL = "%sysfunc(sasmsg(sashelp.dmine, meta_level_vlabel, NOQUOTE))" COUNT = "%sysfunc(sasmsg(sashelp.dmine, rpt_count_vlabel, NOQUOTE))";
+10570  title9 ' ';
+10571  title10 "%sysfunc(sasmsg(sashelp.dmine, rpt_varSummary_title  , NOQUOTE))";
+10572  run;
+
+NOTE: 从数据集 WORK.PARTMETA. 读取了 4 个观测
+NOTE: PROCEDURE PRINT 已打印第 1 页。
+NOTE: “PROCEDURE PRINT”所用时间（总处理时间）:
+      实际时间          0.01 秒
+      CPU 时间          0.01 秒
+      
+
+10573  title10;
+
+10581  *------------------------------------------------------------*;
+10582  * Part: Determine number of observations;
+10583  *------------------------------------------------------------*;
+10584  proc sql;
+10585  reset noprint;
+10586  select count(*) into :_tmpa from EMWS1.Filter_TRAIN
+10587  ;
+NOTE: 从数据集 DATA.TECHNOLOGY. 读取了 10953 个观测
+NOTE: 从数据集 DATA.MOVIES. 读取了 45323 个观测
+NOTE: 从数据集 DATA.HOBBIES. 读取了 20367 个观测
+NOTE: 从数据集 DATA.DIRECTORS. 读取了 17603 个观测
+NOTE: 从数据集 DATA.CUSTOMERS. 读取了 3187 个观测
+NOTE: 从数据集 DATA.CRITERIA. 读取了 8749 个观测
+NOTE: 从数据集 DATA.CHANNELS. 读取了 11123 个观测
+NOTE: 从数据集 DATA.ACTORS. 读取了 36523 个观测
+NOTE: 从数据集 EMWS1.IDS_DATA. 读取了 36523 个观测
+NOTE: 从数据集 EMWS1.IDS2_DATA. 读取了 11123 个观测
+NOTE: 从数据集 EMWS1.IDS3_DATA. 读取了 8749 个观测
+NOTE: 从数据集 EMWS1.IDS4_DATA. 读取了 3187 个观测
+NOTE: 从数据集 EMWS1.IDS5_DATA. 读取了 17603 个观测
+NOTE: 从数据集 EMWS1.IDS6_DATA. 读取了 20367 个观测
+NOTE: 从数据集 EMWS1.IDS7_DATA. 读取了 45323 个观测
+NOTE: 从数据集 EMWS1.IDS8_DATA. 读取了 10953 个观测
+NOTE: “视图 EMWS1.FILTER_TRAIN.VIEW”所用时间（总处理时间）:
+      实际时间          1.12 秒
+      CPU 时间          1.12 秒
+      
+NOTE: 从数据集 EMWS1.MERGE_TRAIN. 读取了 45323 个观测
+10588  quit;
+NOTE: “PROCEDURE SQL”所用时间（总处理时间）:
+      实际时间          1.16 秒
+      CPU 时间          1.15 秒
+      
+
+trainPct=80 validatePct=20 testPct=0 
+NOTE: “视图 EMWS1.FILTER_TRAIN.VIEW”所用时间（总处理时间）:
+      实际时间          0.44 秒
+      CPU 时间          0.40 秒
+      
+10589  *------------------------------------------------------------*;
+10590  * Part: Retrieving stratification variable(s) levels;
+10591  *------------------------------------------------------------*;
+10592  proc freq data=EMWS1.Filter_TRAIN noprint;
+10593  format
+10594  Technology $100.0
+10595  ;
+10596  table
+10597  Technology
+10598  /out=WORK.Part_FREQ(drop=percent);
+10599  run;
+
+NOTE: 从数据集 DATA.TECHNOLOGY. 读取了 10953 个观测
+NOTE: 从数据集 DATA.MOVIES. 读取了 45323 个观测
+NOTE: 从数据集 DATA.HOBBIES. 读取了 20367 个观测
+NOTE: 从数据集 DATA.DIRECTORS. 读取了 17603 个观测
+NOTE: 从数据集 DATA.CUSTOMERS. 读取了 3187 个观测
+NOTE: 从数据集 DATA.CRITERIA. 读取了 8749 个观测
+NOTE: 从数据集 DATA.CHANNELS. 读取了 11123 个观测
+NOTE: 从数据集 DATA.ACTORS. 读取了 36523 个观测
+NOTE: 从数据集 EMWS1.IDS_DATA. 读取了 36523 个观测
+NOTE: 从数据集 EMWS1.IDS2_DATA. 读取了 11123 个观测
+NOTE: 从数据集 EMWS1.IDS3_DATA. 读取了 8749 个观测
+NOTE: 从数据集 EMWS1.IDS4_DATA. 读取了 3187 个观测
+NOTE: 从数据集 EMWS1.IDS5_DATA. 读取了 17603 个观测
+NOTE: 从数据集 EMWS1.IDS6_DATA. 读取了 20367 个观测
+NOTE: 从数据集 EMWS1.IDS7_DATA. 读取了 45323 个观测
+NOTE: 从数据集 EMWS1.IDS8_DATA. 读取了 10953 个观测
+NOTE: “视图 EMWS1.FILTER_TRAIN.VIEW”所用时间（总处理时间）:
+      实际时间          1.16 秒
+      CPU 时间          1.14 秒
+      
+NOTE: 从数据集 EMWS1.MERGE_TRAIN. 读取了 45323 个观测
+NOTE: 从数据集 EMWS1.FILTER_TRAIN. 读取了 2782 个观测
+NOTE: 数据集 WORK.PART_FREQ 有 14 个观测和 2 个变量。
+NOTE: “PROCEDURE FREQ”所用时间（总处理时间）:
+      实际时间          1.18 秒
+      CPU 时间          1.17 秒
+      
+
+10600  proc sort data=WORK.Part_FREQ;
+10601  by descending count;
+10602  run;
+
+NOTE: 从数据集 WORK.PART_FREQ. 读取了 14 个观测
+NOTE: 数据集 WORK.PART_FREQ 有 14 个观测和 2 个变量。
+NOTE: “PROCEDURE SORT”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+10603  * Part: Retrieving levels that meet minimum requirement;
+10604  data WORK.Part_FREQ2(keep = count);
+10605  set WORK.Part_FREQ;
+10606  where (.01 * 80 * count) >= 3;
+10607  run;
+
+NOTE: 从数据集 WORK.PART_FREQ. 读取了 14 个观测
+      WHERE (0.8*count)>=3;
+NOTE: 数据集 WORK.PART_FREQ2 有 14 个观测和 1 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+10608  *------------------------------------------------------------*;
+10609  * Part: Create stratified partitioning;
+10610  *------------------------------------------------------------*;
+10611  data
+10612  EMWS1.Part_TRAIN(label="")
+10613  EMWS1.Part_VALIDATE(label="")
+10614  ;
+10615  retain _seed_ 12345;
+10616  drop _seed_ _genvalue_;
+10617  call ranuni(_seed_, _genvalue_);
+10618  _dataobs_ = _N_;
+10619  drop _c00:;
+10620  set EMWS1.Filter_TRAIN;
+10621  length _Pformat1 $150;
+10622  drop _Pformat1;
+10623  _Pformat1 = strip(put(Technology, $100.0));
+10624  if
+10625  _Pformat1 = 'DVD'
+10626  then do;
+10627  if (675+1-_C000003)*_genvalue_ <= (540 - _C000001) then do;
+10628  _C000001 + 1;
+10629  output EMWS1.Part_TRAIN;
+10630  end;
+10631  else do;
+10632  _C000002 + 1;
+10633  output EMWS1.Part_VALIDATE;
+10634  end;
+10635  _C000003+1;
+10636  end;
+10637  else if
+10638  _Pformat1 = 'VHS'
+10639  then do;
+10640  if (668+1-_C000006)*_genvalue_ <= (534 - _C000004) then do;
+10641  _C000004 + 1;
+10642  output EMWS1.Part_TRAIN;
+10643  end;
+10644  else do;
+10645  _C000005 + 1;
+10646  output EMWS1.Part_VALIDATE;
+10647  end;
+10648  _C000006+1;
+10649  end;
+10650  else if
+10651  _Pformat1 = 'Console Game System(e.g. XBOX PS2 etc)'
+10652  then do;
+10653  if (404+1-_C000009)*_genvalue_ <= (323 - _C000007) then do;
+10654  _C000007 + 1;
+10655  output EMWS1.Part_TRAIN;
+10656  end;
+10657  else do;
+10658  _C000008 + 1;
+10659  output EMWS1.Part_VALIDATE;
+10660  end;
+10661  _C000009+1;
+10662  end;
+10663  else if
+10664  _Pformat1 = 'Surround Sound'
+10665  then do;
+10666  if (353+1-_C0000012)*_genvalue_ <= (282 - _C0000010) then do;
+10667  _C0000010 + 1;
+10668  output EMWS1.Part_TRAIN;
+10669  end;
+10670  else do;
+10671  _C0000011 + 1;
+10672  output EMWS1.Part_VALIDATE;
+10673  end;
+10674  _C0000012+1;
+10675  end;
+10676  else if
+10677  _Pformat1 = 'Digital Satellite'
+10678  then do;
+10679  if (162+1-_C0000015)*_genvalue_ <= (130 - _C0000013) then do;
+10680  _C0000013 + 1;
+10681  output EMWS1.Part_TRAIN;
+10682  end;
+10683  else do;
+10684  _C0000014 + 1;
+10685  output EMWS1.Part_VALIDATE;
+10686  end;
+10687  _C0000015+1;
+10688  end;
+10689  else if
+10690  _Pformat1 = 'Flat Screen TV'
+10691  then do;
+10692  if (132+1-_C0000018)*_genvalue_ <= (106 - _C0000016) then do;
+10693  _C0000016 + 1;
+10694  output EMWS1.Part_TRAIN;
+10695  end;
+10696  else do;
+10697  _C0000017 + 1;
+10698  output EMWS1.Part_VALIDATE;
+10699  end;
+10700  _C0000018+1;
+10701  end;
+10702  else if
+10703  _Pformat1 = 'PVR(Tivo UltimateTV ReplayTV)'
+10704  then do;
+10705  if (96+1-_C0000021)*_genvalue_ <= (77 - _C0000019) then do;
+10706  _C0000019 + 1;
+10707  output EMWS1.Part_TRAIN;
+10708  end;
+10709  else do;
+10710  _C0000020 + 1;
+10711  output EMWS1.Part_VALIDATE;
+10712  end;
+10713  _C0000021+1;
+10714  end;
+10715  else if
+10716  _Pformat1 = 'HDTV'
+10717  then do;
+10718  if (89+1-_C0000024)*_genvalue_ <= (71 - _C0000022) then do;
+10719  _C0000022 + 1;
+10720  output EMWS1.Part_TRAIN;
+10721  end;
+10722  else do;
+10723  _C0000023 + 1;
+10724  output EMWS1.Part_VALIDATE;
+10725  end;
+10726  _C0000024+1;
+10727  end;
+10728  else if
+10729  _Pformat1 = 'Rear Projection TV'
+10730  then do;
+10731  if (83+1-_C0000027)*_genvalue_ <= (66 - _C0000025) then do;
+10732  _C0000025 + 1;
+10733  output EMWS1.Part_TRAIN;
+10734  end;
+10735  else do;
+10736  _C0000026 + 1;
+10737  output EMWS1.Part_VALIDATE;
+10738  end;
+10739  _C0000027+1;
+10740  end;
+10741  else if
+10742  _Pformat1 = 'Front Projection TV'
+10743  then do;
+10744  if (35+1-_C0000030)*_genvalue_ <= (28 - _C0000028) then do;
+10745  _C0000028 + 1;
+10746  output EMWS1.Part_TRAIN;
+10747  end;
+10748  else do;
+10749  _C0000029 + 1;
+10750  output EMWS1.Part_VALIDATE;
+10751  end;
+10752  _C0000030+1;
+10753  end;
+10754  else if
+10755  _Pformat1 = 'Laserdisk'
+10756  then do;
+10757  if (31+1-_C0000033)*_genvalue_ <= (25 - _C0000031) then do;
+10758  _C0000031 + 1;
+10759  output EMWS1.Part_TRAIN;
+10760  end;
+10761  else do;
+10762  _C0000032 + 1;
+10763  output EMWS1.Part_VALIDATE;
+10764  end;
+10765  _C0000033+1;
+10766  end;
+10767  else if
+10768  _Pformat1 = 'Video-capable Automobile'
+10769  then do;
+10770  if (25+1-_C0000036)*_genvalue_ <= (20 - _C0000034) then do;
+10771  _C0000034 + 1;
+10772  output EMWS1.Part_TRAIN;
+10773  end;
+10774  else do;
+10775  _C0000035 + 1;
+10776  output EMWS1.Part_VALIDATE;
+10777  end;
+10778  _C0000036+1;
+10779  end;
+10780  else if
+10781  _Pformat1 = 'Analog Satellite'
+10782  then do;
+10783  if (15+1-_C0000039)*_genvalue_ <= (12 - _C0000037) then do;
+10784  _C0000037 + 1;
+10785  output EMWS1.Part_TRAIN;
+10786  end;
+10787  else do;
+10788  _C0000038 + 1;
+10789  output EMWS1.Part_VALIDATE;
+10790  end;
+10791  _C0000039+1;
+10792  end;
+10793  else if
+10794  _Pformat1 = 'Betamax'
+10795  then do;
+10796  if (14+1-_C0000042)*_genvalue_ <= (11 - _C0000040) then do;
+10797  _C0000040 + 1;
+10798  output EMWS1.Part_TRAIN;
+10799  end;
+10800  else do;
+10801  _C0000041 + 1;
+10802  output EMWS1.Part_VALIDATE;
+10803  end;
+10804  _C0000042+1;
+10805  end;
+10806  run;
+
+NOTE: 从数据集 DATA.TECHNOLOGY. 读取了 10953 个观测
+NOTE: 从数据集 DATA.MOVIES. 读取了 45323 个观测
+NOTE: 从数据集 DATA.HOBBIES. 读取了 20367 个观测
+NOTE: 从数据集 DATA.DIRECTORS. 读取了 17603 个观测
+NOTE: 从数据集 DATA.CUSTOMERS. 读取了 3187 个观测
+NOTE: 从数据集 DATA.CRITERIA. 读取了 8749 个观测
+NOTE: 从数据集 DATA.CHANNELS. 读取了 11123 个观测
+NOTE: 从数据集 DATA.ACTORS. 读取了 36523 个观测
+NOTE: 从数据集 EMWS1.IDS_DATA. 读取了 36523 个观测
+NOTE: 从数据集 EMWS1.IDS2_DATA. 读取了 11123 个观测
+NOTE: 从数据集 EMWS1.IDS3_DATA. 读取了 8749 个观测
+NOTE: 从数据集 EMWS1.IDS4_DATA. 读取了 3187 个观测
+NOTE: 从数据集 EMWS1.IDS5_DATA. 读取了 17603 个观测
+NOTE: 从数据集 EMWS1.IDS6_DATA. 读取了 20367 个观测
+NOTE: 从数据集 EMWS1.IDS7_DATA. 读取了 45323 个观测
+NOTE: 从数据集 EMWS1.IDS8_DATA. 读取了 10953 个观测
+NOTE: “视图 EMWS1.FILTER_TRAIN.VIEW”所用时间（总处理时间）:
+      实际时间          1.05 秒
+      CPU 时间          1.01 秒
+      
+NOTE: 从数据集 EMWS1.MERGE_TRAIN. 读取了 45323 个观测
+NOTE: 从数据集 EMWS1.FILTER_TRAIN. 读取了 2782 个观测
+NOTE: 数据集 EMWS1.PART_TRAIN 有 2214 个观测和 29 个变量。
+NOTE: 数据集 EMWS1.PART_VALIDATE 有 568 个观测和 29 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          1.08 秒
+      CPU 时间          1.07 秒
+      
+
+10807  data _tempNobs;
+10808  length Type $8 Table $32 Nobs 8;
+10809  label type= "%sysfunc(sasmsg(sashelp.dmine, meta_type_vlabel,    NOQUOTE))" table = "%sysfunc(sasmsg(sashelp.dmine, meta_dataset_vlabel, NOQUOTE))" nobs = "%sysfunc(sasmsg(sashelp.dmine,  rpt_numObs_vlabel,   NOQUOTE))";
+10810  type='DATA';
+10811  table="EMWS1.Filter_TRAIN";
+10812  Nobs=2782;
+10813  output;
+10814  type='TRAIN';
+10815  table="EMWS1.Part_TRAIN";
+10816  Nobs=2214;
+10817  output;
+10818  type='VALIDATE';
+10819  table="EMWS1.Part_VALIDATE";
+10820  Nobs=568;
+10821  output;
+10822  run;
+
+NOTE: 数据集 WORK._TEMPNOBS 有 3 个观测和 3 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.01 秒
+      CPU 时间          0.00 秒
+      
+
+10823  %let _cn = %sysfunc(getoption(CENTER));
+10824  %let _nb = %sysfunc(getoption(NUMBER));
+10825  options nonumber nocenter;
+10826  proc print data=_tempNobs noobs label;
+10827  title9 ' ';
+10828  title10 "%sysfunc(sasmsg(sashelp.dmine, rpt_partitionSummary_title, NOQUOTE))";
+10829  run;
+
+NOTE: 从数据集 WORK._TEMPNOBS. 读取了 3 个观测
+NOTE: PROCEDURE PRINT 已打印第 2 页。
+NOTE: “PROCEDURE PRINT”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.01 秒
+      
+
+10830  title10;
+10831  options &_cn &_nb;
+10832  run;
+

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?><_ROOT_  DataSource="customers" Scope="LOCAL" Role="RAW" Library="DATA" Table="CUSTOMERS"
+ NCols="21" NObs="3187" NBytes="1541120" Segment="" DataSourceRole="RAW" OutputType="VIEW"
+ ForceRun="N" ComputeStatistics="N" DataSelection="DATASOURCE" NewTable="" MetaAdvisor="BASIC"
+ ApplyIntervalLevelLowerLimit="Y" IntervalLowerLimit="20" ApplyMaxPercentMissing="Y"
+ MaxPercentMissing="50" ApplyMaxClassLevels="Y" MaxClassLevels="20" IdentifyEmptyColumns="Y"
+ VariableValidation="STRICT" NewVariableRole="REJECT" DropMapVariables="Y" DsId="customers"
+ DsSampleName="" DsSampleSizeType="" DsSampleSize="" DsCreatedBy="Leon" DsCreateDate="1683130221.6"
+ DsModifiedBy="Leon" DsModifyDate="1683130221.7" DsScope="LOCAL" Sample="D" SampleSizeType="PERCENT"
+ SampleSizePercent="20" SampleSizeObs="10000" DBPassThrough="Y" RunAction="Train"
+ Component="DataSource" RawCreateTime="1683131043" CreateTime="02MAY2013:16:24:03"
+ Description="" Data="DATA.CUSTOMERS" CMeta="WORK.M2ZF3HVC" RunId="348a7144-dfea-4d1f-b759-5e118850f1cb"
+>
+<VARIABLEPROPERTIES/>
+<FILEPROPERTIES/>
+</_ROOT_>

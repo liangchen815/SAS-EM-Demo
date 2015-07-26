@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?><_ROOT_  DataSource="criteria" Scope="LOCAL" Role="RAW" Library="DATA" Table="CRITERIA" NCols="2"
+ NObs="8749" NBytes="996352" Segment="" DataSourceRole="RAW" OutputType="VIEW" ForceRun="N"
+ ComputeStatistics="N" DataSelection="DATASOURCE" NewTable="" MetaAdvisor="BASIC"
+ ApplyIntervalLevelLowerLimit="Y" IntervalLowerLimit="20" ApplyMaxPercentMissing="Y"
+ MaxPercentMissing="50" ApplyMaxClassLevels="Y" MaxClassLevels="20" IdentifyEmptyColumns="Y"
+ VariableValidation="STRICT" NewVariableRole="REJECT" DropMapVariables="Y" DsId="criteria"
+ DsSampleName="" DsSampleSizeType="" DsSampleSize="" DsCreatedBy="Leon" DsCreateDate="1683130087.5"
+ DsModifiedBy="Leon" DsModifyDate="1683130087.5" DsScope="LOCAL" Sample="D" SampleSizeType="PERCENT"
+ SampleSizePercent="20" SampleSizeObs="10000" DBPassThrough="Y" RunAction="Train"
+ Component="DataSource" RawCreateTime="1683131036.6" CreateTime="02MAY2013:16:23:57"
+ Description="" Data="DATA.CRITERIA" CMeta="WORK.M2QDUS5J" RunId="b307af7e-3b67-4d12-9270-81215294ce0f"
+>
+<VARIABLEPROPERTIES/>
+<FILEPROPERTIES/>
+</_ROOT_>

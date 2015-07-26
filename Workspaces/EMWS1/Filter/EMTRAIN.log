@@ -1,0 +1,1701 @@
+*------------------------------------------------------------*
+* 训练日志
+日期:       2013年05月18日
+时间:       15时24分15秒
+*------------------------------------------------------------*
+10564  proc freq data=EMWS1.Filter_VariableSet noprint;
+10565  table ROLE*LEVEL/out=WORK.FilterMETA;
+10566  run;
+
+NOTE: 从数据集 EMWS1.FILTER_VARIABLESET. 读取了 25 个观测
+NOTE: 数据集 WORK.FILTERMETA 有 3 个观测和 4 个变量。
+NOTE: “PROCEDURE FREQ”所用时间（总处理时间）:
+      实际时间          0.10 秒
+      CPU 时间          0.03 秒
+      
+
+10567  proc print data=WORK.FilterMETA label noobs;
+10568  var ROLE LEVEL COUNT;
+10569  label ROLE = "%sysfunc(sasmsg(sashelp.dmine, meta_role_vlabel, NOQUOTE))" LEVEL = "%sysfunc(sasmsg(sashelp.dmine, meta_level_vlabel, NOQUOTE))" COUNT = "%sysfunc(sasmsg(sashelp.dmine, rpt_count_vlabel, NOQUOTE))";
+10570  title9 ' ';
+10571  title10 "%sysfunc(sasmsg(sashelp.dmine, rpt_varSummary_title  , NOQUOTE))";
+10572  run;
+
+NOTE: 从数据集 WORK.FILTERMETA. 读取了 3 个观测
+NOTE: PROCEDURE PRINT 已打印第 1 页。
+NOTE: “PROCEDURE PRINT”所用时间（总处理时间）:
+      实际时间          0.01 秒
+      CPU 时间          0.01 秒
+      
+
+10573  title10;
+
+10596  filename cdist catalog 'SASHELP.EMUTIL.EM_CLASSDIST.SOURCE';
+10597  %inc cdist;
+10711  filename cdist;
+NOTE: 已取消文件引用名 CDIST 的分配。
+10712  data work.tempSummaryClass;
+10713  set EMWS1.Filter_CLASSDIST(drop=Count Percent);
+10714  where Filter='Y';
+10715  run;
+
+NOTE: 从数据集 EMWS1.FILTER_CLASSDIST. 读取了 0 个观测
+      WHERE Filter='Y';
+NOTE: 数据集 WORK.TEMPSUMMARYCLASS 有 0 个观测和 3 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+10716  proc sort data=work.tempSummaryClass;
+10717  by variable value;
+10718  run;
+
+NOTE: 输入数据集为空。
+NOTE: 数据集 WORK.TEMPSUMMARYCLASS 有 0 个观测和 3 个变量。
+NOTE: “PROCEDURE SORT”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+10719  %class_profile(DATA=EMWS1.Merge_TRAIN, OUTPUT=EMWS1.Filter_CLASSDIST, METADATA=EMWS1.Filter_VariableSet, STAT=_STAT);
+
+NOTE: 从数据集 EMWS1.FILTER_VARIABLESET. 读取了 18 个观测
+      WHERE (LEVEL not = 'INTERVAL') and (ROLE not = 'FREQ');
+NOTE: 数据集 WORK._NULL 有 18 个观测和 26 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+
+NOTE: FILE _MAC 是:
+      Catalog Name=WORK.MACROS.VARIABLES.SOURCE,
+      目录页大小=4096,目录页数=4,
+      创建时间=2013年05月18日 星期六 下午03时24分15秒,
+      上次修改时间=2013年05月18日 星期六 下午03时24分15秒,
+      文件名=E:\SAS Temporary Files\_TD3512_LEON-PC_\macros.sas7bcat,
+      创建版本=9.0301M2,创建主机=XP_PRO
+
+NOTE: 有 6 条记录写入到 FILE _MAC 中。
+      最小记录长度是 12。
+      最大记录长度是 77。
+NOTE: 从数据集 EMWS1.FILTER_VARIABLESET. 读取了 18 个观测
+      WHERE (LEVEL not = 'INTERVAL') or (ROLE='FREQ');
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.06 秒
+      CPU 时间          0.00 秒
+      
+
+NOTE: 已取消文件引用名 _MAC 的分配。
+
+NOTE: Records processed = 45323   Memory used = 511K.
+Note: Large memory request: 544800
+Note: Large memory request: 544800
+NOTE: 从数据集 DATA.TECHNOLOGY. 读取了 10953 个观测
+NOTE: 从数据集 DATA.MOVIES. 读取了 45323 个观测
+NOTE: 从数据集 DATA.HOBBIES. 读取了 20367 个观测
+NOTE: 从数据集 DATA.DIRECTORS. 读取了 17603 个观测
+NOTE: 从数据集 DATA.CUSTOMERS. 读取了 3187 个观测
+NOTE: 从数据集 DATA.CRITERIA. 读取了 8749 个观测
+NOTE: 从数据集 DATA.CHANNELS. 读取了 11123 个观测
+NOTE: 从数据集 DATA.ACTORS. 读取了 36523 个观测
+NOTE: “视图 EMWS1.MERGE_TRAIN.VIEW”所用时间（总处理时间）:
+      实际时间          1.08 秒
+      CPU 时间          0.70 秒
+      
+NOTE: 从数据集 EMWS1.IDS_DATA. 读取了 36523 个观测
+NOTE: 从数据集 EMWS1.IDS2_DATA. 读取了 11123 个观测
+NOTE: 从数据集 EMWS1.IDS3_DATA. 读取了 8749 个观测
+NOTE: 从数据集 EMWS1.IDS4_DATA. 读取了 3187 个观测
+NOTE: 从数据集 EMWS1.IDS5_DATA. 读取了 17603 个观测
+NOTE: 从数据集 EMWS1.IDS6_DATA. 读取了 20367 个观测
+NOTE: 从数据集 EMWS1.IDS7_DATA. 读取了 45323 个观测
+NOTE: 从数据集 EMWS1.IDS8_DATA. 读取了 10953 个观测
+NOTE: 从数据集 EMWS1.MERGE_TRAIN. 读取了 45323 个观测
+NOTE: 数据集 WORK._TEMPCLASS 有 4526 个观测和 9 个变量。
+NOTE: “PROCEDURE DMDB”所用时间（总处理时间）:
+      实际时间          1.17 秒
+      CPU 时间          0.79 秒
+      
+
+
+NOTE: 从数据集 WORK._TEMPCLASS. 读取了 4526 个观测
+NOTE: 数据集 WORK._TEMPCLASS 有 4526 个观测和 9 个变量。
+NOTE: “PROCEDURE SORT”所用时间（总处理时间）:
+      实际时间          0.02 秒
+      CPU 时间          0.03 秒
+      
+
+
+NOTE: 从数据集 WORK._TEMPCLASS. 读取了 4526 个观测
+NOTE: 数据集 EMWS1.FILTER_CLASSDIST 有 4526 个观测和 4 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.07 秒
+      CPU 时间          0.00 秒
+      
+
+
+NOTE: 从数据集 EMWS1.FILTER_CLASSDIST. 读取了 4526 个观测
+NOTE: 数据集 WORK._STAT 有 19 个观测和 4 个变量。
+NOTE: “PROCEDURE MEANS”所用时间（总处理时间）:
+      实际时间          0.02 秒
+      CPU 时间          0.03 秒
+      
+
+
+NOTE: 从数据集 WORK._STAT. 读取了 18 个观测
+      WHERE _TYPE_=1;
+NOTE: 数据集 WORK._STAT 有 18 个观测和 2 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.01 秒
+      CPU 时间          0.01 秒
+      
+
+
+NOTE: 正在删除 WORK._TEMPCLASS (memtype=DATA)。
+
+NOTE: “PROCEDURE DATASETS”所用时间（总处理时间）:
+      实际时间          0.01 秒
+      CPU 时间          0.00 秒
+      
+
+
+10726  data EMWS1.Filter_CLASSDIST;
+10727  set EMWS1.Filter_CLASSDIST;
+10728  length Filter $1;
+10729  retain Filter 'N';
+10730  run;
+
+NOTE: 从数据集 EMWS1.FILTER_CLASSDIST. 读取了 4526 个观测
+NOTE: 数据集 EMWS1.FILTER_CLASSDIST 有 4526 个观测和 5 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.03 秒
+      CPU 时间          0.01 秒
+      
+
+10731  proc sort data=EMWS1.Filter_CLASSDIST;
+10732  by variable value;
+10733  run;
+
+NOTE: 从数据集 EMWS1.FILTER_CLASSDIST. 读取了 4526 个观测
+NOTE: 数据集 EMWS1.FILTER_CLASSDIST 有 4526 个观测和 5 个变量。
+NOTE: “PROCEDURE SORT”所用时间（总处理时间）:
+      实际时间          0.02 秒
+      CPU 时间          0.01 秒
+      
+
+10734  data EMWS1.Filter_CLASSDIST;
+10735  merge EMWS1.Filter_CLASSDIST(in=_a) work.tempSummaryClass(in=_b);
+10736  by variable value;
+10737  if _a then output;
+10738  run;
+
+NOTE: 从数据集 EMWS1.FILTER_CLASSDIST. 读取了 4526 个观测
+NOTE: 从数据集 WORK.TEMPSUMMARYCLASS. 读取了 0 个观测
+NOTE: 数据集 EMWS1.FILTER_CLASSDIST 有 4526 个观测和 5 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.01 秒
+      CPU 时间          0.01 秒
+      
+
+10739  data EMWS1.Filter_CLASSFILTER / view=EMWS1.Filter_CLASSFILTER;
+10740  set EMWS1.Filter_CLASSDIST;
+10741  where Filter eq 'Y';
+10742  run;
+
+NOTE: DATA STEP 视图已保存在文件 EMWS1.FILTER_CLASSFILTER 中。
+NOTE: 存储的 DATA STEP 视图无法在不同的操作系统下运行。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.01 秒
+      CPU 时间          0.01 秒
+      
+
+10743  %let EM_CODEBAR = *------------------------------------------------------------*;
+10744  filename cdist catalog 'SASHELP.EMUTIL.EM_VARDIST.SOURCE';
+10745  %inc cdist;
+11141  filename cdist;
+NOTE: 已取消文件引用名 CDIST 的分配。
+11142  %var_profile(DATA=EMWS1.Merge_TRAIN, OUTPUT=EMWS1.Filter_VARDIST, METADATA=EMWS1.Filter_VariableSet, COMPUTESTAT=N, FREQ=, BIN=Y, NUMBARS= 16, minmax=Y);
+*------------------------------------------------------------*
+* EM: 计算汇总统计量
+*------------------------------------------------------------*
+
+NOTE: 从数据集 EMWS1.FILTER_VARIABLESET. 读取了 7 个观测
+      WHERE (LEVEL='INTERVAL') and (ROLE not = 'FREQ');
+NOTE: 数据集 WORK._NULL 有 7 个观测和 26 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+
+NOTE: FILE _MAC 是:
+      Catalog Name=WORK.MACROS.VARIABLES.SOURCE,
+      目录页大小=4096,目录页数=5,
+      创建时间=2013年05月18日 星期六 下午03时24分15秒,
+      上次修改时间=2013年05月18日 星期六 下午03时24分15秒,
+      文件名=E:\SAS Temporary Files\_TD3512_LEON-PC_\macros.sas7bcat,
+      创建版本=9.0301M2,创建主机=XP_PRO
+
+NOTE: 有 3 条记录写入到 FILE _MAC 中。
+      最小记录长度是 12。
+      最大记录长度是 71。
+NOTE: 从数据集 EMWS1.FILTER_VARIABLESET. 读取了 7 个观测
+      WHERE (LEVEL='INTERVAL') or (ROLE='FREQ');
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+NOTE: 已取消文件引用名 _MAC 的分配。
+
+NOTE: 文件 WORK._BOUNDS (memtype=(DATA VIEW)) 没有找到，但出现在 DELETE 语句中。
+*------------------------------------------------------------*
+* computingmidpoints_note
+*------------------------------------------------------------*
+
+NOTE: “PROCEDURE DATASETS”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+
+NOTE: Records processed = 45323   Memory used = 511K.
+NOTE: 从数据集 DATA.TECHNOLOGY. 读取了 10953 个观测
+NOTE: 从数据集 DATA.MOVIES. 读取了 45323 个观测
+NOTE: 从数据集 DATA.HOBBIES. 读取了 20367 个观测
+NOTE: 从数据集 DATA.DIRECTORS. 读取了 17603 个观测
+NOTE: 从数据集 DATA.CUSTOMERS. 读取了 3187 个观测
+NOTE: 从数据集 DATA.CRITERIA. 读取了 8749 个观测
+NOTE: 从数据集 DATA.CHANNELS. 读取了 11123 个观测
+NOTE: 从数据集 DATA.ACTORS. 读取了 36523 个观测
+NOTE: “视图 EMWS1.MERGE_TRAIN.VIEW”所用时间（总处理时间）:
+      实际时间          1.01 秒
+      CPU 时间          0.57 秒
+      
+NOTE: 从数据集 EMWS1.IDS_DATA. 读取了 36523 个观测
+NOTE: 从数据集 EMWS1.IDS2_DATA. 读取了 11123 个观测
+NOTE: 从数据集 EMWS1.IDS3_DATA. 读取了 8749 个观测
+NOTE: 从数据集 EMWS1.IDS4_DATA. 读取了 3187 个观测
+NOTE: 从数据集 EMWS1.IDS5_DATA. 读取了 17603 个观测
+NOTE: 从数据集 EMWS1.IDS6_DATA. 读取了 20367 个观测
+NOTE: 从数据集 EMWS1.IDS7_DATA. 读取了 45323 个观测
+NOTE: 从数据集 EMWS1.IDS8_DATA. 读取了 10953 个观测
+NOTE: 从数据集 EMWS1.MERGE_TRAIN. 读取了 45323 个观测
+NOTE: 数据集 WORK._CLASSOUT 有 83 个观测和 9 个变量。
+NOTE: “PROCEDURE DMDB”所用时间（总处理时间）:
+      实际时间          1.09 秒
+      CPU 时间          0.65 秒
+      
+
+
+NOTE: 从数据集 WORK._CLASSOUT. 读取了 83 个观测
+NOTE: 数据集 WORK._COUNT 有 5 个观测和 3 个变量。
+NOTE: “PROCEDURE FREQ”所用时间（总处理时间）:
+      实际时间          0.01 秒
+      CPU 时间          0.01 秒
+      
+
+
+NOTE: 从数据集 WORK._COUNT. 读取了 5 个观测
+NOTE: 数据集 WORK._COUNT 有 5 个观测和 2 个变量。
+NOTE: “PROCEDURE SORT”所用时间（总处理时间）:
+      实际时间          0.01 秒
+      CPU 时间          0.00 秒
+      
+
+
+NOTE: 从数据集 WORK._CLASSOUT. 读取了 83 个观测
+NOTE: 数据集 WORK._CLASSOUT 有 83 个观测和 9 个变量。
+NOTE: “PROCEDURE SORT”所用时间（总处理时间）:
+      实际时间          0.01 秒
+      CPU 时间          0.01 秒
+      
+
+
+NOTE: 从数据集 WORK._CLASSOUT. 读取了 83 个观测
+NOTE: 数据集 WORK._DISCRETEMID 有 7 个观测和 18 个变量。
+NOTE: “PROCEDURE TRANSPOSE”所用时间（总处理时间）:
+      实际时间          0.01 秒
+      CPU 时间          0.01 秒
+      
+
+
+NOTE: 正在删除 WORK._CLASSOUT (memtype=DATA)。
+NOTE: “PROCEDURE DELETE”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+
+NOTE: 从数据集 WORK._DISCRETEMID. 读取了 7 个观测
+NOTE: 从数据集 WORK._COUNT. 读取了 5 个观测
+NOTE: 数据集 WORK._DISCRETEMID 有 5 个观测和 19 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.01 秒
+      CPU 时间          0.01 秒
+      
+
+
+NOTE: DATA STEP 视图已保存在文件 WORK._EMVARDIST 中。
+NOTE: 存储的 DATA STEP 视图无法在不同的操作系统下运行。
+NOTE: “视图 EMWS1.MERGE_TRAIN.VIEW”所用时间（总处理时间）:
+      实际时间          0.42 秒
+      CPU 时间          0.34 秒
+      
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.51 秒
+      CPU 时间          0.42 秒
+      
+
+
+NOTE: 从数据集 DATA.TECHNOLOGY. 读取了 10953 个观测
+NOTE: 从数据集 DATA.MOVIES. 读取了 45323 个观测
+NOTE: 从数据集 DATA.HOBBIES. 读取了 20367 个观测
+NOTE: 从数据集 DATA.DIRECTORS. 读取了 17603 个观测
+NOTE: 从数据集 DATA.CUSTOMERS. 读取了 3187 个观测
+NOTE: 从数据集 DATA.CRITERIA. 读取了 8749 个观测
+NOTE: 从数据集 DATA.CHANNELS. 读取了 11123 个观测
+NOTE: 从数据集 DATA.ACTORS. 读取了 36523 个观测
+NOTE: 从数据集 EMWS1.IDS_DATA. 读取了 36523 个观测
+NOTE: 从数据集 EMWS1.IDS2_DATA. 读取了 11123 个观测
+NOTE: 从数据集 EMWS1.IDS3_DATA. 读取了 8749 个观测
+NOTE: 从数据集 EMWS1.IDS4_DATA. 读取了 3187 个观测
+NOTE: 从数据集 EMWS1.IDS5_DATA. 读取了 17603 个观测
+NOTE: 从数据集 EMWS1.IDS6_DATA. 读取了 20367 个观测
+NOTE: 从数据集 EMWS1.IDS7_DATA. 读取了 45323 个观测
+NOTE: 从数据集 EMWS1.IDS8_DATA. 读取了 10953 个观测
+NOTE: “视图 WORK._EMVARDIST.VIEW”所用时间（总处理时间）:
+      实际时间          2.26 秒
+      CPU 时间          1.32 秒
+      
+NOTE: 从数据集 EMWS1.MERGE_TRAIN. 读取了 45323 个观测
+NOTE: 从数据集 WORK._EMVARDIST. 读取了 45323 个观测
+NOTE: 数据集 WORK._PCTLSTAT 有 15 个观测和 8 个变量。
+NOTE: “PROCEDURE STDIZE”所用时间（总处理时间）:
+      实际时间          2.29 秒
+      CPU 时间          1.35 秒
+      
+
+
+NOTE: 正在删除 WORK._EMVARDIST (memtype=VIEW)。
+
+NOTE: “PROCEDURE DATASETS”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+
+NOTE: 从数据集 WORK._PCTLSTAT. 读取了 2 个观测
+      WHERE _type_ in ('P0', 'P100');
+NOTE: 数据集 WORK._MINMAXDATA 有 7 个观测和 4 个变量。
+NOTE: “PROCEDURE TRANSPOSE”所用时间（总处理时间）:
+      实际时间          0.01 秒
+      CPU 时间          0.01 秒
+      
+
+
+NOTE: 从数据集 WORK._MINMAXDATA. 读取了 7 个观测
+NOTE: 数据集 WORK._MINMAXDATA 有 14 个观测和 3 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.03 秒
+      CPU 时间          0.00 秒
+      
+
+
+NOTE: 从数据集 WORK._PCTLSTAT. 读取了 4 个观测
+      WHERE _type_ in ('P0', 'P100', 'P5', 'P95');
+NOTE: 数据集 WORK._BOUNDS 有 7 个观测和 6 个变量。
+NOTE: “PROCEDURE TRANSPOSE”所用时间（总处理时间）:
+      实际时间          0.01 秒
+      CPU 时间          0.00 秒
+      
+
+
+NOTE: 从数据集 WORK._BOUNDS. 读取了 7 个观测
+NOTE: 数据集 WORK._BOUNDS 有 7 个观测和 6 个变量。
+NOTE: “PROCEDURE SORT”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.01 秒
+      
+
+
+NOTE: 从数据集 WORK._BOUNDS. 读取了 7 个观测
+NOTE: 数据集 WORK._BOUNDS 有 7 个观测和 69 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.01 秒
+      CPU 时间          0.01 秒
+      
+
+
+WARNING: 输入数据集为 BY 变量 VARIABLE 指定了多个长度。这可能导致意外的结果。
+NOTE: 从数据集 WORK._BOUNDS. 读取了 7 个观测
+NOTE: 从数据集 WORK._DISCRETEMID. 读取了 5 个观测
+NOTE: 数据集 WORK._BOUNDS 有 7 个观测和 71 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+
+NOTE: FILE FREF 是:
+      Catalog Name=WORK.EM.PROFILEFORMAT.SOURCE,
+      目录页大小=4096,目录页数=4,
+      创建时间=2013年05月18日 星期六 下午03时24分22秒,
+      上次修改时间=2013年05月18日 星期六 下午03时24分22秒,
+      文件名=E:\SAS Temporary Files\_TD3512_LEON-PC_\em.sas7bcat,
+      创建版本=9.0301M2,创建主机=XP_PRO
+
+NOTE: 有 102 条记录写入到 FILE FREF 中。
+      最小记录长度是 1。
+      最大记录长度是 40。
+NOTE: 从数据集 WORK._BOUNDS. 读取了 7 个观测
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.05 秒
+      CPU 时间          0.00 秒
+      
+
+NOTE: 输出格式 F1_ 已输出。
+NOTE: 输出格式 F2_ 已输出。
+NOTE: 输出格式 F3_ 已输出。
+NOTE: 输出格式 F4_ 已输出。
+NOTE: 输出格式 F5_ 已输出。
+NOTE: 输出格式 F6_ 已输出。
+NOTE: 输出格式 F7_ 已输出。
+
+NOTE: “PROCEDURE FORMAT”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+NOTE: 已取消文件引用名 FREF 的分配。
+
+NOTE: DATA STEP 视图已保存在文件 WORK._BINNEDDATA 中。
+NOTE: 存储的 DATA STEP 视图无法在不同的操作系统下运行。
+NOTE: “视图 EMWS1.MERGE_TRAIN.VIEW”所用时间（总处理时间）:
+      实际时间          0.36 秒
+      CPU 时间          0.31 秒
+      
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.44 秒
+      CPU 时间          0.37 秒
+      
+
+
+NOTE: Records processed = 45323   Memory used = 511K.
+NOTE: 从数据集 DATA.TECHNOLOGY. 读取了 10953 个观测
+NOTE: 从数据集 DATA.MOVIES. 读取了 45323 个观测
+NOTE: 从数据集 DATA.HOBBIES. 读取了 20367 个观测
+NOTE: 从数据集 DATA.DIRECTORS. 读取了 17603 个观测
+NOTE: 从数据集 DATA.CUSTOMERS. 读取了 3187 个观测
+NOTE: 从数据集 DATA.CRITERIA. 读取了 8749 个观测
+NOTE: 从数据集 DATA.CHANNELS. 读取了 11123 个观测
+NOTE: 从数据集 DATA.ACTORS. 读取了 36523 个观测
+NOTE: 从数据集 EMWS1.IDS_DATA. 读取了 36523 个观测
+NOTE: 从数据集 EMWS1.IDS2_DATA. 读取了 11123 个观测
+NOTE: 从数据集 EMWS1.IDS3_DATA. 读取了 8749 个观测
+NOTE: 从数据集 EMWS1.IDS4_DATA. 读取了 3187 个观测
+NOTE: 从数据集 EMWS1.IDS5_DATA. 读取了 17603 个观测
+NOTE: 从数据集 EMWS1.IDS6_DATA. 读取了 20367 个观测
+NOTE: 从数据集 EMWS1.IDS7_DATA. 读取了 45323 个观测
+NOTE: 从数据集 EMWS1.IDS8_DATA. 读取了 10953 个观测
+NOTE: “视图 WORK._BINNEDDATA.VIEW”所用时间（总处理时间）:
+      实际时间          0.99 秒
+      CPU 时间          0.78 秒
+      
+NOTE: 从数据集 EMWS1.MERGE_TRAIN. 读取了 45323 个观测
+NOTE: 从数据集 WORK._BINNEDDATA. 读取了 45323 个观测
+NOTE: 数据集 WORK._TEMPTAB 有 87 个观测和 9 个变量。
+NOTE: “PROCEDURE DMDB”所用时间（总处理时间）:
+      实际时间          1.01 秒
+      CPU 时间          0.79 秒
+      
+
+
+NOTE: 从数据集 WORK._TEMPTAB. 读取了 87 个观测
+NOTE: 数据集 EMWS1.FILTER_VARDIST 有 87 个观测和 4 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.05 秒
+      CPU 时间          0.04 秒
+      
+
+
+NOTE: 从数据集 EMWS1.FILTER_VARDIST. 读取了 87 个观测
+NOTE: 从数据集 WORK._MINMAXDATA. 读取了 14 个观测
+NOTE: 数据集 EMWS1.FILTER_VARDIST 有 101 个观测和 5 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+
+NOTE: 从数据集 EMWS1.FILTER_VARDIST. 读取了 95 个观测
+      WHERE VALUE not = .;
+NOTE: 数据集 EMWS1.FILTER_VARDIST 有 95 个观测和 4 个变量。
+NOTE: “PROCEDURE SORT”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.01 秒
+      
+
+
+NOTE: 正在删除 WORK._TEMPTAB (memtype=DATA)。
+NOTE: 正在删除 WORK._BINNEDDATA (memtype=VIEW)。
+NOTE: 正在删除 WORK._MINMAXDATA (memtype=DATA)。
+
+NOTE: “PROCEDURE DATASETS”所用时间（总处理时间）:
+      实际时间          0.01 秒
+      CPU 时间          0.01 秒
+      
+
+
+11258  *------------------------------------------------------------* ;
+11259  * Filter: DMDBClass Macro ;
+11260  *------------------------------------------------------------* ;
+11261  %macro DMDBClass;
+11262      Actor(ASC) Director(ASC) Education_Level(ASC) Gender(ASC) Home_Ownership(ASC)
+11263     Internet_Connection(ASC) Marital_Status(ASC) Movie(ASC) Movie_Selector(ASC)
+11264     PPV_Freq(ASC) Prerec_Buying_Freq(ASC) Prerec_Format(ASC)
+11265     Prerec_Renting_Freq(ASC) Prerec_Viewing_Freq(ASC) TV_Movie_Freq(ASC)
+11266     TV_Signal(ASC) Theater_Freq(ASC)
+11267  %mend DMDBClass;
+11268  *------------------------------------------------------------* ;
+11269  * Filter: DMDBVar Macro ;
+11270  *------------------------------------------------------------* ;
+11271  %macro DMDBVar;
+11272      Age CustomerID Num_Bathrooms Num_Bedrooms Num_Cars Num_Children Num_TVs
+11273  %mend DMDBVar;
+11274  *------------------------------------------------------------*;
+11275  * Filter: Create DMDB;
+11276  *------------------------------------------------------------*;
+11277  proc dmdb batch data=EMWS1.Merge_TRAIN
+11278  classout=WORK._EMFILTERCLASS
+11279  varout=WORK._EMFILTERVAR
+11280  maxlevel = 26
+11281  ;
+11282  class %DMDBClass;
+11283  var %DMDBVar;
+11284  run;
+
+NOTE: Records processed = 45323   Memory used = 511K.
+NOTE: 从数据集 DATA.TECHNOLOGY. 读取了 10953 个观测
+NOTE: 从数据集 DATA.MOVIES. 读取了 45323 个观测
+NOTE: 从数据集 DATA.HOBBIES. 读取了 20367 个观测
+NOTE: 从数据集 DATA.DIRECTORS. 读取了 17603 个观测
+NOTE: 从数据集 DATA.CUSTOMERS. 读取了 3187 个观测
+NOTE: 从数据集 DATA.CRITERIA. 读取了 8749 个观测
+NOTE: 从数据集 DATA.CHANNELS. 读取了 11123 个观测
+NOTE: 从数据集 DATA.ACTORS. 读取了 36523 个观测
+NOTE: “视图 EMWS1.MERGE_TRAIN.VIEW”所用时间（总处理时间）:
+      实际时间          0.67 秒
+      CPU 时间          0.65 秒
+      
+NOTE: 从数据集 EMWS1.IDS_DATA. 读取了 36523 个观测
+NOTE: 从数据集 EMWS1.IDS2_DATA. 读取了 11123 个观测
+NOTE: 从数据集 EMWS1.IDS3_DATA. 读取了 8749 个观测
+NOTE: 从数据集 EMWS1.IDS4_DATA. 读取了 3187 个观测
+NOTE: 从数据集 EMWS1.IDS5_DATA. 读取了 17603 个观测
+NOTE: 从数据集 EMWS1.IDS6_DATA. 读取了 20367 个观测
+NOTE: 从数据集 EMWS1.IDS7_DATA. 读取了 45323 个观测
+NOTE: 从数据集 EMWS1.IDS8_DATA. 读取了 10953 个观测
+NOTE: 从数据集 EMWS1.MERGE_TRAIN. 读取了 45323 个观测
+NOTE: 数据集 WORK._EMFILTERCLASS 有 161 个观测和 9 个变量。
+NOTE: 数据集 WORK._EMFILTERVAR 有 7 个观测和 9 个变量。
+NOTE: “PROCEDURE DMDB”所用时间（总处理时间）:
+      实际时间          0.75 秒
+      CPU 时间          0.73 秒
+      
+
+11285  quit;
+11286  *--- end code ---*;
+
+11287  data WORK.M18DUX9Z;
+11288  set WORK.M18DUX9Z;
+11289  if ROLE ^in('TARGET', 'INPUT', 'FREQ') and CALCMETHOD ne 'NONE' then ROLE ='INPUT';
+11290  if LEVEL ne 'INTERVAL' and KEEPMISSING IN('D', '', 'N');
+11291  run;
+
+NOTE: 从数据集 WORK.M18DUX9Z. 读取了 24 个观测
+NOTE: 数据集 WORK.M18DUX9Z 有 17 个观测和 26 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.01 秒
+      
+
+11292  *------------------------------------------------------------* ;
+11293  * Filter: DMDBClass Macro ;
+11294  *------------------------------------------------------------* ;
+11295  %macro DMDBClass;
+11296      Actor(ASC) Director(ASC) Education_Level(ASC) Gender(ASC) Home_Ownership(ASC)
+11297     Internet_Connection(ASC) Marital_Status(ASC) Movie(ASC) Movie_Selector(ASC)
+11298     PPV_Freq(ASC) Prerec_Buying_Freq(ASC) Prerec_Format(ASC)
+11299     Prerec_Renting_Freq(ASC) Prerec_Viewing_Freq(ASC) TV_Movie_Freq(ASC)
+11300     TV_Signal(ASC) Theater_Freq(ASC)
+11301  %mend DMDBClass;
+11302  *------------------------------------------------------------* ;
+11303  * Filter: DMDBVar Macro ;
+11304  *------------------------------------------------------------* ;
+11305  %macro DMDBVar;
+11306  
+11307  %mend DMDBVar;
+11308  *------------------------------------------------------------*;
+11309  * Filter: Create DMDB;
+11310  *------------------------------------------------------------*;
+11311  proc dmdb batch data=EMWS1.Merge_TRAIN
+11312  classout=_MissingDs
+11313  maxlevel = 26
+11314  missingOnly
+11315  ;
+11316  class %DMDBClass;
+11317  run;
+
+NOTE: Records processed = 45323   Memory used = 511K.
+NOTE: 从数据集 DATA.TECHNOLOGY. 读取了 10953 个观测
+NOTE: 从数据集 DATA.MOVIES. 读取了 45323 个观测
+NOTE: 从数据集 DATA.HOBBIES. 读取了 20367 个观测
+NOTE: 从数据集 DATA.DIRECTORS. 读取了 17603 个观测
+NOTE: 从数据集 DATA.CUSTOMERS. 读取了 3187 个观测
+NOTE: 从数据集 DATA.CRITERIA. 读取了 8749 个观测
+NOTE: 从数据集 DATA.CHANNELS. 读取了 11123 个观测
+NOTE: 从数据集 DATA.ACTORS. 读取了 36523 个观测
+NOTE: “视图 EMWS1.MERGE_TRAIN.VIEW”所用时间（总处理时间）:
+      实际时间          0.54 秒
+      CPU 时间          0.49 秒
+      
+NOTE: 从数据集 EMWS1.IDS_DATA. 读取了 36523 个观测
+NOTE: 从数据集 EMWS1.IDS2_DATA. 读取了 11123 个观测
+NOTE: 从数据集 EMWS1.IDS3_DATA. 读取了 8749 个观测
+NOTE: 从数据集 EMWS1.IDS4_DATA. 读取了 3187 个观测
+NOTE: 从数据集 EMWS1.IDS5_DATA. 读取了 17603 个观测
+NOTE: 从数据集 EMWS1.IDS6_DATA. 读取了 20367 个观测
+NOTE: 从数据集 EMWS1.IDS7_DATA. 读取了 45323 个观测
+NOTE: 从数据集 EMWS1.IDS8_DATA. 读取了 10953 个观测
+NOTE: 从数据集 EMWS1.MERGE_TRAIN. 读取了 45323 个观测
+NOTE: 数据集 WORK._MISSINGDS 有 34 个观测和 9 个变量。
+NOTE: “PROCEDURE DMDB”所用时间（总处理时间）:
+      实际时间          0.63 秒
+      CPU 时间          0.57 秒
+      
+
+11318  quit;
+11319  *--- end code ---*;
+
+11320  proc freq data=WORK._EMFILTERCLASS noprint;
+11321  table NAME / out=WORK._EMFILTERFREQ(keep=NAME COUNT rename=(COUNT=NUMLEVELS));
+11322  run;
+
+NOTE: 从数据集 WORK._EMFILTERCLASS. 读取了 161 个观测
+NOTE: 数据集 WORK._EMFILTERFREQ 有 17 个观测和 2 个变量。
+NOTE: “PROCEDURE FREQ”所用时间（总处理时间）:
+      实际时间          0.01 秒
+      CPU 时间          0.01 秒
+      
+
+11323  data WORK._EMFILTERCLASS;
+11324  set WORK._EMFILTERCLASS (rename=(FREQUENCY=COUNT FREQPERCENT=PERCENT));
+11325  _OBS_= _N_;
+11326  if (CRAW eq '' and NRAW eq .) then _OBS_=0;
+11327  run;
+
+NOTE: 从数据集 WORK._EMFILTERCLASS. 读取了 161 个观测
+NOTE: 数据集 WORK._EMFILTERCLASS 有 161 个观测和 10 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.01 秒
+      CPU 时间          0.00 秒
+      
+
+11328  data _MissingDs;
+11329  retain _OBS_ 0;
+11330  set _MissingDs(rename=(FREQUENCY=COUNT FREQPERCENT=PERCENT));
+11331  where substr(LEVEL, 1, 1) ='M';
+11332  if type = 'C' then LEVEL = '';
+11333  else LEVEL='.';
+11334  run;
+
+NOTE: 从数据集 WORK._MISSINGDS. 读取了 17 个观测
+      WHERE SUBSTR(LEVEL, 1, 1)='M';
+NOTE: 数据集 WORK._MISSINGDS 有 17 个观测和 10 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.01 秒
+      CPU 时间          0.01 秒
+      
+
+11335  data WORK._EMFILTERCLASS;
+11336  set WORK._EMFILTERCLASS _MissingDs;
+11337  run;
+
+NOTE: 从数据集 WORK._EMFILTERCLASS. 读取了 161 个观测
+NOTE: 从数据集 WORK._MISSINGDS. 读取了 17 个观测
+NOTE: 数据集 WORK._EMFILTERCLASS 有 178 个观测和 10 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.01 秒
+      CPU 时间          0.01 秒
+      
+
+11338  proc sort data=WORK._EMFILTERCLASS nodupkey;
+11339  by NAME _OBS_;
+11340  run;
+
+NOTE: 从数据集 WORK._EMFILTERCLASS. 读取了 178 个观测
+NOTE: 14 个具有重复键值的观测已删除。
+NOTE: 数据集 WORK._EMFILTERCLASS 有 164 个观测和 10 个变量。
+NOTE: “PROCEDURE SORT”所用时间（总处理时间）:
+      实际时间          0.01 秒
+      CPU 时间          0.01 秒
+      
+
+11341  proc sort data=WORK._EMFILTERFREQ;
+11342  by NAME;
+11343  run;
+
+NOTE: 从数据集 WORK._EMFILTERFREQ. 读取了 17 个观测
+NOTE: 数据集 WORK._EMFILTERFREQ 有 17 个观测和 2 个变量。
+NOTE: “PROCEDURE SORT”所用时间（总处理时间）:
+      实际时间          0.01 秒
+      CPU 时间          0.00 秒
+      
+
+11344  data WORK._EMFILTERCLASS;
+11345  merge WORK._EMFILTERCLASS WORK._EMFILTERFREQ;
+11346  by NAME;
+11347  run;
+
+NOTE: 从数据集 WORK._EMFILTERCLASS. 读取了 164 个观测
+NOTE: 从数据集 WORK._EMFILTERFREQ. 读取了 17 个观测
+NOTE: 数据集 WORK._EMFILTERCLASS 有 164 个观测和 11 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.01 秒
+      CPU 时间          0.01 秒
+      
+
+11348  data work._FilterMinFreq;
+11349  set WORK.M0TV_434;
+11350  where level ne 'INTERVAL';
+11351  if KEEPMISSING in('D', '') then
+11352  KEEPMISSING = "N";
+11353  *if ROLE='REJECTED' and CALCMETHOD in('', 'DEFAULT') and KEEPMISSING="Y" then delete;
+11354  if ROLE ^in('INPUT','TARGET') and CALCMETHOD in('', 'DEFAULT') and KEEPMISSING="Y" then delete;
+11355  if CALCMETHOD in('', 'DEFAULT') then CALCMETHOD = "MINPCT";
+11356  if minfreq = . then minfreq=1;
+11357  if MAXVALUES = . then MAXVALUES = 25;
+11358  minClassPct = 0.01;
+11359  run;
+
+NOTE: 从数据集 WORK.M0TV_434. 读取了 17 个观测
+      WHERE level not = 'INTERVAL';
+NOTE: 数据集 WORK._FILTERMINFREQ 有 17 个观测和 27 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+11360  proc sort data=work._FilterMinFreq;
+11361  by NAME;
+11362  run;
+
+NOTE: 从数据集 WORK._FILTERMINFREQ. 读取了 17 个观测
+NOTE: 数据集 WORK._FILTERMINFREQ 有 17 个观测和 27 个变量。
+NOTE: “PROCEDURE SORT”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.01 秒
+      
+
+11363  proc sort data=WORK._EMFILTERCLASS;
+11364  by NAME;
+11365  run;
+
+NOTE: 从数据集 WORK._EMFILTERCLASS. 读取了 164 个观测
+NOTE: 数据集 WORK._EMFILTERCLASS 有 164 个观测和 11 个变量。
+NOTE: “PROCEDURE SORT”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+11366  data work._FilterMinFreq;
+11367  merge work._FilterMinFreq(drop=LEVEL in=_a) WORK._EMFILTERCLASS (in=_b);
+11368  if _a and _b then output;
+11369  by NAME;
+11370  run;
+
+NOTE: 从数据集 WORK._FILTERMINFREQ. 读取了 17 个观测
+NOTE: 从数据集 WORK._EMFILTERCLASS. 读取了 164 个观测
+NOTE: 数据集 WORK._FILTERMINFREQ 有 164 个观测和 35 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.01 秒
+      
+
+11371  data work._FilterExclude;
+11372  set work._FilterMinFreq;
+11373  where ( ((CALCMETHOD = 'MINFREQ' and (COUNT ne . and COUNT <= minfreq)) or (CALCMETHOD = 'MINPCT' and (NMISSPERCENT ne . and 0.01*NMISSPERCENT <=minClassPct))) and (NUMLEVELS <= MAXVALUES)) or (KEEPMISSING eq 'N' and NRAW=. and CRAW='');
+11374  run;
+
+NOTE: 从数据集 WORK._FILTERMINFREQ. 读取了 30 个观测
+      WHERE ((((CALCMETHOD='MINFREQ') and (COUNT not = .) and (COUNT<=minfreq)) or ((CALCMETHOD='MINPCT') and (NMISSPERCENT not = .) and (minClassPct>=(0.01*NMISSPERCENT)))) and (NUMLEVELS<=MAXVALUES)) or ((KEEPMISSING='N') and (NRAW=.) and (CRAW=' '));
+NOTE: 数据集 WORK._FILTEREXCLUDE 有 30 个观测和 35 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+11375  data work._ManualExclude;
+11376  set WORK.M0TV_434;
+11377  if CALCMETHOD in('', 'DEFAULT') then CALCMETHOD = "MINPCT";
+11378  if level ne 'INTERVAL' and calcmethod='MANUAL' then output;
+11379  run;
+
+NOTE: 从数据集 WORK.M0TV_434. 读取了 24 个观测
+NOTE: 数据集 WORK._MANUALEXCLUDE 有 0 个观测和 26 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.01 秒
+      
+
+11380  proc sort data=work._ManualExclude;
+11381  by NAME;
+11382  run;
+
+NOTE: 输入数据集为空。
+NOTE: 数据集 WORK._MANUALEXCLUDE 有 0 个观测和 26 个变量。
+NOTE: “PROCEDURE SORT”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+11383  proc sort data=EMWS1.Filter_CLASSFILTER(rename=(VARIABLE=NAME VALUE=LEVEL)) out=_temp;
+11384  by NAME;
+11385  run;
+
+NOTE: 从数据集 EMWS1.FILTER_CLASSFILTER. 读取了 0 个观测
+NOTE: “视图 EMWS1.FILTER_CLASSFILTER.VIEW”所用时间（总处理时间）:
+      实际时间          0.04 秒
+      CPU 时间          0.03 秒
+      
+NOTE: 从数据集 EMWS1.FILTER_CLASSDIST. 读取了 0 个观测
+      WHERE Filter='Y';
+NOTE: 输入数据集为空。
+NOTE: 数据集 WORK._TEMP 有 0 个观测和 5 个变量。
+NOTE: “PROCEDURE SORT”所用时间（总处理时间）:
+      实际时间          0.06 秒
+      CPU 时间          0.04 秒
+      
+
+11386  data work._ManualExclude;
+11387  merge work._ManualExclude(drop=LEVEL in=_a) _temp(in=_b);
+11388  _OBS_=_N_;
+11389  if strip(Level) in('.', '') then _OBS_=0;
+11390  if _a and _b then output;
+11391  by NAME;
+11392  run;
+
+NOTE: 从数据集 WORK._MANUALEXCLUDE. 读取了 0 个观测
+NOTE: 从数据集 WORK._TEMP. 读取了 0 个观测
+NOTE: 数据集 WORK._MANUALEXCLUDE 有 0 个观测和 30 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.01 秒
+      CPU 时间          0.01 秒
+      
+
+11393  data work._FilterExclude;
+11394  set work._ManualExclude work._FilterExclude;
+11395  if type = 'N' and format='' then level= strip(level);
+11396  run;
+
+NOTE: 从数据集 WORK._MANUALEXCLUDE. 读取了 0 个观测
+NOTE: 从数据集 WORK._FILTEREXCLUDE. 读取了 30 个观测
+NOTE: 数据集 WORK._FILTEREXCLUDE 有 30 个观测和 36 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+11397  proc sort data=work._FilterExclude nodupkey;
+11398  by NAME _OBS_;
+11399  run;
+
+NOTE: 从数据集 WORK._FILTEREXCLUDE. 读取了 30 个观测
+NOTE: 0 个具有重复键值的观测已删除。
+NOTE: 数据集 WORK._FILTEREXCLUDE 有 30 个观测和 36 个变量。
+NOTE: “PROCEDURE SORT”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+11400  %let _FilterClassNum= 0;
+11401  data work._FilterExclude;
+11402  retain newvarindex 0;
+11403  length newvar normvar $32;
+11404  drop newvarindex string;
+11405  set work._FilterExclude end=eof;
+11406  by NAME;
+11407  if first.NAME then do;
+11408  newvarindex + 1;
+11409  if format ne '' then do;
+11410  newvar = strip("_FILTERFMT")!!strip(put(newvarindex, best.));
+11411  end;
+11412  else newvar = name;
+11413  if CALCMETHOD ne 'MANUAL' then do;
+11414  if format ne '' or type = 'C' then do;
+11415  normvar = strip("_FILTERNORM")!!strip(put(newvarindex, best.));
+11416  end;
+11417  end;
+11418  end;
+11419  if eof then call symput('_FilterClassNum', strip(put(_N_, best.)));
+11420  run;
+
+WARNING: 从未引用过 DROP、KEEP 或 RENAME 列表中的变量 string。
+NOTE: 从数据集 WORK._FILTEREXCLUDE. 读取了 30 个观测
+NOTE: 数据集 WORK._FILTEREXCLUDE 有 30 个观测和 38 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.01 秒
+      
+
+11421  data EMWS1.Filter_CLASS;
+11422  label NAME = "%sysfunc(sasmsg(sashelp.dmine, rpt_variable_vlabel,     NOQUOTE))" ROLE = "%sysfunc(sasmsg(sashelp.dmine, meta_role_vlabel,        NOQUOTE))" VALUE = "%sysfunc(sasmsg(sashelp.dmine, rpt_value_vlabel,        NOQUOTE))" COUNT =
+11423     "%sysfunc(sasmsg(sashelp.dmine, rpt_count_vlabel,        NOQUOTE))" PERCENT = "%sysfunc(sasmsg(sashelp.dmine, rpt_percent_vlabel,      NOQUOTE))" LABEL = "%sysfunc(sasmsg(sashelp.dmine, meta_label_vlabel,       NOQUOTE))" CALCMETHOD =
+11424     "%sysfunc(sasmsg(sashelp.dmine, rpt_filtermethod_vlabel, NOQUOTE))";
+11425  length VALUE $200;
+11426  set work._FilterExclude;
+11427  keep NAME ROLE VALUE COUNT PERCENT LABEL CALCMETHOD;
+11428  if COUNT = . then COUNT = 0;
+11429  if PERCENT = . then PERCENT = 0;
+11430  VALUE = LEVEL;
+11431  if _OBS_ = 0 and KEEPMISSING='N' then do;
+11432  CALCMETHOD= '';
+11433  KEEPMISSING = '';
+11434  if VALUE = '' and type eq 'C' then VALUE = '_BLANK_';
+11435  if type eq 'N' then do;
+11436  VALUE = strip(VALUE);
+11437  if VALUE = '' then VALUE = '.';
+11438  end;
+11439  end;
+11440  run;
+
+NOTE: 从数据集 WORK._FILTEREXCLUDE. 读取了 30 个观测
+NOTE: 数据集 EMWS1.FILTER_CLASS 有 30 个观测和 7 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.02 秒
+      CPU 时间          0.01 秒
+      
+
+11441  %let _FOBS=0;
+11442  filename _X "E:\SAS Temporary Files\_TD3512_LEON-PC_\NEWVAR.txt";
+11443  data _null_;
+11444  length string $200;
+11445  set work._FilterExclude end=eof;
+11446  file _X;
+11447  by NAME;
+11448  if first.NAME then do;
+11449  if format ne '' then do;
+11450  put ' ';
+11451  put ' ';
+11452  put 'length ' newvar ' $200;';
+11453  put 'drop ' newvar ';';
+11454  string = strip(newvar)!!'= put('!!strip(NAME)!!','!!strip(format)!!');';
+11455  put string;
+11456  end;
+11457  else newvar = name;
+11458  if CALCMETHOD ne 'MANUAL' then do;
+11459  if format ne '' or type = 'C' then do;
+11460  if (newvar eq name) then do;
+11461  put ' ';
+11462  end;
+11463  put 'length ' normvar " $%dmnorlen;";
+11464  put 'drop ' normvar ';';
+11465  string = '%dmnormcp('!!strip(newvar)!!','!!strip(normvar)!!');';
+11466  put string;
+11467  end;
+11468  end;
+11469  end;
+11470  if eof then call symput('_FOBS', '1');
+11471  run;
+
+NOTE: FILE _X 是:
+      文件名=E:\SAS Temporary Files\_TD3512_LEON-PC_\NEWVAR.txt,
+      RECFM=V,LRECL=256,文件大小（字节）=0,
+      上次修改时间=2013年05月18日 15时24分26秒,
+      创建时间=2013年05月18日 15时24分26秒
+
+NOTE: 有 136 条记录写入到 FILE _X 中。
+      最小记录长度是 1。
+      最大记录长度是 45。
+NOTE: 从数据集 WORK._FILTEREXCLUDE. 读取了 30 个观测
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.01 秒
+      
+
+11472  %let _FOBS=0;
+11473  filename _X "E:\SAS Temporary Files\_TD3512_LEON-PC_\PUBLISHNEWVAR.txt";
+11474  data _null_;
+11475  length string $200;
+11476  set work._FilterExclude end=eof;
+11477  where ROLE ne 'TARGET';
+11478  file _X;
+11479  by NAME;
+11480  if first.NAME then do;
+11481  if format ne '' then do;
+11482  put ' ';
+11483  put ' ';
+11484  put 'length ' newvar ' $200;';
+11485  put 'drop ' newvar ';';
+11486  string = strip(newvar)!!'= put('!!strip(NAME)!!','!!strip(format)!!');';
+11487  put string;
+11488  end;
+11489  else newvar = name;
+11490  if CALCMETHOD ne 'MANUAL' then do;
+11491  if format ne '' or type = 'C' then do;
+11492  if (newvar eq name) then do;
+11493  put ' ';
+11494  end;
+11495  put 'length ' normvar " $%dmnorlen;";
+11496  put 'drop ' normvar ';';
+11497  string = '%dmnormcp('!!strip(newvar)!!','!!strip(normvar)!!');';
+11498  put string;
+11499  end;
+11500  end;
+11501  end;
+11502  if eof then call symput('_FOBS', '1');
+11503  run;
+
+NOTE: FILE _X 是:
+      文件名=E:\SAS Temporary Files\_TD3512_LEON-PC_\PUBLISHNEWVAR.txt,
+      RECFM=V,LRECL=256,文件大小（字节）=0,
+      上次修改时间=2013年05月18日 15时24分26秒,
+      创建时间=2013年05月18日 15时24分26秒
+
+NOTE: 有 136 条记录写入到 FILE _X 中。
+      最小记录长度是 1。
+      最大记录长度是 45。
+NOTE: 从数据集 WORK._FILTEREXCLUDE. 读取了 30 个观测
+      WHERE ROLE not = 'TARGET';
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+11504  %let _FOBS=0;
+11505  filename _X "E:\SAS Temporary Files\_TD3512_LEON-PC_\CLASSFILTERCODE.txt";
+11506  data _null_;
+11507  length line string $200 _filtervar $32;
+11508  drop newvarindex string;
+11509  retain line '';
+11510  set work._FilterExclude end=eof;
+11511  file _X;
+11512  by NAME;
+11513  if first.NAME then do;
+11514  _filtervar = NAME;
+11515  if newvar ne '' then _filtervar = newvar;
+11516  if normvar ne '' then _filtervar = normvar;
+11517  if _N_ ne 1 then put ' and ';
+11518  if format ne '' or type = 'C' then do;
+11519  line = strip(_filtervar)!!" not in ( '"!! tranwrd(trim(level), "'", "''")!!"'";
+11520  end;
+11521  else do;
+11522  if CALCMETHOD = 'MANUAL' then line = '('!!strip(NAME)!!' ne '!!strip(LEVEL)!!')';
+11523  else line = '('!!strip(NAME)!!' ne '!!strip(put(NRAW, best.))!!')';
+11524  end;
+11525  end;
+11526  else do;
+11527  if format ne '' or type = 'C' then do;
+11528  string = ", '"!! tranwrd(trim(level), "'", "''")!!"'";
+11529  end;
+11530  else do;
+11531  if CALCMETHOD = 'MANUAL' then string = 'and ('!!strip(NAME)!!' ne '!!strip(LEVEL)!!')';
+11532  else string = 'and ('!!strip(NAME)!!' ne '!!strip(put(NRAW, best.))!!')';
+11533  end;
+11534  if length(strip(string)) + length(strip(line)) < 80 then do;
+11535  line = strip(line)!!' '!!strip(string);
+11536  end;
+11537  else do;
+11538  put line;
+11539  line = string;
+11540  end;
+11541  end;
+11542  if last.name then do;
+11543  if (format ne '' or type eq 'C') then do;
+11544  line = strip(line)!!')';
+11545  end;
+11546  put line;
+11547  end;
+11548  if eof then call symput('_FOBS', '1');
+11549  run;
+
+NOTE: FILE _X 是:
+      文件名=E:\SAS Temporary Files\_TD3512_LEON-PC_\CLASSFILTERCODE.txt,
+      RECFM=V,LRECL=256,文件大小（字节）=0,
+      上次修改时间=2013年05月18日 15时24分26秒,
+      创建时间=2013年05月18日 15时24分26秒
+
+NOTE: 有 33 条记录写入到 FILE _X 中。
+      最小记录长度是 5。
+      最大记录长度是 76。
+NOTE: 从数据集 WORK._FILTEREXCLUDE. 读取了 30 个观测
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+11550  filename _X;
+NOTE: 已取消文件引用名 _X 的分配。
+
+11551  %let _FOBS=0;
+11552  filename _X "E:\SAS Temporary Files\_TD3512_LEON-PC_\CLASSPUBLISHFILTERCODE.txt";
+11553  data _null_;
+11554  length line string $200 _filtervar $32;
+11555  drop newvarindex string;
+11556  retain line '';
+11557  set work._FilterExclude end=eof;
+11558  where ROLE ne 'TARGET';
+11559  file _X;
+11560  by NAME;
+11561  if first.NAME then do;
+11562  _filtervar = NAME;
+11563  if newvar ne '' then _filtervar = newvar;
+11564  if normvar ne '' then _filtervar = normvar;
+11565  if _N_ ne 1 then put ' and ';
+11566  if format ne '' or type = 'C' then do;
+11567  line = strip(_filtervar)!!" not in ( '"!! tranwrd(trim(level), "'", "''")!!"'";
+11568  end;
+11569  else do;
+11570  if CALCMETHOD = 'MANUAL' then line = '('!!strip(NAME)!!' ne '!!strip(LEVEL)!!')';
+11571  else line = '('!!strip(NAME)!!' ne '!!strip(put(NRAW, best.))!!')';
+11572  end;
+11573  end;
+11574  else do;
+11575  if format ne '' or type = 'C' then do;
+11576  string = ", '"!! tranwrd(trim(level), "'", "''")!!"'";
+11577  end;
+11578  else do;
+11579  if CALCMETHOD = 'MANUAL' then string = 'and ('!!strip(NAME)!!' ne '!!strip(LEVEL)!!')';
+11580  else string = 'and ('!!strip(NAME)!!' ne '!!strip(put(NRAW, best.))!!')';
+11581  end;
+11582  if length(strip(string)) + length(strip(line)) < 80 then do;
+11583  line = strip(line)!!' '!!strip(string);
+11584  end;
+11585  else do;
+11586  put line;
+11587  line = string;
+11588  end;
+11589  end;
+11590  if last.name then do;
+11591  if (format ne '' or type eq 'C') then do;
+11592  line = strip(line)!!')';
+11593  end;
+11594  put line;
+11595  end;
+11596  if eof then call symput('_FOBS', '1');
+11597  run;
+
+NOTE: FILE _X 是:
+      文件名=E:\SAS Temporary Files\_TD3512_LEON-PC_\CLASSPUBLISHFILTERCODE.txt,
+      RECFM=V,LRECL=256,文件大小（字节）=0,
+      上次修改时间=2013年05月18日 15时24分26秒,
+      创建时间=2013年05月18日 15时24分26秒
+
+NOTE: 有 33 条记录写入到 FILE _X 中。
+      最小记录长度是 5。
+      最大记录长度是 76。
+NOTE: 从数据集 WORK._FILTEREXCLUDE. 读取了 30 个观测
+      WHERE ROLE not = 'TARGET';
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+11598  filename _X;
+NOTE: 已取消文件引用名 _X 的分配。
+
+11599  %let _FilterIntervalNum= 0;
+11600  proc sort data=EMWS1.Filter_INTERVAL;
+11601  by NAME;
+11602  run;
+
+NOTE: 从数据集 EMWS1.FILTER_INTERVAL. 读取了 7 个观测
+NOTE: 数据集 EMWS1.FILTER_INTERVAL 有 7 个观测和 7 个变量。
+NOTE: “PROCEDURE SORT”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+11603  filename _X "E:\SAS Temporary Files\_TD3512_LEON-PC_\INTERVALFILTERCODE.txt";
+11604  data _null_;
+11605  length string $200;
+11606  set EMWS1.Filter_INTERVAL end=eof;
+11607  file _X;
+11608  where (INTERVALMIN ne . or INTERVALMAX ne . or KEEPMISSING eq 'N')
+11609  ;
+11610  by NAME;
+11611  if _N_ = 1 then do;
+11612  string = ' (';
+11613  end;
+11614  else do;
+11615  string = ' and (';
+11616  end;
+11617  if INTERVALMIN ne . or INTERVALMAX ne . then do;
+11618  if KEEPMISSING = 'N' then string = trim(string)!!' '!!strip(NAME)!!' ne . and ';
+11619  else string = trim(string)!!' '!!strip(NAME)!!' eq . or ';
+11620  if INTERVALMIN ne . and INTERVALMAX ne . then do;
+11621  string = trim(string)!!' ('!!strip(put(INTERVALMIN, best12.))!!'<='!!strip(NAME)!!') and ('!!strip(NAME)!!'<='!!strip(put(INTERVALMAX, best12.))!!')';
+11622  end;
+11623  else if INTERVALMIN eq . and INTERVALMAX ne . then do;
+11624  string = trim(string)!!' ('!!strip(NAME)!!'<='!!strip(put(INTERVALMAX, best12.))!!')';
+11625  end;
+11626  else if INTERVALMIN ne . and INTERVALMAX eq . then do;
+11627  string = trim(string)!!' ('!!strip(put(INTERVALMIN, best12.)) || '<=' || NAME||')';
+11628  end;
+11629  end;
+11630  else do;
+11631  string = trim(string)!!' '!!strip(name)!!' ne .';
+11632  end;
+11633  string = trim(string)!!')';
+11634  put string;
+11635  if eof then call symput('_FilterIntervalNum', strip(put(_N_, best.)));
+11636  run;
+
+NOTE: FILE _X 是:
+      文件名=E:\SAS Temporary Files\_TD3512_LEON-PC_\INTERVALFILTERCODE.txt,
+      RECFM=V,LRECL=256,文件大小（字节）=0,
+      上次修改时间=2013年05月18日 15时24分26秒,
+      创建时间=2013年05月18日 15时24分26秒
+
+NOTE: 有 7 条记录写入到 FILE _X 中。
+      最小记录长度是 59。
+      最大记录长度是 93。
+NOTE: 从数据集 EMWS1.FILTER_INTERVAL. 读取了 7 个观测
+      WHERE (INTERVALMIN not = .) or (INTERVALMAX not = .) or (KEEPMISSING='N');
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+11637  %let _FilterIntervalNum= 0;
+11638  proc sort data=EMWS1.Filter_INTERVAL;
+11639  by NAME;
+11640  run;
+
+NOTE: 输入数据集已排序，故未进行排序。
+NOTE: “PROCEDURE SORT”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+11641  filename _X "E:\SAS Temporary Files\_TD3512_LEON-PC_\INTERVALPUBLISHFILTERCODE.txt";
+11642  data _null_;
+11643  length string $200;
+11644  set EMWS1.Filter_INTERVAL end=eof;
+11645  file _X;
+11646  where (INTERVALMIN ne . or INTERVALMAX ne . or KEEPMISSING eq 'N')
+11647  and ROLE ne 'TARGET';
+11648  ;
+11649  by NAME;
+11650  if _N_ = 1 then do;
+11651  string = ' (';
+11652  end;
+11653  else do;
+11654  string = ' and (';
+11655  end;
+11656  if INTERVALMIN ne . or INTERVALMAX ne . then do;
+11657  if KEEPMISSING = 'N' then string = trim(string)!!' '!!strip(NAME)!!' ne . and ';
+11658  else string = trim(string)!!' '!!strip(NAME)!!' eq . or ';
+11659  if INTERVALMIN ne . and INTERVALMAX ne . then do;
+11660  string = trim(string)!!' ('!!strip(put(INTERVALMIN, best12.))!!'<='!!strip(NAME)!!') and ('!!strip(NAME)!!'<='!!strip(put(INTERVALMAX, best12.))!!')';
+11661  end;
+11662  else if INTERVALMIN eq . and INTERVALMAX ne . then do;
+11663  string = trim(string)!!' ('!!strip(NAME)!!'<='!!strip(put(INTERVALMAX, best12.))!!')';
+11664  end;
+11665  else if INTERVALMIN ne . and INTERVALMAX eq . then do;
+11666  string = trim(string)!!' ('!!strip(put(INTERVALMIN, best12.)) || '<=' || NAME||')';
+11667  end;
+11668  end;
+11669  else do;
+11670  string = trim(string)!!' '!!strip(name)!!' ne .';
+11671  end;
+11672  string = trim(string)!!')';
+11673  put string;
+11674  if eof then call symput('_FilterIntervalNum', strip(put(_N_, best.)));
+11675  run;
+
+NOTE: FILE _X 是:
+      文件名=E:\SAS Temporary Files\_TD3512_LEON-PC_\INTERVALPUBLISHFILTERCODE.txt,
+      RECFM=V,LRECL=256,文件大小（字节）=0,
+      上次修改时间=2013年05月18日 15时24分26秒,
+      创建时间=2013年05月18日 15时24分26秒
+
+NOTE: 有 7 条记录写入到 FILE _X 中。
+      最小记录长度是 59。
+      最大记录长度是 93。
+NOTE: 从数据集 EMWS1.FILTER_INTERVAL. 读取了 7 个观测
+      WHERE ((INTERVALMIN not = .) or (INTERVALMAX not = .) or (KEEPMISSING='N')) and (ROLE not = 'TARGET');
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+NOTE: 该 SAS 会话使用的是 WORK 中的注册表，结束会话时将不会保存任何更改。
+11676  data EMWS1.Filter_TRAIN / view=EMWS1.Filter_TRAIN;
+11677  set EMWS1.Merge_TRAIN;
+11678  
+11679  
+11680  length _FILTERFMT1  $200;
+11681  drop _FILTERFMT1 ;
+11682  _FILTERFMT1= put(Actor,$80.0);
+11683  length _FILTERNORM1  $32;
+11684  drop _FILTERNORM1 ;
+11685  %dmnormcp(_FILTERFMT1,_FILTERNORM1);
+11686  
+11687  
+11688  length _FILTERFMT2  $200;
+11689  drop _FILTERFMT2 ;
+11690  _FILTERFMT2= put(Director,$80.0);
+11691  length _FILTERNORM2  $32;
+11692  drop _FILTERNORM2 ;
+11693  %dmnormcp(_FILTERFMT2,_FILTERNORM2);
+11694  
+11695  
+11696  length _FILTERFMT3  $200;
+11697  drop _FILTERFMT3 ;
+11698  _FILTERFMT3= put(Education_Level,$50.0);
+11699  length _FILTERNORM3  $32;
+11700  drop _FILTERNORM3 ;
+11701  %dmnormcp(_FILTERFMT3,_FILTERNORM3);
+11702  
+11703  
+11704  length _FILTERFMT4  $200;
+11705  drop _FILTERFMT4 ;
+11706  _FILTERFMT4= put(Gender,$20.0);
+11707  length _FILTERNORM4  $32;
+11708  drop _FILTERNORM4 ;
+11709  %dmnormcp(_FILTERFMT4,_FILTERNORM4);
+11710  
+11711  
+11712  length _FILTERFMT5  $200;
+11713  drop _FILTERFMT5 ;
+11714  _FILTERFMT5= put(Home_Ownership,$10.0);
+11715  length _FILTERNORM5  $32;
+11716  drop _FILTERNORM5 ;
+11717  %dmnormcp(_FILTERFMT5,_FILTERNORM5);
+11718  
+11719  
+11720  length _FILTERFMT6  $200;
+11721  drop _FILTERFMT6 ;
+11722  _FILTERFMT6= put(Internet_Connection,$50.0);
+11723  length _FILTERNORM6  $32;
+11724  drop _FILTERNORM6 ;
+11725  %dmnormcp(_FILTERFMT6,_FILTERNORM6);
+11726  
+11727  
+11728  length _FILTERFMT7  $200;
+11729  drop _FILTERFMT7 ;
+11730  _FILTERFMT7= put(Marital_Status,$30.0);
+11731  length _FILTERNORM7  $32;
+11732  drop _FILTERNORM7 ;
+11733  %dmnormcp(_FILTERFMT7,_FILTERNORM7);
+11734  
+11735  
+11736  length _FILTERFMT8  $200;
+11737  drop _FILTERFMT8 ;
+11738  _FILTERFMT8= put(Movie,$200.0);
+11739  length _FILTERNORM8  $32;
+11740  drop _FILTERNORM8 ;
+11741  %dmnormcp(_FILTERFMT8,_FILTERNORM8);
+11742  
+11743  
+11744  length _FILTERFMT9  $200;
+11745  drop _FILTERFMT9 ;
+11746  _FILTERFMT9= put(Movie_Selector,$30.0);
+11747  length _FILTERNORM9  $32;
+11748  drop _FILTERNORM9 ;
+11749  %dmnormcp(_FILTERFMT9,_FILTERNORM9);
+11750  
+11751  
+11752  length _FILTERFMT10  $200;
+11753  drop _FILTERFMT10 ;
+11754  _FILTERFMT10= put(PPV_Freq,$20.0);
+11755  length _FILTERNORM10  $32;
+11756  drop _FILTERNORM10 ;
+11757  %dmnormcp(_FILTERFMT10,_FILTERNORM10);
+11758  
+11759  
+11760  length _FILTERFMT11  $200;
+11761  drop _FILTERFMT11 ;
+11762  _FILTERFMT11= put(Prerec_Buying_Freq,$20.0);
+11763  length _FILTERNORM11  $32;
+11764  drop _FILTERNORM11 ;
+11765  %dmnormcp(_FILTERFMT11,_FILTERNORM11);
+11766  
+11767  
+11768  length _FILTERFMT12  $200;
+11769  drop _FILTERFMT12 ;
+11770  _FILTERFMT12= put(Prerec_Format,$50.0);
+11771  length _FILTERNORM12  $32;
+11772  drop _FILTERNORM12 ;
+11773  %dmnormcp(_FILTERFMT12,_FILTERNORM12);
+11774  
+11775  
+11776  length _FILTERFMT13  $200;
+11777  drop _FILTERFMT13 ;
+11778  _FILTERFMT13= put(Prerec_Renting_Freq,$20.0);
+11779  length _FILTERNORM13  $32;
+11780  drop _FILTERNORM13 ;
+11781  %dmnormcp(_FILTERFMT13,_FILTERNORM13);
+11782  
+11783  
+11784  length _FILTERFMT14  $200;
+11785  drop _FILTERFMT14 ;
+11786  _FILTERFMT14= put(Prerec_Viewing_Freq,$20.0);
+11787  length _FILTERNORM14  $32;
+11788  drop _FILTERNORM14 ;
+11789  %dmnormcp(_FILTERFMT14,_FILTERNORM14);
+11790  
+11791  
+11792  length _FILTERFMT15  $200;
+11793  drop _FILTERFMT15 ;
+11794  _FILTERFMT15= put(TV_Movie_Freq,$20.0);
+11795  length _FILTERNORM15  $32;
+11796  drop _FILTERNORM15 ;
+11797  %dmnormcp(_FILTERFMT15,_FILTERNORM15);
+11798  
+11799  
+11800  length _FILTERFMT16  $200;
+11801  drop _FILTERFMT16 ;
+11802  _FILTERFMT16= put(TV_Signal,$50.0);
+11803  length _FILTERNORM16  $32;
+11804  drop _FILTERNORM16 ;
+11805  %dmnormcp(_FILTERFMT16,_FILTERNORM16);
+11806  
+11807  
+11808  length _FILTERFMT17  $200;
+11809  drop _FILTERFMT17 ;
+11810  _FILTERFMT17= put(Theater_Freq,$20.0);
+11811  length _FILTERNORM17  $32;
+11812  drop _FILTERNORM17 ;
+11813  %dmnormcp(_FILTERFMT17,_FILTERNORM17);
+11814  if
+11815  _FILTERNORM1 not in ( ' ')
+11816   and
+11817  _FILTERNORM2 not in ( ' ')
+11818   and
+11819  _FILTERNORM3 not in ( ' ' , 'GRADE SCHOOL' , 'TRADE SCHOOL')
+11820   and
+11821  _FILTERNORM4 not in ( ' ')
+11822   and
+11823  _FILTERNORM5 not in ( ' ')
+11824   and
+11825  _FILTERNORM6 not in ( ' ')
+11826   and
+11827  _FILTERNORM7 not in ( ' ' , 'SEPARATED')
+11828   and
+11829  _FILTERNORM8 not in ( ' ')
+11830   and
+11831  _FILTERNORM9 not in ( ' ')
+11832   and
+11833  _FILTERNORM10 not in ( ' ' , 'DAILY')
+11834   and
+11835  _FILTERNORM11 not in ( ' ' , 'DAILY')
+11836   and
+11837  _FILTERNORM12 not in ( ' ' , 'BETAMAX' , 'LASERDISK' , 'OTHER' , 'VIDEO CD')
+11838   and
+11839  _FILTERNORM13 not in ( ' ' , 'DAILY')
+11840   and
+11841  _FILTERNORM14 not in ( ' ' , 'NEVER')
+11842   and
+11843  _FILTERNORM15 not in ( ' ')
+11844   and
+11845  _FILTERNORM16 not in ( ' ' , 'ANALOG SATELLITE')
+11846   and
+11847  _FILTERNORM17 not in ( ' ' , 'DAILY')
+11848  and
+11849  ( Age ne . and (11.437824077<=Age) and (Age<=54.816503905))
+11850  and ( CustomerID ne . and (857712.44593<=CustomerID) and (CustomerID<=940457.80909))
+11851  and ( Num_Bathrooms ne . and (-0.361357994<=Num_Bathrooms) and (Num_Bathrooms<=4.5584085118))
+11852  and ( Num_Bedrooms ne . and (-0.642585361<=Num_Bedrooms) and (Num_Bedrooms<=6.4122747243))
+11853  and ( Num_Cars ne . and (-0.740181305<=Num_Cars) and (Num_Cars<=4.0944921921))
+11854  and ( Num_Children ne . and (-2.536262826<=Num_Children) and (Num_Children<=4.1492688832))
+11855  and ( Num_TVs ne . and (-1.584377079<=Num_TVs) and (Num_TVs<=5.7630951089))
+11856  ;
+11857  run;
+
+NOTE: DATA STEP 视图已保存在文件 EMWS1.FILTER_TRAIN 中。
+NOTE: 存储的 DATA STEP 视图无法在不同的操作系统下运行。
+NOTE: “视图 EMWS1.MERGE_TRAIN.VIEW”所用时间（总处理时间）:
+      实际时间          0.32 秒
+      CPU 时间          0.32 秒
+      
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.41 秒
+      CPU 时间          0.40 秒
+      
+
+11858  data WORK.FilterFILTERVAR;
+11859  set
+11860  EMWS1.Filter_INTERVAL(where=(INTERVALMIN ne . or INTERVALMAX ne . or KEEPMISSING='N'))
+11861  EMWS1.Filter_CLASS(where=(CALCMETHOD ne 'NONE'))
+11862  ;
+11863  keep NAME;
+11864  run;
+
+NOTE: 从数据集 EMWS1.FILTER_INTERVAL. 读取了 7 个观测
+      WHERE (INTERVALMIN not = .) or (INTERVALMAX not = .) or (KEEPMISSING='N');
+NOTE: 从数据集 EMWS1.FILTER_CLASS. 读取了 30 个观测
+      WHERE CALCMETHOD not = 'NONE';
+NOTE: 数据集 WORK.FILTERFILTERVAR 有 37 个观测和 1 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.01 秒
+      
+
+11865  proc sort data= WORK.FilterFILTERVAR nodupkey;
+11866  by NAME;
+11867  run;
+
+NOTE: 从数据集 WORK.FILTERFILTERVAR. 读取了 37 个观测
+NOTE: 13 个具有重复键值的观测已删除。
+NOTE: 数据集 WORK.FILTERFILTERVAR 有 24 个观测和 1 个变量。
+NOTE: “PROCEDURE SORT”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+11868  proc sort data=WORK.M2ADKE36;
+11869  by NAME;
+11870  run;
+
+NOTE: 从数据集 WORK.M2ADKE36. 读取了 25 个观测
+NOTE: 数据集 WORK.M2ADKE36 有 25 个观测和 26 个变量。
+NOTE: “PROCEDURE SORT”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.01 秒
+      
+
+11871  data WORK.FilterDMDBC;
+11872  merge WORK.M2ADKE36 WORK.FilterFILTERVAR(in=_b);
+11873  by NAME;
+11874  if (REPORT = 'Y' or ROLE in('FREQ','TARGET') or _b) then output;
+11875  run;
+
+NOTE: 从数据集 WORK.M2ADKE36. 读取了 25 个观测
+NOTE: 从数据集 WORK.FILTERFILTERVAR. 读取了 24 个观测
+NOTE: 数据集 WORK.FILTERDMDBC 有 25 个观测和 26 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.01 秒
+      
+
+11876  *------------------------------------------------------------* ;
+11877  * Filter: DMDBClass Macro ;
+11878  *------------------------------------------------------------* ;
+11879  %macro DMDBClass;
+11880      Actor(ASC) Director(ASC) Education_Level(ASC) Gender(ASC) Home_Ownership(ASC)
+11881     Internet_Connection(ASC) Marital_Status(ASC) Movie(ASC) Movie_Selector(ASC)
+11882     PPV_Freq(ASC) Prerec_Buying_Freq(ASC) Prerec_Format(ASC)
+11883     Prerec_Renting_Freq(ASC) Prerec_Viewing_Freq(ASC) TV_Movie_Freq(ASC)
+11884     TV_Signal(ASC) Technology(DESC) Theater_Freq(ASC)
+11885  %mend DMDBClass;
+11886  *------------------------------------------------------------* ;
+11887  * Filter: DMDBVar Macro ;
+11888  *------------------------------------------------------------* ;
+11889  %macro DMDBVar;
+11890      Age CustomerID Num_Bathrooms Num_Bedrooms Num_Cars Num_Children Num_TVs
+11891  %mend DMDBVar;
+11892  *------------------------------------------------------------*;
+11893  * Filter: Create DMDB;
+11894  *------------------------------------------------------------*;
+11895  proc dmdb batch data=EMWS1.Merge_TRAIN
+11896  dmdbcat=WORK.Filter_DMDB
+11897  varout=WORK.FILTER_VARSTATS
+11898  maxlevel = 513
+11899  ;
+11900  class %DMDBClass;
+11901  var %DMDBVar;
+11902  target
+11903  Technology
+11904  ;
+11905  run;
+
+NOTE: Records processed = 45323   Memory used = 511K.
+NOTE: 从数据集 DATA.TECHNOLOGY. 读取了 10953 个观测
+NOTE: 从数据集 DATA.MOVIES. 读取了 45323 个观测
+NOTE: 从数据集 DATA.HOBBIES. 读取了 20367 个观测
+NOTE: 从数据集 DATA.DIRECTORS. 读取了 17603 个观测
+NOTE: 从数据集 DATA.CUSTOMERS. 读取了 3187 个观测
+NOTE: 从数据集 DATA.CRITERIA. 读取了 8749 个观测
+NOTE: 从数据集 DATA.CHANNELS. 读取了 11123 个观测
+NOTE: 从数据集 DATA.ACTORS. 读取了 36523 个观测
+NOTE: “视图 EMWS1.MERGE_TRAIN.VIEW”所用时间（总处理时间）:
+      实际时间          0.83 秒
+      CPU 时间          0.71 秒
+      
+NOTE: 从数据集 EMWS1.IDS_DATA. 读取了 36523 个观测
+NOTE: 从数据集 EMWS1.IDS2_DATA. 读取了 11123 个观测
+NOTE: 从数据集 EMWS1.IDS3_DATA. 读取了 8749 个观测
+NOTE: 从数据集 EMWS1.IDS4_DATA. 读取了 3187 个观测
+NOTE: 从数据集 EMWS1.IDS5_DATA. 读取了 17603 个观测
+NOTE: 从数据集 EMWS1.IDS6_DATA. 读取了 20367 个观测
+NOTE: 从数据集 EMWS1.IDS7_DATA. 读取了 45323 个观测
+NOTE: 从数据集 EMWS1.IDS8_DATA. 读取了 10953 个观测
+NOTE: 从数据集 EMWS1.MERGE_TRAIN. 读取了 45323 个观测
+NOTE: 数据集 WORK.FILTER_VARSTATS 有 7 个观测和 9 个变量。
+NOTE: “PROCEDURE DMDB”所用时间（总处理时间）:
+      实际时间          0.94 秒
+      CPU 时间          0.81 秒
+      
+
+11906  quit;
+11907  *--- end code ---*;
+
+  
+  
+ERROR: Number of class levels for  Actor exceeds limit. 
+ERROR: Number of class levels for  Movie exceeds limit. 
+NOTE: The class levels limit is set by the macro variable EM_TRAIN_MAXLEVELS: 512 
+  
+NOTE: Apply the following actions where appropriate: 
+NOTE: * Change the measurement level of numeric class variables to interval 
+NOTE: * Reject class variables with excessive numbers of categories 
+NOTE: * Group class variables into fewer categories. 
+  
+  
+11909  data WORK.FILTER_VARSTATS;
+11910  length DATAROLE $10 TYPE $8 NAME $32;
+11911  label DATAROLE = "%sysfunc(sasmsg(sashelp.dmine, rpt_datarole_vlabel, NOQUOTE))";
+11912  label N = "%sysfunc(sasmsg(sashelp.dmine, rpt_nonMiss_vlabel, NOQUOTE))";
+11913  label NMISS = "%sysfunc(sasmsg(sashelp.dmine, rpt_missing_vlabel, NOQUOTE))";
+11914  label MIN = "%sysfunc(sasmsg(sashelp.dmine, rpt_minimum_vlabel, NOQUOTE))";
+11915  label MAX = "%sysfunc(sasmsg(sashelp.dmine, rpt_maximum_vlabel, NOQUOTE))";
+11916  label MEAN = "%sysfunc(sasmsg(sashelp.dmine, rpt_mean_vlabel,    NOQUOTE))";
+11917  label STD = "%sysfunc(sasmsg(sashelp.dmine, rpt_std_vlabel,     NOQUOTE))";
+11918  label SKEWNESS = "%sysfunc(sasmsg(sashelp.dmine, rpt_skewness_vlabel, NOQUOTE))";
+11919  label KURTOSIS = "%sysfunc(sasmsg(sashelp.dmine, rpt_kurtosis_vlabel, NOQUOTE))";
+11920  label NUMCAT = "%sysfunc(sasmsg(sashelp.dmine, rpt_numcat_vlabel,   NOQUOTE))";
+11921  retain DATAROLE "TRAIN" type "ORIGINAL";
+11922  set WORK.FILTER_VARSTATS;
+11923  run;
+
+NOTE: 变量 NUMCAT 未初始化。
+NOTE: 从数据集 WORK.FILTER_VARSTATS. 读取了 7 个观测
+NOTE: 数据集 WORK.FILTER_VARSTATS 有 7 个观测和 11 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.04 秒
+      CPU 时间          0.03 秒
+      
+
+11924  proc append base=EMWS1.Filter_STATS data=WORK.FILTER_VARSTATS;
+11925  run;
+
+NOTE: 正在追加 WORK.FILTER_VARSTATS 至 EMWS1.FILTER_STATS。
+NOTE: BASE 数据集不存在。正将 DATA 文件复制到 BASE 文件。
+NOTE: 从数据集 WORK.FILTER_VARSTATS. 读取了 7 个观测
+NOTE: 数据集 EMWS1.FILTER_STATS 有 7 个观测和 11 个变量。
+NOTE: “PROCEDURE APPEND”所用时间（总处理时间）:
+      实际时间          0.01 秒
+      CPU 时间          0.01 秒
+      
+

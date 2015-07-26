@@ -1,0 +1,1 @@
+Start: 1684509834.7 Time: 7.6610000134 StartFmt: 18MAY2013:15:23:55 EndFmt: 18MAY2013:15:24:02 TimeFmt: 0 Hr. 0 Min. 7.66 Sec.

@@ -1,0 +1,649 @@
+*------------------------------------------------------------*
+用户:       Leon
+日期:       2013年05月18日
+时间:       15时24分10秒
+软件安装点: 11202901
+平台:       XP_PRO
+维护版本:   9.03.01M2P081512
+EM 版本:    12.1
+* 
+*------------------------------------------------------------*
+* 训练日志
+日期:       2013年05月18日
+时间:       15时24分06秒
+*------------------------------------------------------------*
+10564  proc freq data=EMWS1.Merge_VariableSet noprint;
+10565  table ROLE*LEVEL/out=WORK.MergeMETA;
+10566  run;
+ 
+NOTE: 从数据集 EMWS1.MERGE_VARIABLESET. 读取了 2 个观测
+NOTE: 数据集 WORK.MERGEMETA 有 2 个观测和 4 个变量。
+NOTE: “PROCEDURE FREQ”所用时间（总处理时间）:
+      实际时间          0.03 秒
+      CPU 时间          0.00 秒
+ 
+ 
+10567  proc print data=WORK.MergeMETA label noobs;
+10568  var ROLE LEVEL COUNT;
+10569  label ROLE = "%sysfunc(sasmsg(sashelp.dmine, meta_role_vlabel, NOQUOTE))" LEVEL = "%sysfunc(sasmsg(sashelp.dmine, meta_level_vlabel, NOQUOTE))" COUNT = "%sysfunc(sasmsg(sashelp.dmine, rpt_count_vlabel, NOQUOTE))";
+10570  title9 ' ';
+10571  title10 "%sysfunc(sasmsg(sashelp.dmine, rpt_varSummary_title  , NOQUOTE))";
+10572  run;
+ 
+NOTE: 从数据集 WORK.MERGEMETA. 读取了 2 个观测
+NOTE: PROCEDURE PRINT 已打印第 1 页。
+NOTE: “PROCEDURE PRINT”所用时间（总处理时间）:
+      实际时间          0.01 秒
+      CPU 时间          0.01 秒
+ 
+ 
+10573  title10;
+ 
+NOTE: “视图 EMWS1.IDS_DATA.VIEW”所用时间（总处理时间）:
+      实际时间          0.04 秒
+      CPU 时间          0.04 秒
+ 
+NOTE: “视图 EMWS1.IDS2_DATA.VIEW”所用时间（总处理时间）:
+      实际时间          0.04 秒
+      CPU 时间          0.04 秒
+ 
+NOTE: “视图 EMWS1.IDS3_DATA.VIEW”所用时间（总处理时间）:
+      实际时间          0.04 秒
+      CPU 时间          0.03 秒
+ 
+NOTE: “视图 EMWS1.IDS4_DATA.VIEW”所用时间（总处理时间）:
+      实际时间          0.04 秒
+      CPU 时间          0.04 秒
+ 
+NOTE: “视图 EMWS1.IDS5_DATA.VIEW”所用时间（总处理时间）:
+      实际时间          0.04 秒
+      CPU 时间          0.03 秒
+ 
+NOTE: “视图 EMWS1.IDS6_DATA.VIEW”所用时间（总处理时间）:
+      实际时间          0.04 秒
+      CPU 时间          0.04 秒
+ 
+NOTE: “视图 EMWS1.IDS7_DATA.VIEW”所用时间（总处理时间）:
+      实际时间          0.05 秒
+      CPU 时间          0.04 秒
+ 
+NOTE: “视图 EMWS1.IDS8_DATA.VIEW”所用时间（总处理时间）:
+      实际时间          0.04 秒
+      CPU 时间          0.01 秒
+ 
+10574  data EMWS1.Merge_TRAIN / view=EMWS1.Merge_TRAIN;
+10575  merge
+10576  EMWS1.Ids_DATA
+10577  (rename=(
+10578  ))
+10579  EMWS1.Ids2_DATA
+10580  (rename=(
+10581  ))
+10582  EMWS1.Ids3_DATA
+10583  (rename=(
+10584  ))
+10585  EMWS1.Ids4_DATA
+10586  (rename=(
+10587  ))
+10588  EMWS1.Ids5_DATA
+10589  (rename=(
+10590  ))
+10591  EMWS1.Ids6_DATA
+10592  (rename=(
+10593  ))
+10594  EMWS1.Ids7_DATA
+10595  (rename=(
+10596  ))
+10597  EMWS1.Ids8_DATA
+10598  (rename=(
+10599  ))
+10600  ;
+10601  run;
+ 
+NOTE: DATA STEP 视图已保存在文件 EMWS1.MERGE_TRAIN 中。
+NOTE: 存储的 DATA STEP 视图无法在不同的操作系统下运行。
+NOTE: “视图 EMWS1.IDS8_DATA.VIEW”所用时间（总处理时间）:
+      实际时间          0.04 秒
+      CPU 时间          0.03 秒
+ 
+NOTE: “视图 EMWS1.IDS7_DATA.VIEW”所用时间（总处理时间）:
+      实际时间          0.07 秒
+      CPU 时间          0.07 秒
+ 
+NOTE: “视图 EMWS1.IDS6_DATA.VIEW”所用时间（总处理时间）:
+      实际时间          0.11 秒
+      CPU 时间          0.11 秒
+ 
+NOTE: “视图 EMWS1.IDS5_DATA.VIEW”所用时间（总处理时间）:
+      实际时间          0.14 秒
+      CPU 时间          0.14 秒
+ 
+NOTE: “视图 EMWS1.IDS4_DATA.VIEW”所用时间（总处理时间）:
+      实际时间          0.17 秒
+      CPU 时间          0.17 秒
+ 
+NOTE: “视图 EMWS1.IDS3_DATA.VIEW”所用时间（总处理时间）:
+      实际时间          0.21 秒
+      CPU 时间          0.23 秒
+ 
+NOTE: “视图 EMWS1.IDS2_DATA.VIEW”所用时间（总处理时间）:
+      实际时间          0.25 秒
+      CPU 时间          0.26 秒
+ 
+NOTE: “视图 EMWS1.IDS_DATA.VIEW”所用时间（总处理时间）:
+      实际时间          0.28 秒
+      CPU 时间          0.29 秒
+ 
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.36 秒
+      CPU 时间          0.35 秒
+ 
+ 
+10602  proc contents noprint data=EMWS1.Merge_TRAIN out=WORK.MERGECONTENT(drop=NAME TYPE LENGTH VARNUM LABEL FORMAT FORMATL FORMATD INFORMAT INFORML INFORMD JUST NPOS);
+10603  run;
+ 
+NOTE: 数据集 WORK.MERGECONTENT 有 28 个观测和 27 个变量。
+NOTE: “PROCEDURE CONTENTS”所用时间（总处理时间）:
+      实际时间          0.05 秒
+      CPU 时间          0.04 秒
+ 
+ 
+10604  data WORK.MERGECONTENT;
+10605  set WORK.MERGECONTENT(obs=1);
+10606  run;
+ 
+NOTE: 从数据集 WORK.MERGECONTENT. 读取了 1 个观测
+NOTE: 数据集 WORK.MERGECONTENT 有 1 个观测和 27 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+ 
+ 
+10607  data WORK.MERGEOUTPUT(keep=ATTRIBUTE LABEL VALUE);
+10608  length ATTRIBUTE $20 LABEL $50 VALUE $50;
+10609  label LABEL = "%sysfunc(sasmsg(sashelp.dmine, rpt_attribute_vlabel, NOQUOTE))" VALUE = "%sysfunc(sasmsg(sashelp.dmine, rpt_value_vlabel, NOQUOTE))";
+10610  dsid = open("WORK.MERGECONTENT");
+10611  rc = fetch(dsid);
+10612  nvars = attrn(dsid, 'NVARS');
+10613  nobs = attrn(dsid, 'NOBS');
+10614  ATTRIBUTE = "DATASOURCE";
+10615  LABEL = "Data Source: Path 1";
+10616  VALUE="actors";
+10617  output;
+10618  ATTRIBUTE = "DATASOURCE";
+10619  LABEL = "Data Source: Path 2";
+10620  VALUE="channels";
+10621  output;
+10622  ATTRIBUTE = "DATASOURCE";
+10623  LABEL = "Data Source: Path 3";
+10624  VALUE="criteria";
+10625  output;
+10626  ATTRIBUTE = "DATASOURCE";
+10627  LABEL = "Data Source: Path 4";
+10628  VALUE="customers";
+10629  output;
+10630  ATTRIBUTE = "DATASOURCE";
+10631  LABEL = "Data Source: Path 5";
+10632  VALUE="directors";
+10633  output;
+10634  ATTRIBUTE = "DATASOURCE";
+10635  LABEL = "Data Source: Path 6";
+10636  VALUE="hobbies";
+10637  output;
+10638  ATTRIBUTE = "DATASOURCE";
+10639  LABEL = "Data Source: Path 7";
+10640  VALUE="movies";
+10641  output;
+10642  ATTRIBUTE = "DATASOURCE";
+10643  LABEL = "Data Source: Path 8";
+10644  VALUE="technology";
+10645  output;
+10646  ATTRIBUTE = '';
+10647  LABEL = '';
+10648  VALUE='';
+10649  output;
+10650  do i=1 to nvars;
+10651  ATTRIBUTE = varname(dsid, i);
+10652  LABEL = varlabel(dsid, i);
+10653  if vartype(dsid,i)='C' then do;
+10654  VALUE = getvarc(dsid, i);
+10655  end;
+10656  else do;
+10657  NVALUE = getvarn(dsid, i);
+10658  if ATTRIBUTE in('CRDATE', 'MODATE') then VALUE = left(put(NVALUE, NLDATM20.));
+10659  else VALUE = left(put(NVALUE, BEST12.));
+10660  end;
+10661  output;
+10662  if ATTRIBUTE = 'NOBS' then do;
+10663  ATTRIBUTE = 'NVARS';
+10664  VALUE = left(put(NVARS, BEST12.));
+10665  LABEL = 'Variables';
+10666  output;
+10667  end;
+10668  end;
+10669  dsid=close(dsid);
+10670  run;
+ 
+NOTE: 数据集 WORK.MERGEOUTPUT 有 37 个观测和 3 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.01 秒
+      CPU 时间          0.00 秒
+ 
+ 
+10671  proc print data=WORK.MERGEOUTPUT noobs label;
+10672  var label value;
+10673  title9 ' ';
+10674  title10 "%sysfunc(sasmsg(sashelp.dmine, rpt_mergeattributes_title, NOQUOTE))";
+10675  run;
+ 
+NOTE: 从数据集 WORK.MERGEOUTPUT. 读取了 37 个观测
+NOTE: PROCEDURE PRINT 已打印第 2 页。
+NOTE: “PROCEDURE PRINT”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+ 
+ 
+10676  title10;
+ 
+*------------------------------------------------------------*
+* 评分日志
+日期:       2013年05月18日
+时间:       15时24分09秒
+*------------------------------------------------------------*
+10782  data work.IDS_DATA;
+10783  length UNAME $65;
+10784  set EMWS1.Ids_CMeta_DATA;
+10785  UNAME = upcase(NAME);
+10786  run;
+ 
+NOTE: 从数据集 EMWS1.IDS_CMETA_DATA. 读取了 2 个观测
+NOTE: 数据集 WORK.IDS_DATA 有 2 个观测和 21 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+ 
+ 
+10787  proc sort data=work.IDS_DATA;
+10788  by NAME;
+10789  run;
+ 
+NOTE: 从数据集 WORK.IDS_DATA. 读取了 2 个观测
+NOTE: 数据集 WORK.IDS_DATA 有 2 个观测和 21 个变量。
+NOTE: “PROCEDURE SORT”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.01 秒
+ 
+ 
+10790  proc append base=EMWS1.Merge_CMeta_TRAIN data=work.IDS_DATA force;
+10791  run;
+ 
+NOTE: 正在追加 WORK.IDS_DATA 至 EMWS1.MERGE_CMETA_TRAIN。
+NOTE: BASE 数据集不存在。正将 DATA 文件复制到 BASE 文件。
+NOTE: 从数据集 WORK.IDS_DATA. 读取了 2 个观测
+NOTE: 数据集 EMWS1.MERGE_CMETA_TRAIN 有 2 个观测和 21 个变量。
+NOTE: “PROCEDURE APPEND”所用时间（总处理时间）:
+      实际时间          0.01 秒
+      CPU 时间          0.00 秒
+ 
+ 
+10792  proc datasets lib=work nolist;
+10793  delete IDS_DATA;
+10794  run;
+ 
+NOTE: 正在删除 WORK.IDS_DATA (memtype=DATA)。
+ 
+NOTE: “PROCEDURE DATASETS”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+ 
+ 
+10795  data work.IDS2_DATA;
+10796  length UNAME $65;
+10797  set EMWS1.Ids2_CMeta_DATA;
+10798  UNAME = upcase(NAME);
+10799  run;
+ 
+NOTE: 从数据集 EMWS1.IDS2_CMETA_DATA. 读取了 2 个观测
+NOTE: 数据集 WORK.IDS2_DATA 有 2 个观测和 21 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.01 秒
+ 
+ 
+10800  proc sort data=work.IDS2_DATA;
+10801  by NAME;
+10802  run;
+ 
+NOTE: 从数据集 WORK.IDS2_DATA. 读取了 2 个观测
+NOTE: 数据集 WORK.IDS2_DATA 有 2 个观测和 21 个变量。
+NOTE: “PROCEDURE SORT”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+ 
+ 
+10803  proc append base=EMWS1.Merge_CMeta_TRAIN data=work.IDS2_DATA force;
+10804  run;
+ 
+NOTE: 正在追加 WORK.IDS2_DATA 至 EMWS1.MERGE_CMETA_TRAIN。
+NOTE: 从数据集 WORK.IDS2_DATA. 读取了 2 个观测
+NOTE: 添加了 2 个观测。
+NOTE: 数据集 EMWS1.MERGE_CMETA_TRAIN 有 4 个观测和 21 个变量。
+NOTE: “PROCEDURE APPEND”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.01 秒
+ 
+ 
+10805  proc datasets lib=work nolist;
+10806  delete IDS2_DATA;
+10807  run;
+ 
+NOTE: 正在删除 WORK.IDS2_DATA (memtype=DATA)。
+ 
+NOTE: “PROCEDURE DATASETS”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+ 
+ 
+10808  data work.IDS3_DATA;
+10809  length UNAME $65;
+10810  set EMWS1.Ids3_CMeta_DATA;
+10811  UNAME = upcase(NAME);
+10812  run;
+ 
+NOTE: 从数据集 EMWS1.IDS3_CMETA_DATA. 读取了 2 个观测
+NOTE: 数据集 WORK.IDS3_DATA 有 2 个观测和 21 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+ 
+ 
+10813  proc sort data=work.IDS3_DATA;
+10814  by NAME;
+10815  run;
+ 
+NOTE: 从数据集 WORK.IDS3_DATA. 读取了 2 个观测
+NOTE: 数据集 WORK.IDS3_DATA 有 2 个观测和 21 个变量。
+NOTE: “PROCEDURE SORT”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+ 
+ 
+10816  proc append base=EMWS1.Merge_CMeta_TRAIN data=work.IDS3_DATA force;
+10817  run;
+ 
+NOTE: 正在追加 WORK.IDS3_DATA 至 EMWS1.MERGE_CMETA_TRAIN。
+NOTE: 从数据集 WORK.IDS3_DATA. 读取了 2 个观测
+NOTE: 添加了 2 个观测。
+NOTE: 数据集 EMWS1.MERGE_CMETA_TRAIN 有 6 个观测和 21 个变量。
+NOTE: “PROCEDURE APPEND”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.01 秒
+ 
+ 
+10818  proc datasets lib=work nolist;
+10819  delete IDS3_DATA;
+10820  run;
+ 
+NOTE: 正在删除 WORK.IDS3_DATA (memtype=DATA)。
+ 
+NOTE: “PROCEDURE DATASETS”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+ 
+ 
+10821  data work.IDS4_DATA;
+10822  length UNAME $65;
+10823  set EMWS1.Ids4_CMeta_DATA;
+10824  UNAME = upcase(NAME);
+10825  run;
+ 
+NOTE: 从数据集 EMWS1.IDS4_CMETA_DATA. 读取了 21 个观测
+NOTE: 数据集 WORK.IDS4_DATA 有 21 个观测和 21 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+ 
+ 
+10826  proc sort data=work.IDS4_DATA;
+10827  by NAME;
+10828  run;
+ 
+NOTE: 从数据集 WORK.IDS4_DATA. 读取了 21 个观测
+NOTE: 数据集 WORK.IDS4_DATA 有 21 个观测和 21 个变量。
+NOTE: “PROCEDURE SORT”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+ 
+ 
+10829  proc append base=EMWS1.Merge_CMeta_TRAIN data=work.IDS4_DATA force;
+10830  run;
+ 
+NOTE: 正在追加 WORK.IDS4_DATA 至 EMWS1.MERGE_CMETA_TRAIN。
+NOTE: 从数据集 WORK.IDS4_DATA. 读取了 21 个观测
+NOTE: 添加了 21 个观测。
+NOTE: 数据集 EMWS1.MERGE_CMETA_TRAIN 有 27 个观测和 21 个变量。
+NOTE: “PROCEDURE APPEND”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+ 
+ 
+10831  proc datasets lib=work nolist;
+10832  delete IDS4_DATA;
+10833  run;
+ 
+NOTE: 正在删除 WORK.IDS4_DATA (memtype=DATA)。
+ 
+NOTE: “PROCEDURE DATASETS”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+ 
+ 
+10834  data work.IDS5_DATA;
+10835  length UNAME $65;
+10836  set EMWS1.Ids5_CMeta_DATA;
+10837  UNAME = upcase(NAME);
+10838  run;
+ 
+NOTE: 从数据集 EMWS1.IDS5_CMETA_DATA. 读取了 2 个观测
+NOTE: 数据集 WORK.IDS5_DATA 有 2 个观测和 21 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+ 
+ 
+10839  proc sort data=work.IDS5_DATA;
+10840  by NAME;
+10841  run;
+ 
+NOTE: 从数据集 WORK.IDS5_DATA. 读取了 2 个观测
+NOTE: 数据集 WORK.IDS5_DATA 有 2 个观测和 21 个变量。
+NOTE: “PROCEDURE SORT”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+ 
+ 
+10842  proc append base=EMWS1.Merge_CMeta_TRAIN data=work.IDS5_DATA force;
+10843  run;
+ 
+NOTE: 正在追加 WORK.IDS5_DATA 至 EMWS1.MERGE_CMETA_TRAIN。
+NOTE: 从数据集 WORK.IDS5_DATA. 读取了 2 个观测
+NOTE: 添加了 2 个观测。
+NOTE: 数据集 EMWS1.MERGE_CMETA_TRAIN 有 29 个观测和 21 个变量。
+NOTE: “PROCEDURE APPEND”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+ 
+ 
+10844  proc datasets lib=work nolist;
+10845  delete IDS5_DATA;
+10846  run;
+ 
+NOTE: 正在删除 WORK.IDS5_DATA (memtype=DATA)。
+ 
+NOTE: “PROCEDURE DATASETS”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.01 秒
+ 
+ 
+10847  data work.IDS6_DATA;
+10848  length UNAME $65;
+10849  set EMWS1.Ids6_CMeta_DATA;
+10850  UNAME = upcase(NAME);
+10851  run;
+ 
+NOTE: 从数据集 EMWS1.IDS6_CMETA_DATA. 读取了 2 个观测
+NOTE: 数据集 WORK.IDS6_DATA 有 2 个观测和 21 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+ 
+ 
+10852  proc sort data=work.IDS6_DATA;
+10853  by NAME;
+10854  run;
+ 
+NOTE: 从数据集 WORK.IDS6_DATA. 读取了 2 个观测
+NOTE: 数据集 WORK.IDS6_DATA 有 2 个观测和 21 个变量。
+NOTE: “PROCEDURE SORT”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+ 
+ 
+10855  proc append base=EMWS1.Merge_CMeta_TRAIN data=work.IDS6_DATA force;
+10856  run;
+ 
+NOTE: 正在追加 WORK.IDS6_DATA 至 EMWS1.MERGE_CMETA_TRAIN。
+NOTE: 从数据集 WORK.IDS6_DATA. 读取了 2 个观测
+NOTE: 添加了 2 个观测。
+NOTE: 数据集 EMWS1.MERGE_CMETA_TRAIN 有 31 个观测和 21 个变量。
+NOTE: “PROCEDURE APPEND”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+ 
+ 
+10857  proc datasets lib=work nolist;
+10858  delete IDS6_DATA;
+10859  run;
+ 
+NOTE: 正在删除 WORK.IDS6_DATA (memtype=DATA)。
+ 
+NOTE: “PROCEDURE DATASETS”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+ 
+ 
+10860  data work.IDS7_DATA;
+10861  length UNAME $65;
+10862  set EMWS1.Ids7_CMeta_DATA;
+10863  UNAME = upcase(NAME);
+10864  run;
+ 
+NOTE: 从数据集 EMWS1.IDS7_CMETA_DATA. 读取了 2 个观测
+NOTE: 数据集 WORK.IDS7_DATA 有 2 个观测和 21 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.01 秒
+ 
+ 
+10865  proc sort data=work.IDS7_DATA;
+10866  by NAME;
+10867  run;
+ 
+NOTE: 从数据集 WORK.IDS7_DATA. 读取了 2 个观测
+NOTE: 数据集 WORK.IDS7_DATA 有 2 个观测和 21 个变量。
+NOTE: “PROCEDURE SORT”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+ 
+ 
+10868  proc append base=EMWS1.Merge_CMeta_TRAIN data=work.IDS7_DATA force;
+10869  run;
+ 
+NOTE: 正在追加 WORK.IDS7_DATA 至 EMWS1.MERGE_CMETA_TRAIN。
+NOTE: 从数据集 WORK.IDS7_DATA. 读取了 2 个观测
+NOTE: 添加了 2 个观测。
+NOTE: 数据集 EMWS1.MERGE_CMETA_TRAIN 有 33 个观测和 21 个变量。
+NOTE: “PROCEDURE APPEND”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+ 
+ 
+10870  proc datasets lib=work nolist;
+10871  delete IDS7_DATA;
+10872  run;
+ 
+NOTE: 正在删除 WORK.IDS7_DATA (memtype=DATA)。
+ 
+NOTE: “PROCEDURE DATASETS”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+ 
+ 
+10873  data work.IDS8_DATA;
+10874  length UNAME $65;
+10875  set EMWS1.Ids8_CMeta_DATA;
+10876  UNAME = upcase(NAME);
+10877  run;
+ 
+NOTE: 从数据集 EMWS1.IDS8_CMETA_DATA. 读取了 2 个观测
+NOTE: 数据集 WORK.IDS8_DATA 有 2 个观测和 21 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+ 
+ 
+10878  proc sort data=work.IDS8_DATA;
+10879  by NAME;
+10880  run;
+ 
+NOTE: 从数据集 WORK.IDS8_DATA. 读取了 2 个观测
+NOTE: 数据集 WORK.IDS8_DATA 有 2 个观测和 21 个变量。
+NOTE: “PROCEDURE SORT”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+ 
+ 
+10881  proc append base=EMWS1.Merge_CMeta_TRAIN data=work.IDS8_DATA force;
+10882  run;
+ 
+NOTE: 正在追加 WORK.IDS8_DATA 至 EMWS1.MERGE_CMETA_TRAIN。
+NOTE: 从数据集 WORK.IDS8_DATA. 读取了 2 个观测
+NOTE: 添加了 2 个观测。
+NOTE: 数据集 EMWS1.MERGE_CMETA_TRAIN 有 35 个观测和 21 个变量。
+NOTE: “PROCEDURE APPEND”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+ 
+ 
+10883  proc datasets lib=work nolist;
+10884  delete IDS8_DATA;
+10885  run;
+ 
+NOTE: 正在删除 WORK.IDS8_DATA (memtype=DATA)。
+ 
+NOTE: “PROCEDURE DATASETS”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+ 
+ 
+10886  proc sort data = EMWS1.Merge_CMeta_TRAIN out = EMWS1.Merge_CMeta_TRAIN(drop=UNAME) nodupkey;
+10887  by UNAME;
+10888  run;
+ 
+NOTE: 从数据集 EMWS1.MERGE_CMETA_TRAIN. 读取了 35 个观测
+NOTE: 7 个具有重复键值的观测已删除。
+NOTE: 数据集 EMWS1.MERGE_CMETA_TRAIN 有 28 个观测和 20 个变量。
+NOTE: “PROCEDURE SORT”所用时间（总处理时间）:
+      实际时间          0.01 秒
+      CPU 时间          0.01 秒
+ 
+ 
+NOTE: “视图 EMWS1.MERGE_TRAIN.VIEW”所用时间（总处理时间）:
+      实际时间          0.34 秒
+      CPU 时间          0.31 秒
+ 
+*------------------------------------------------------------*
+* 报表日志
+日期:       2013年05月18日
+时间:       15时24分10秒
+*------------------------------------------------------------*

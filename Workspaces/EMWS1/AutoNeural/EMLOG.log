@@ -1,0 +1,323 @@
+*------------------------------------------------------------*
+用户:       Leon
+日期:       2013年05月18日
+时间:       15时28分49秒
+软件安装点: 11202901
+平台:       XP_PRO
+维护版本:   9.03.01M2P081512
+EM 版本:    12.1
+* 
+*------------------------------------------------------------*
+* 训练日志
+日期:       2013年05月18日
+时间:       15时28分47秒
+*------------------------------------------------------------*
+10565  proc freq data=EMWS1.AutoNeural_VariableSet noprint;
+10566  table ROLE*LEVEL/out=WORK.AutoNeuralMETA;
+10567  run;
+ 
+NOTE: 从数据集 EMWS1.AUTONEURAL_VARIABLESET. 读取了 25 个观测
+NOTE: 数据集 WORK.AUTONEURALMETA 有 3 个观测和 4 个变量。
+NOTE: “PROCEDURE FREQ”所用时间（总处理时间）:
+      实际时间          0.04 秒
+      CPU 时间          0.03 秒
+ 
+ 
+10568  proc print data=WORK.AutoNeuralMETA label noobs;
+10569  var ROLE LEVEL COUNT;
+10570  label ROLE = "%sysfunc(sasmsg(sashelp.dmine, meta_role_vlabel, NOQUOTE))" LEVEL = "%sysfunc(sasmsg(sashelp.dmine, meta_level_vlabel, NOQUOTE))" COUNT = "%sysfunc(sasmsg(sashelp.dmine, rpt_count_vlabel, NOQUOTE))";
+10571  title9 ' ';
+10572  title10 "%sysfunc(sasmsg(sashelp.dmine, rpt_varSummary_title  , NOQUOTE))";
+10573  run;
+ 
+NOTE: 从数据集 WORK.AUTONEURALMETA. 读取了 3 个观测
+NOTE: PROCEDURE PRINT 已打印第 1 页。
+NOTE: “PROCEDURE PRINT”所用时间（总处理时间）:
+      实际时间          0.01 秒
+      CPU 时间          0.01 秒
+ 
+ 
+10574  title10;
+ 
+10575  %let EMNORLEN = %DMNORLEN;
+EMWS1.Part_TRAIN EMWS1.Part_TRAIN
+EMWS1.Part_TRAIN EMWS1.Part_TRAIN EMWS1 Part_TRAIN
+EMWS1.Part_TRAIN EMWS1.Part_TRAIN
+EMWS1.Part_TRAIN EMWS1.Part_TRAIN EMWS1 Part_TRAIN
+PERFORMANCE  DETAILS
+WORK.EM_DMDB WORK.EM_DMDB
+WORK.EM_DMDB WORK.EM_DMDB WORK EM_DMDB
+10696  data WORK.AutoNeural_EVENT(KEEP=VARIABLE LABEL LEVEL EVENT NUMLEVELS ORDER);
+10697  length ORDER $20;
+10698  label VARIABLE = "%sysfunc(sasmsg(sashelp.dmine, rpt_target_vlabel,  NOQUOTE))" EVENT = "%sysfunc(sasmsg(sashelp.dmine, assmt_event_vlabel, NOQUOTE))" NUMLEVELS = "%sysfunc(sasmsg(sashelp.dmine, rpt_numcat_vlabel, NOQUOTE))" LEVEL =
+10699     "%sysfunc(sasmsg(sashelp.dmine, meta_level_vlabel, NOQUOTE))" ORDER = "%sysfunc(sasmsg(sashelp.dmine, meta_order_vlabel, NOQUOTE))" LABEL = "%sysfunc(sasmsg(sashelp.dmine, meta_label_vlabel, NOQUOTE))";
+10700  set EMWS1.AUTONEURAL_TECHNOLOGY_DM( where=(_TYPE_="TARGET"));
+10701  NumLevels=14;
+10702  select(upcase(ORDER));
+10703  when('DESC') ORDER = 'Descending';
+10704  when('ASC') ORDER = 'Ascending';
+10705  when('FMTDESC') ORDER = 'Formatted Descending';
+10706  when('FMTASC') ORDER = 'Formatted Ascending';
+10707  otherwise ORDER = 'Descending';
+10708  end;
+10709  output;
+10710  run;
+ 
+NOTE: 从数据集 EMWS1.AUTONEURAL_TECHNOLOGY_DM. 读取了 1 个观测
+      WHERE _TYPE_='TARGET';
+NOTE: 数据集 WORK.AUTONEURAL_EVENT 有 1 个观测和 6 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.02 秒
+      CPU 时间          0.03 秒
+ 
+ 
+10711  title9 ' ';
+10712  proc print data=WORK.AutoNeural_EVENT noobs label;
+10713  var VARIABLE EVENT LEVEL NUMLEVELS ORDER LABEL;
+10714  title9 ' ';
+10715  title10 "%sysfunc(sasmsg(sashelp.dmine, rpt_modelEvent_title  , NOQUOTE))";
+10716  run;
+ 
+NOTE: 从数据集 WORK.AUTONEURAL_EVENT. 读取了 1 个观测
+NOTE: PROCEDURE PRINT 已打印第 2 页。
+NOTE: “PROCEDURE PRINT”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.01 秒
+ 
+ 
+10717  title10;
+ 
+"没有为目标 Technology 定义决策。"
+10718  proc print data = EMWS1.AutoNeural_Technology_DM noobs label;
+10719  var _type_ variable label;
+10720  where _type_ ^in('MATRIX', 'DECISION', 'TRAINPRIOR', 'DATAPRIOR', 'DECPRIOR');
+10721  label _TYPE_ = "%sysfunc(sasmsg(sashelp.dmine, rpt_type_vlabel,     NOQUOTE))" VARIABLE = "%sysfunc(sasmsg(sashelp.dmine, rpt_variable_vlabel, NOQUOTE))" LABEL = "%sysfunc(sasmsg(sashelp.dmine, meta_label_vlabel, NOQUOTE))";
+10722  title9 ' ';
+10723  title10 "%sysfunc(sasmsg(sashelp.dmine, rpt_predDecVars_title  , NOQUOTE))";
+10724  run;
+ 
+NOTE: 从数据集 EMWS1.AUTONEURAL_TECHNOLOGY_DM. 读取了 31 个观测
+      WHERE _type_ not in ('DATAPRIOR', 'DECISION', 'DECPRIOR', 'MATRIX', 'TRAINPRIOR');
+NOTE: PROCEDURE PRINT 已打印第 3 页。
+NOTE: “PROCEDURE PRINT”所用时间（总处理时间）:
+      实际时间          0.01 秒
+      CPU 时间          0.00 秒
+ 
+ 
+10725  title10;
+ 
+10734  data WORK.M2S1MXWF;
+10735  set WORK.M2S1MXWF end=eof;
+10736  output;
+10737  if eof then do;
+10738  NAME="";
+10739  ROLE="COST";
+10740  LEVEL="INTERVAL";
+10741  TYPE="N";
+10742  output;
+10743  end;
+10744  run;
+ 
+NOTE: 从数据集 WORK.M2S1MXWF. 读取了 25 个观测
+NOTE: 数据集 WORK.M2S1MXWF 有 26 个观测和 21 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+ 
+ 
+NOTE: 从数据集 EMWS1.AUTONEURAL_TECHNOLOGY_DD. 读取了 14 个观测
+NOTE: 数据集 WORK.TECHNOLOGY 有 14 个观测和 19 个变量。
+10745  *------------------------------------------------------------*;
+10746  * AutoNeural: Create decision matrix;
+10747  *------------------------------------------------------------*;
+10748  data WORK.Technology(label="Technology");
+10749    length   Technology                       $  32
+10750             COUNT                                8
+10751             DATAPRIOR                            8
+10752             TRAINPRIOR                           8
+10753             DECPRIOR                             8
+10754             DECISION1                            8
+10755             DECISION2                            8
+10756             DECISION3                            8
+10757             DECISION4                            8
+10758             DECISION5                            8
+10759             DECISION6                            8
+10760             DECISION7                            8
+10761             DECISION8                            8
+10762             DECISION9                            8
+10763             DECISION10                           8
+10764             DECISION11                           8
+10765             DECISION12                           8
+10766             DECISION13                           8
+10767             DECISION14                           8
+10768             ;
+10769
+10770    label    COUNT="Level Counts"
+10771             DATAPRIOR="Data Proportions"
+10772             TRAINPRIOR="Training Proportions"
+10773             DECPRIOR="Decision Priors"
+10774             DECISION1="VIDEO-CAPABLE AUTOMOBILE"
+10775             DECISION2="VHS"
+10776             DECISION3="SURROUND SOUND"
+10777             DECISION4="REAR PROJECTION TV"
+10778             DECISION5="PVR(TIVO ULTIMATETV REPLAYTV)"
+10779             DECISION6="LASERDISK"
+10780             DECISION7="HDTV"
+10781             DECISION8="FRONT PROJECTION TV"
+10782             DECISION9="FLAT SCREEN TV"
+10783             DECISION10="DIGITAL SATELLITE"
+10784             DECISION11="DVD"
+10785             DECISION12="CONSOLE GAME SYSTEM(E.G. XBOX PS"
+10786             DECISION13="BETAMAX"
+10787             DECISION14="ANALOG SATELLITE"
+10788             ;
+10789  Technology="VIDEO-CAPABLE AUTOMOBILE"; COUNT=19; DATAPRIOR=0.00858175248419; TRAINPRIOR=0.00858175248419; DECPRIOR=.; DECISION1=1; DECISION2=0; DECISION3=0; DECISION4=0; DECISION5=0; DECISION6=0;
+10790  DECISION7=0; DECISION8=0; DECISION9=0; DECISION10=0; DECISION11=0; DECISION12=0; DECISION13=0; DECISION14=0;
+10791  output;
+10792  Technology="VHS"; COUNT=533; DATAPRIOR=0.24074074074074; TRAINPRIOR=0.24074074074074; DECPRIOR=.; DECISION1=0; DECISION2=1; DECISION3=0; DECISION4=0; DECISION5=0; DECISION6=0; DECISION7=0;
+10793  DECISION8=0; DECISION9=0; DECISION10=0; DECISION11=0; DECISION12=0; DECISION13=0; DECISION14=0;
+10794  output;
+10795  Technology="SURROUND SOUND"; COUNT=282; DATAPRIOR=0.12737127371273; TRAINPRIOR=0.12737127371273; DECPRIOR=.; DECISION1=0; DECISION2=0; DECISION3=1; DECISION4=0; DECISION5=0; DECISION6=0; DECISION7=0;
+10796  DECISION8=0; DECISION9=0; DECISION10=0; DECISION11=0; DECISION12=0; DECISION13=0; DECISION14=0;
+10797  output;
+10798  Technology="REAR PROJECTION TV"; COUNT=66; DATAPRIOR=0.02981029810298; TRAINPRIOR=0.02981029810298; DECPRIOR=.; DECISION1=0; DECISION2=0; DECISION3=0; DECISION4=1; DECISION5=0; DECISION6=0;
+10799  DECISION7=0; DECISION8=0; DECISION9=0; DECISION10=0; DECISION11=0; DECISION12=0; DECISION13=0; DECISION14=0;
+10800  output;
+10801  Technology="PVR(TIVO ULTIMATETV REPLAYTV)"; COUNT=76; DATAPRIOR=0.03432700993676; TRAINPRIOR=0.03432700993676; DECPRIOR=.; DECISION1=0; DECISION2=0; DECISION3=0; DECISION4=0; DECISION5=1;
+10802  DECISION6=0; DECISION7=0; DECISION8=0; DECISION9=0; DECISION10=0; DECISION11=0; DECISION12=0; DECISION13=0; DECISION14=0;
+10803  output;
+10804  Technology="LASERDISK"; COUNT=24; DATAPRIOR=0.01084010840108; TRAINPRIOR=0.01084010840108; DECPRIOR=.; DECISION1=0; DECISION2=0; DECISION3=0; DECISION4=0; DECISION5=0; DECISION6=1; DECISION7=0;
+10805  DECISION8=0; DECISION9=0; DECISION10=0; DECISION11=0; DECISION12=0; DECISION13=0; DECISION14=0;
+10806  output;
+10807  Technology="HDTV"; COUNT=70; DATAPRIOR=0.03161698283649; TRAINPRIOR=0.03161698283649; DECPRIOR=.; DECISION1=0; DECISION2=0; DECISION3=0; DECISION4=0; DECISION5=0; DECISION6=0; DECISION7=1;
+10808  DECISION8=0; DECISION9=0; DECISION10=0; DECISION11=0; DECISION12=0; DECISION13=0; DECISION14=0;
+10809  output;
+10810  Technology="FRONT PROJECTION TV"; COUNT=27; DATAPRIOR=0.01219512195121; TRAINPRIOR=0.01219512195121; DECPRIOR=.; DECISION1=0; DECISION2=0; DECISION3=0; DECISION4=0; DECISION5=0; DECISION6=0;
+10811  DECISION7=0; DECISION8=1; DECISION9=0; DECISION10=0; DECISION11=0; DECISION12=0; DECISION13=0; DECISION14=0;
+10812  output;
+10813  Technology="FLAT SCREEN TV"; COUNT=105; DATAPRIOR=0.04742547425474; TRAINPRIOR=0.04742547425474; DECPRIOR=.; DECISION1=0; DECISION2=0; DECISION3=0; DECISION4=0; DECISION5=0; DECISION6=0; DECISION7=0;
+10814  DECISION8=0; DECISION9=1; DECISION10=0; DECISION11=0; DECISION12=0; DECISION13=0; DECISION14=0;
+10815  output;
+10816  Technology="DIGITAL SATELLITE"; COUNT=129; DATAPRIOR=0.05826558265582; TRAINPRIOR=0.05826558265582; DECPRIOR=.; DECISION1=0; DECISION2=0; DECISION3=0; DECISION4=0; DECISION5=0; DECISION6=0;
+10817  DECISION7=0; DECISION8=0; DECISION9=0; DECISION10=1; DECISION11=0; DECISION12=0; DECISION13=0; DECISION14=0;
+10818  output;
+10819  Technology="DVD"; COUNT=539; DATAPRIOR=0.24345076784101; TRAINPRIOR=0.24345076784101; DECPRIOR=.; DECISION1=0; DECISION2=0; DECISION3=0; DECISION4=0; DECISION5=0; DECISION6=0; DECISION7=0;
+10820  DECISION8=0; DECISION9=0; DECISION10=0; DECISION11=1; DECISION12=0; DECISION13=0; DECISION14=0;
+10821  output;
+10822  Technology="CONSOLE GAME SYSTEM(E.G. XBOX PS"; COUNT=322; DATAPRIOR=0.14543812104787; TRAINPRIOR=0.14543812104787; DECPRIOR=.; DECISION1=0; DECISION2=0; DECISION3=0; DECISION4=0; DECISION5=0;
+10823  DECISION6=0; DECISION7=0; DECISION8=0; DECISION9=0; DECISION10=0; DECISION11=0; DECISION12=1; DECISION13=0; DECISION14=0;
+10824  output;
+10825  Technology="BETAMAX"; COUNT=11; DATAPRIOR=0.00496838301716; TRAINPRIOR=0.00496838301716; DECPRIOR=.; DECISION1=0; DECISION2=0; DECISION3=0; DECISION4=0; DECISION5=0; DECISION6=0; DECISION7=0;
+10826  DECISION8=0; DECISION9=0; DECISION10=0; DECISION11=0; DECISION12=0; DECISION13=1; DECISION14=0;
+10827  output;
+10828  Technology="ANALOG SATELLITE"; COUNT=11; DATAPRIOR=0.00496838301716; TRAINPRIOR=0.00496838301716; DECPRIOR=.; DECISION1=0; DECISION2=0; DECISION3=0; DECISION4=0; DECISION5=0; DECISION6=0;
+10829  DECISION7=0; DECISION8=0; DECISION9=0; DECISION10=0; DECISION11=0; DECISION12=0; DECISION13=0; DECISION14=1;
+10830  output;
+10831  ;
+10832  run;
+ 
+NOTE: 数据集 WORK.TECHNOLOGY 有 14 个观测和 19 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.02 秒
+      CPU 时间          0.01 秒
+ 
+ 
+10833  proc datasets lib=work nolist;
+10834  modify Technology(type=PROFIT label=Technology);
+10835  label DECISION1= 'VIDEO-CAPABLE AUTOMOBILE';
+10836  label DECISION2= 'VHS';
+10837  label DECISION3= 'SURROUND SOUND';
+10838  label DECISION4= 'REAR PROJECTION TV';
+10839  label DECISION5= 'PVR(TIVO ULTIMATETV REPLAYTV)';
+10840  label DECISION6= 'LASERDISK';
+10841  label DECISION7= 'HDTV';
+10842  label DECISION8= 'FRONT PROJECTION TV';
+10843  label DECISION9= 'FLAT SCREEN TV';
+10844  label DECISION10= 'DIGITAL SATELLITE';
+10845  label DECISION11= 'DVD';
+10846  label DECISION12= 'CONSOLE GAME SYSTEM(E.G. XBOX PS';
+10847  label DECISION13= 'BETAMAX';
+10848  label DECISION14= 'ANALOG SATELLITE';
+10849  run;
+ 
+NOTE: WORK.TECHNOLOGY.DATA 修改成功。
+10850  quit;
+ 
+NOTE: “PROCEDURE DATASETS”所用时间（总处理时间）:
+      实际时间          0.01 秒
+      CPU 时间          0.01 秒
+ 
+ 
+10851  data EM_AutoNeural;
+10852  set EMWS1.Part_TRAIN(keep=
+10853  Actor Age CustomerID Director Education_Level Gender Home_Ownership
+10854  Internet_Connection Marital_Status Movie Movie_Selector Num_Bathrooms
+10855  Num_Bedrooms Num_Cars Num_Children Num_TVs PPV_Freq Prerec_Buying_Freq
+10856  Prerec_Format Prerec_Renting_Freq Prerec_Viewing_Freq TV_Movie_Freq TV_Signal
+10857  Technology Theater_Freq );
+10858  run;
+ 
+NOTE: 从数据集 EMWS1.PART_TRAIN. 读取了 2214 个观测
+NOTE: 数据集 WORK.EM_AUTONEURAL 有 2214 个观测和 25 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.03 秒
+      CPU 时间          0.01 秒
+ 
+ 
+10859  *------------------------------------------------------------* ;
+10860  * AutoNeural: DMDBClass Macro ;
+10861  *------------------------------------------------------------* ;
+10862  %macro DMDBClass;
+10863      Actor(ASC) Director(ASC) Education_Level(ASC) Gender(ASC) Home_Ownership(ASC)
+10864     Internet_Connection(ASC) Marital_Status(ASC) Movie(ASC) Movie_Selector(ASC)
+10865     PPV_Freq(ASC) Prerec_Buying_Freq(ASC) Prerec_Format(ASC)
+10866     Prerec_Renting_Freq(ASC) Prerec_Viewing_Freq(ASC) TV_Movie_Freq(ASC)
+10867     TV_Signal(ASC) Technology(DESC) Theater_Freq(ASC)
+10868  %mend DMDBClass;
+10869  *------------------------------------------------------------* ;
+10870  * AutoNeural: DMDBVar Macro ;
+10871  *------------------------------------------------------------* ;
+10872  %macro DMDBVar;
+10873      Age CustomerID Num_Bathrooms Num_Bedrooms Num_Cars Num_Children Num_TVs
+10874  %mend DMDBVar;
+10875  *------------------------------------------------------------*;
+10876  * AutoNeural: Create DMDB;
+10877  *------------------------------------------------------------*;
+10878  proc dmdb batch data=WORK.EM_AutoNeural
+10879  dmdbcat=WORK.AutoNeural_DMDB
+10880  maxlevel = 513
+10881  ;
+10882  class %DMDBClass;
+10883  var %DMDBVar;
+10884  target
+10885  Technology
+10886  ;
+10887  run;
+ 
+NOTE: Records processed = 2214   Memory used = 511K.
+NOTE: 从数据集 WORK.EM_AUTONEURAL. 读取了 2214 个观测
+NOTE: “PROCEDURE DMDB”所用时间（总处理时间）:
+      实际时间          0.07 秒
+      CPU 时间          0.01 秒
+ 
+ 
+10888  quit;
+10889  *--- end code ---*;
+ 
+ 
+ 
+ERROR: Number of class levels for  Movie exceeds limit.
+NOTE: The class levels limit is set by the macro variable EM_TRAIN_MAXLEVELS: 512
+ 
+NOTE: Apply the following actions where appropriate:
+NOTE: * Change the measurement level of numeric class variables to interval
+NOTE: * Reject class variables with excessive numbers of categories
+NOTE: * Group class variables into fewer categories.
+ 
+ 
+*------------------------------------------------------------*
+*
+* ERROR: DMDBFACTORY.EXCEEDMAXLEVEL_err
+* 请向技术支持人员报告未解决的问题。
+*
+*------------------------------------------------------------*

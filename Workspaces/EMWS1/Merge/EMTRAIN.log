@@ -1,0 +1,238 @@
+*------------------------------------------------------------*
+* 训练日志
+日期:       2013年05月18日
+时间:       15时24分06秒
+*------------------------------------------------------------*
+10564  proc freq data=EMWS1.Merge_VariableSet noprint;
+10565  table ROLE*LEVEL/out=WORK.MergeMETA;
+10566  run;
+
+NOTE: 从数据集 EMWS1.MERGE_VARIABLESET. 读取了 2 个观测
+NOTE: 数据集 WORK.MERGEMETA 有 2 个观测和 4 个变量。
+NOTE: “PROCEDURE FREQ”所用时间（总处理时间）:
+      实际时间          0.03 秒
+      CPU 时间          0.00 秒
+      
+
+10567  proc print data=WORK.MergeMETA label noobs;
+10568  var ROLE LEVEL COUNT;
+10569  label ROLE = "%sysfunc(sasmsg(sashelp.dmine, meta_role_vlabel, NOQUOTE))" LEVEL = "%sysfunc(sasmsg(sashelp.dmine, meta_level_vlabel, NOQUOTE))" COUNT = "%sysfunc(sasmsg(sashelp.dmine, rpt_count_vlabel, NOQUOTE))";
+10570  title9 ' ';
+10571  title10 "%sysfunc(sasmsg(sashelp.dmine, rpt_varSummary_title  , NOQUOTE))";
+10572  run;
+
+NOTE: 从数据集 WORK.MERGEMETA. 读取了 2 个观测
+NOTE: PROCEDURE PRINT 已打印第 1 页。
+NOTE: “PROCEDURE PRINT”所用时间（总处理时间）:
+      实际时间          0.01 秒
+      CPU 时间          0.01 秒
+      
+
+10573  title10;
+
+NOTE: “视图 EMWS1.IDS_DATA.VIEW”所用时间（总处理时间）:
+      实际时间          0.04 秒
+      CPU 时间          0.04 秒
+      
+NOTE: “视图 EMWS1.IDS2_DATA.VIEW”所用时间（总处理时间）:
+      实际时间          0.04 秒
+      CPU 时间          0.04 秒
+      
+NOTE: “视图 EMWS1.IDS3_DATA.VIEW”所用时间（总处理时间）:
+      实际时间          0.04 秒
+      CPU 时间          0.03 秒
+      
+NOTE: “视图 EMWS1.IDS4_DATA.VIEW”所用时间（总处理时间）:
+      实际时间          0.04 秒
+      CPU 时间          0.04 秒
+      
+NOTE: “视图 EMWS1.IDS5_DATA.VIEW”所用时间（总处理时间）:
+      实际时间          0.04 秒
+      CPU 时间          0.03 秒
+      
+NOTE: “视图 EMWS1.IDS6_DATA.VIEW”所用时间（总处理时间）:
+      实际时间          0.04 秒
+      CPU 时间          0.04 秒
+      
+NOTE: “视图 EMWS1.IDS7_DATA.VIEW”所用时间（总处理时间）:
+      实际时间          0.05 秒
+      CPU 时间          0.04 秒
+      
+NOTE: “视图 EMWS1.IDS8_DATA.VIEW”所用时间（总处理时间）:
+      实际时间          0.04 秒
+      CPU 时间          0.01 秒
+      
+10574  data EMWS1.Merge_TRAIN / view=EMWS1.Merge_TRAIN;
+10575  merge
+10576  EMWS1.Ids_DATA
+10577  (rename=(
+10578  ))
+10579  EMWS1.Ids2_DATA
+10580  (rename=(
+10581  ))
+10582  EMWS1.Ids3_DATA
+10583  (rename=(
+10584  ))
+10585  EMWS1.Ids4_DATA
+10586  (rename=(
+10587  ))
+10588  EMWS1.Ids5_DATA
+10589  (rename=(
+10590  ))
+10591  EMWS1.Ids6_DATA
+10592  (rename=(
+10593  ))
+10594  EMWS1.Ids7_DATA
+10595  (rename=(
+10596  ))
+10597  EMWS1.Ids8_DATA
+10598  (rename=(
+10599  ))
+10600  ;
+10601  run;
+
+NOTE: DATA STEP 视图已保存在文件 EMWS1.MERGE_TRAIN 中。
+NOTE: 存储的 DATA STEP 视图无法在不同的操作系统下运行。
+NOTE: “视图 EMWS1.IDS8_DATA.VIEW”所用时间（总处理时间）:
+      实际时间          0.04 秒
+      CPU 时间          0.03 秒
+      
+NOTE: “视图 EMWS1.IDS7_DATA.VIEW”所用时间（总处理时间）:
+      实际时间          0.07 秒
+      CPU 时间          0.07 秒
+      
+NOTE: “视图 EMWS1.IDS6_DATA.VIEW”所用时间（总处理时间）:
+      实际时间          0.11 秒
+      CPU 时间          0.11 秒
+      
+NOTE: “视图 EMWS1.IDS5_DATA.VIEW”所用时间（总处理时间）:
+      实际时间          0.14 秒
+      CPU 时间          0.14 秒
+      
+NOTE: “视图 EMWS1.IDS4_DATA.VIEW”所用时间（总处理时间）:
+      实际时间          0.17 秒
+      CPU 时间          0.17 秒
+      
+NOTE: “视图 EMWS1.IDS3_DATA.VIEW”所用时间（总处理时间）:
+      实际时间          0.21 秒
+      CPU 时间          0.23 秒
+      
+NOTE: “视图 EMWS1.IDS2_DATA.VIEW”所用时间（总处理时间）:
+      实际时间          0.25 秒
+      CPU 时间          0.26 秒
+      
+NOTE: “视图 EMWS1.IDS_DATA.VIEW”所用时间（总处理时间）:
+      实际时间          0.28 秒
+      CPU 时间          0.29 秒
+      
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.36 秒
+      CPU 时间          0.35 秒
+      
+
+10602  proc contents noprint data=EMWS1.Merge_TRAIN out=WORK.MERGECONTENT(drop=NAME TYPE LENGTH VARNUM LABEL FORMAT FORMATL FORMATD INFORMAT INFORML INFORMD JUST NPOS);
+10603  run;
+
+NOTE: 数据集 WORK.MERGECONTENT 有 28 个观测和 27 个变量。
+NOTE: “PROCEDURE CONTENTS”所用时间（总处理时间）:
+      实际时间          0.05 秒
+      CPU 时间          0.04 秒
+      
+
+10604  data WORK.MERGECONTENT;
+10605  set WORK.MERGECONTENT(obs=1);
+10606  run;
+
+NOTE: 从数据集 WORK.MERGECONTENT. 读取了 1 个观测
+NOTE: 数据集 WORK.MERGECONTENT 有 1 个观测和 27 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+10607  data WORK.MERGEOUTPUT(keep=ATTRIBUTE LABEL VALUE);
+10608  length ATTRIBUTE $20 LABEL $50 VALUE $50;
+10609  label LABEL = "%sysfunc(sasmsg(sashelp.dmine, rpt_attribute_vlabel, NOQUOTE))" VALUE = "%sysfunc(sasmsg(sashelp.dmine, rpt_value_vlabel, NOQUOTE))";
+10610  dsid = open("WORK.MERGECONTENT");
+10611  rc = fetch(dsid);
+10612  nvars = attrn(dsid, 'NVARS');
+10613  nobs = attrn(dsid, 'NOBS');
+10614  ATTRIBUTE = "DATASOURCE";
+10615  LABEL = "Data Source: Path 1";
+10616  VALUE="actors";
+10617  output;
+10618  ATTRIBUTE = "DATASOURCE";
+10619  LABEL = "Data Source: Path 2";
+10620  VALUE="channels";
+10621  output;
+10622  ATTRIBUTE = "DATASOURCE";
+10623  LABEL = "Data Source: Path 3";
+10624  VALUE="criteria";
+10625  output;
+10626  ATTRIBUTE = "DATASOURCE";
+10627  LABEL = "Data Source: Path 4";
+10628  VALUE="customers";
+10629  output;
+10630  ATTRIBUTE = "DATASOURCE";
+10631  LABEL = "Data Source: Path 5";
+10632  VALUE="directors";
+10633  output;
+10634  ATTRIBUTE = "DATASOURCE";
+10635  LABEL = "Data Source: Path 6";
+10636  VALUE="hobbies";
+10637  output;
+10638  ATTRIBUTE = "DATASOURCE";
+10639  LABEL = "Data Source: Path 7";
+10640  VALUE="movies";
+10641  output;
+10642  ATTRIBUTE = "DATASOURCE";
+10643  LABEL = "Data Source: Path 8";
+10644  VALUE="technology";
+10645  output;
+10646  ATTRIBUTE = '';
+10647  LABEL = '';
+10648  VALUE='';
+10649  output;
+10650  do i=1 to nvars;
+10651  ATTRIBUTE = varname(dsid, i);
+10652  LABEL = varlabel(dsid, i);
+10653  if vartype(dsid,i)='C' then do;
+10654  VALUE = getvarc(dsid, i);
+10655  end;
+10656  else do;
+10657  NVALUE = getvarn(dsid, i);
+10658  if ATTRIBUTE in('CRDATE', 'MODATE') then VALUE = left(put(NVALUE, NLDATM20.));
+10659  else VALUE = left(put(NVALUE, BEST12.));
+10660  end;
+10661  output;
+10662  if ATTRIBUTE = 'NOBS' then do;
+10663  ATTRIBUTE = 'NVARS';
+10664  VALUE = left(put(NVARS, BEST12.));
+10665  LABEL = 'Variables';
+10666  output;
+10667  end;
+10668  end;
+10669  dsid=close(dsid);
+10670  run;
+
+NOTE: 数据集 WORK.MERGEOUTPUT 有 37 个观测和 3 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.01 秒
+      CPU 时间          0.00 秒
+      
+
+10671  proc print data=WORK.MERGEOUTPUT noobs label;
+10672  var label value;
+10673  title9 ' ';
+10674  title10 "%sysfunc(sasmsg(sashelp.dmine, rpt_mergeattributes_title, NOQUOTE))";
+10675  run;
+
+NOTE: 从数据集 WORK.MERGEOUTPUT. 读取了 37 个观测
+NOTE: PROCEDURE PRINT 已打印第 2 页。
+NOTE: “PROCEDURE PRINT”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+10676  title10;
+

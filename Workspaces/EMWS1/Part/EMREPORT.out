@@ -1,0 +1,64 @@
+ 
+                                                                                                                                                                                                                                                                
+ 
+ 
+分类目标的汇总统计量
+
+数据=DATA
+
+   变量       数值型值    格式化值                                  频数计数     百分比       标签
+
+Technology        .       Analog Satellite                              15       0.5392    Technology
+Technology        .       Betamax                                       14       0.5032    Technology
+Technology        .       Console Game System(e.g. XBOX PS2 etc)       404      14.5219    Technology
+Technology        .       DVD                                          675      24.2631    Technology
+Technology        .       Digital Satellite                            162       5.8231    Technology
+Technology        .       Flat Screen TV                               132       4.7448    Technology
+Technology        .       Front Projection TV                           35       1.2581    Technology
+Technology        .       HDTV                                          89       3.1991    Technology
+Technology        .       Laserdisk                                     31       1.1143    Technology
+Technology        .       PVR(Tivo UltimateTV ReplayTV)                 96       3.4508    Technology
+Technology        .       Rear Projection TV                            83       2.9835    Technology
+Technology        .       Surround Sound                               353      12.6887    Technology
+Technology        .       VHS                                          668      24.0115    Technology
+Technology        .       Video-capable Automobile                      25       0.8986    Technology
+
+
+数据=TRAIN
+
+   变量       数值型值    格式化值                                  频数计数     百分比       标签
+
+Technology        .       Analog Satellite                              11       0.4968    Technology
+Technology        .       Betamax                                       11       0.4968    Technology
+Technology        .       Console Game System(e.g. XBOX PS2 etc)       322      14.5438    Technology
+Technology        .       DVD                                          539      24.3451    Technology
+Technology        .       Digital Satellite                            129       5.8266    Technology
+Technology        .       Flat Screen TV                               105       4.7425    Technology
+Technology        .       Front Projection TV                           27       1.2195    Technology
+Technology        .       HDTV                                          70       3.1617    Technology
+Technology        .       Laserdisk                                     24       1.0840    Technology
+Technology        .       PVR(Tivo UltimateTV ReplayTV)                 76       3.4327    Technology
+Technology        .       Rear Projection TV                            66       2.9810    Technology
+Technology        .       Surround Sound                               282      12.7371    Technology
+Technology        .       VHS                                          533      24.0741    Technology
+Technology        .       Video-capable Automobile                      19       0.8582    Technology
+
+
+数据=VALIDATE
+
+   变量       数值型值    格式化值                                  频数计数     百分比       标签
+
+Technology        .       Analog Satellite                               4       0.7042    Technology
+Technology        .       Betamax                                        3       0.5282    Technology
+Technology        .       Console Game System(e.g. XBOX PS2 etc)        82      14.4366    Technology
+Technology        .       DVD                                          136      23.9437    Technology
+Technology        .       Digital Satellite                             33       5.8099    Technology
+Technology        .       Flat Screen TV                                27       4.7535    Technology
+Technology        .       Front Projection TV                            8       1.4085    Technology
+Technology        .       HDTV                                          19       3.3451    Technology
+Technology        .       Laserdisk                                      7       1.2324    Technology
+Technology        .       PVR(Tivo UltimateTV ReplayTV)                 20       3.5211    Technology
+Technology        .       Rear Projection TV                            17       2.9930    Technology
+Technology        .       Surround Sound                                71      12.5000    Technology
+Technology        .       VHS                                          135      23.7676    Technology
+Technology        .       Video-capable Automobile                       6       1.0563    Technology

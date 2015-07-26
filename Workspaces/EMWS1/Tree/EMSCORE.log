@@ -1,0 +1,115 @@
+*------------------------------------------------------------*
+* 评分日志
+日期:       2013年05月18日
+时间:       15时25分00秒
+*------------------------------------------------------------*
+11749  filename emflow "E:\SASWorkSpace\MovieEM\Workspaces\EMWS1\Tree\EMFLOWSCORE.sas";
+11750  *------------------------------------------------------------*;
+11751  * Tree: Scoring DATA data;
+11752  *------------------------------------------------------------*;
+11753  data EMWS1.Tree_TRAIN
+11754  / view=EMWS1.Tree_TRAIN
+11755  ;
+11756  set EMWS1.Part_TRAIN
+11757  ;
+11758  %inc emflow;
+12001  run;
+
+NOTE: DATA STEP 视图已保存在文件 EMWS1.TREE_TRAIN 中。
+NOTE: 存储的 DATA STEP 视图无法在不同的操作系统下运行。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.01 秒
+      CPU 时间          0.00 秒
+      
+
+12002  quit;
+12003  filename emflow;
+NOTE: 已取消文件引用名 EMFLOW 的分配。
+
+12004  filename emflow "E:\SASWorkSpace\MovieEM\Workspaces\EMWS1\Tree\EMFLOWSCORE.sas";
+12005  *------------------------------------------------------------*;
+12006  * Tree: Scoring VALIDATE data;
+12007  *------------------------------------------------------------*;
+12008  data EMWS1.Tree_VALIDATE
+12009  / view=EMWS1.Tree_VALIDATE
+12010  ;
+12011  set EMWS1.Part_VALIDATE
+12012  ;
+12013  %inc emflow;
+12256  run;
+
+NOTE: DATA STEP 视图已保存在文件 EMWS1.TREE_VALIDATE 中。
+NOTE: 存储的 DATA STEP 视图无法在不同的操作系统下运行。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.02 秒
+      CPU 时间          0.01 秒
+      
+
+12257  quit;
+12258  filename emflow;
+NOTE: 已取消文件引用名 EMFLOW 的分配。
+
+12259  *------------------------------------------------------------*;
+12260  * Tree: Computing metadata for TRAIN data;
+12261  *------------------------------------------------------------*;
+
+NOTE: “视图 EMWS1.TREE_TRAIN.VIEW”所用时间（总处理时间）:
+      实际时间          0.03 秒
+      CPU 时间          0.04 秒
+      
+12703  data WORK.MODELTEMP_INFO;
+12704  set EMWS1.Tree_EMINFO;
+12705  where DATA='Tree' and KEY ^in('DECDATA', 'DECMETA', 'IMPORTANCE', 'MODEL');
+12706  run;
+
+NOTE: 从数据集 EMWS1.TREE_EMINFO. 读取了 0 个观测
+      WHERE (DATA='Tree') and KEY not in ('DECDATA', 'DECMETA', 'IMPORTANCE', 'MODEL');
+NOTE: 数据集 WORK.MODELTEMP_INFO 有 0 个观测和 3 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+12707  data EMWS1.Tree_EMINFO;
+12708  length TARGET KEY $32 DATA $43;
+12709  input TARGET KEY DATA $;
+12710  cards;
+
+NOTE: 数据集 EMWS1.TREE_EMINFO 有 3 个观测和 3 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.03 秒
+      CPU 时间          0.00 秒
+      
+
+12714  run;
+12715  data EMWS1.Tree_EMINFO;
+12716  set EMWS1.Tree_EMINFO WORK.MODELTEMP_INFO;
+12717  run;
+
+NOTE: 从数据集 EMWS1.TREE_EMINFO. 读取了 3 个观测
+NOTE: 从数据集 WORK.MODELTEMP_INFO. 读取了 0 个观测
+NOTE: 数据集 EMWS1.TREE_EMINFO 有 3 个观测和 3 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+12718  proc sort data = EMWS1.Tree_EMINFO NOTHREADS;
+12719  by TARGET KEY;
+12720  run;
+
+NOTE: 从数据集 EMWS1.TREE_EMINFO. 读取了 3 个观测
+NOTE: 数据集 EMWS1.TREE_EMINFO 有 3 个观测和 3 个变量。
+NOTE: “PROCEDURE SORT”所用时间（总处理时间）:
+      实际时间          0.01 秒
+      CPU 时间          0.01 秒
+      
+
+NOTE: “视图 EMWS1.TREE_TRAIN.VIEW”所用时间（总处理时间）:
+      实际时间          0.03 秒
+      CPU 时间          0.01 秒
+      
+NOTE: “视图 EMWS1.TREE_VALIDATE.VIEW”所用时间（总处理时间）:
+      实际时间          0.04 秒
+      CPU 时间          0.01 秒
+      

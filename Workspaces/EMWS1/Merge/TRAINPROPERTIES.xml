@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?><_ROOT_  MergeType="ONETOONE" OverwriteVariables="N" OverwritePredicted="N" OverwriteResidual="N"
+ OverwriteClassification="N" OverwriteAssess="N" OverwriteSegment="N" ForceRun="N"
+ RunAction="Train" Component="Merge" RawCreateTime="1683131099.7" CreateTime="02MAY2013:16:25:00"
+ RunId="57f73a1e-1c46-4089-b81a-92425d0d1ef3" RawLastTimeRun="1684509842.9" RawRunTime="9.0020000935"
+ LastTimeRun="18MAY2013:15:24:03" RunTime="0 Hr. 0 Min. 9.00 Sec.">
+<VARIABLEPROPERTIES/>
+<FILEPROPERTIES ><![CDATA[
+BYORDER
+]]>
+</FILEPROPERTIES></_ROOT_>

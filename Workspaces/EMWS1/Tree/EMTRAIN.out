@@ -1,0 +1,69 @@
+ 
+                                                                                                                                                                                                                                                                
+ 
+ 
+变量汇总
+
+ 角色     测度水平    频数计数
+
+INPUT     INTERVAL        7   
+INPUT     NOMINAL        17   
+TARGET    NOMINAL         1   
+ 
+                                                                                                                                                                                                                                                                
+ 
+ 
+模型事件
+
+   目标                 事件              测度水平    水平数       顺序          标签
+
+Technology    VIDEO-CAPABLE AUTOMOBILE    NOMINAL       14      Descending    Technology
+ 
+                                                                                                                                                                                                                                                                
+ 
+ 
+预测变量和决策变量
+
+类型         变量                                标签
+
+TARGET       Technology                          Technology                              
+PREDICTED    P_TechnologyVideo_capable_Automo    Predicted: Technology=Video-capable Auto
+RESIDUAL     R_TechnologyVideo_capable_Automo    Residual: Technology=Video-capable Autom
+PREDICTED    P_TechnologyVHS                     Predicted: Technology=VHS               
+RESIDUAL     R_TechnologyVHS                     Residual: Technology=VHS                
+PREDICTED    P_TechnologySurround_Sound          Predicted: Technology=Surround Sound    
+RESIDUAL     R_TechnologySurround_Sound          Residual: Technology=Surround Sound     
+PREDICTED    P_TechnologyRear_Projection_TV      Predicted: Technology=Rear Projection TV
+RESIDUAL     R_TechnologyRear_Projection_TV      Residual: Technology=Rear Projection TV 
+PREDICTED    P_TechnologyPVR_Tivo_UltimateTV     Predicted: Technology=PVR(Tivo UltimateT
+RESIDUAL     R_TechnologyPVR_Tivo_UltimateTV     Residual: Technology=PVR(Tivo UltimateTV
+PREDICTED    P_TechnologyLaserdisk               Predicted: Technology=Laserdisk         
+RESIDUAL     R_TechnologyLaserdisk               Residual: Technology=Laserdisk          
+PREDICTED    P_TechnologyHDTV                    Predicted: Technology=HDTV              
+RESIDUAL     R_TechnologyHDTV                    Residual: Technology=HDTV               
+PREDICTED    P_TechnologyFront_Projection_TV     Predicted: Technology=Front Projection T
+RESIDUAL     R_TechnologyFront_Projection_TV     Residual: Technology=Front Projection TV
+PREDICTED    P_TechnologyFlat_Screen_TV          Predicted: Technology=Flat Screen TV    
+RESIDUAL     R_TechnologyFlat_Screen_TV          Residual: Technology=Flat Screen TV     
+PREDICTED    P_TechnologyDigital_Satellite       Predicted: Technology=Digital Satellite 
+RESIDUAL     R_TechnologyDigital_Satellite       Residual: Technology=Digital Satellite  
+PREDICTED    P_TechnologyDVD                     Predicted: Technology=DVD               
+RESIDUAL     R_TechnologyDVD                     Residual: Technology=DVD                
+PREDICTED    P_TechnologyConsole_Game_System_    Predicted: Technology=Console Game Syste
+RESIDUAL     R_TechnologyConsole_Game_System_    Residual: Technology=Console Game System
+PREDICTED    P_TechnologyBetamax                 Predicted: Technology=Betamax           
+RESIDUAL     R_TechnologyBetamax                 Residual: Technology=Betamax            
+PREDICTED    P_TechnologyAnalog_Satellite        Predicted: Technology=Analog Satellite  
+RESIDUAL     R_TechnologyAnalog_Satellite        Residual: Technology=Analog Satellite   
+FROM         F_Technology                        From: Technology                        
+INTO         I_Technology                        Into: Technology                        
+ 
+                                                                                                                                                                                                                                                                
+ 
+树叶报表
+
+                            VIDEO-CAPABLE                VIDEO-CAPABLE
+                            AUTOMOBILE 的                AUTOMOBILE 的
+节点    深度    训练观测      训练百分比     验证观测      验证百分比
+
+  1       0       2214           0.01           568           0.01    

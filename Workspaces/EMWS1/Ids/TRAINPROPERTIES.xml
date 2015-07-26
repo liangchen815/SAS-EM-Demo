@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?><_ROOT_  DataSource="actors" Scope="LOCAL" Role="RAW" Library="DATA" Table="ACTORS" NCols="2"
+ NObs="36523" NBytes="3261440" Segment="" DataSourceRole="RAW" OutputType="VIEW" ForceRun="N"
+ ComputeStatistics="N" DataSelection="DATASOURCE" NewTable="" MetaAdvisor="BASIC"
+ ApplyIntervalLevelLowerLimit="Y" IntervalLowerLimit="20" ApplyMaxPercentMissing="Y"
+ MaxPercentMissing="50" ApplyMaxClassLevels="Y" MaxClassLevels="20" IdentifyEmptyColumns="Y"
+ VariableValidation="STRICT" NewVariableRole="REJECT" DropMapVariables="Y" DsId="actors"
+ DsSampleName="" DsSampleSizeType="" DsSampleSize="" DsCreatedBy="Leon" DsCreateDate="1683130012.2"
+ DsModifiedBy="Leon" DsModifyDate="1683130012.2" DsScope="LOCAL" Sample="D" SampleSizeType="PERCENT"
+ SampleSizePercent="20" SampleSizeObs="10000" DBPassThrough="Y" RunAction="Train"
+ Component="DataSource" RawCreateTime="1683131025.4" CreateTime="02MAY2013:16:23:45"
+ Description="" Data="DATA.ACTORS" CMeta="WORK.M0OG632X" RunId="27873eda-e1ea-4031-af72-65e6d654259f"
+ RawLastTimeRun="1683131185.2" RawRunTime="7.6880002022" LastTimeRun="02MAY2013:16:26:25"
+ RunTime="0 Hr. 0 Min. 7.69 Sec.">
+<VARIABLEPROPERTIES/>
+<FILEPROPERTIES/>
+</_ROOT_>

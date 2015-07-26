@@ -1,0 +1,53 @@
+*------------------------------------------------------------*
+* 评分日志
+日期:       2013年05月18日
+时间:       15时24分00秒
+*------------------------------------------------------------*
+11221  *------------------------------------------------------------*;
+11222  * Ids8: Computing metadata for DATA data;
+11223  *------------------------------------------------------------*;
+
+NOTE: “视图 EMWS1.IDS8_DATA.VIEW”所用时间（总处理时间）:
+      实际时间          0.03 秒
+      CPU 时间          0.04 秒
+      
+11224  data EMWS1.Ids8_EMINFO;
+11225  length TARGET KEY $32 DATA $43;
+11226  TARGET="";
+11227  KEY="IDSTABLE";
+11228  DATA="DATA.TECHNOLOGY";
+11229  output;
+11230  TARGET="Technology";
+11231  KEY="DECDATA";
+11232  DATA="EMWS1.Ids8_Technology_DD";
+11233  output;
+11234  TARGET="Technology";
+11235  KEY="DECMETA";
+11236  DATA="EMWS1.Ids8_Technology_DM";
+11237  output;
+11238  run;
+
+NOTE: 数据集 EMWS1.IDS8_EMINFO 有 3 个观测和 3 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.01 秒
+      CPU 时间          0.00 秒
+      
+
+NOTE: “视图 EMWS1.IDS8_DATA.VIEW”所用时间（总处理时间）:
+      实际时间          0.03 秒
+      CPU 时间          0.04 秒
+      
+11239  data EMWS1.Ids8_CMeta_DATA;
+11240  set EMWS1.Ids8_VariableSet;
+11241  drop DROP;
+11242  where DROP='N';
+11243  run;
+
+NOTE: 从数据集 EMWS1.IDS8_VARIABLESET. 读取了 2 个观测
+      WHERE DROP='N';
+NOTE: 数据集 EMWS1.IDS8_CMETA_DATA 有 2 个观测和 20 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.01 秒
+      CPU 时间          0.01 秒
+      
+

@@ -1,0 +1,23 @@
+ 
+                                                                                                                                                                                                                                                                
+ 
+ 
+变量汇总
+
+ 角色     测度水平    频数计数
+
+INPUT     INTERVAL        7   
+INPUT     NOMINAL        17   
+TARGET    NOMINAL         1   
+TEXT      NOMINAL         3   
+ 
+                                                                                                                                                                                                                                                                
+ 
+ 
+分区汇总
+
+类型              数据集           观测数
+
+DATA        EMWS1.Filter_TRAIN      2782 
+TRAIN       EMWS1.Part_TRAIN        2214 
+VALIDATE    EMWS1.Part_VALIDATE      568 

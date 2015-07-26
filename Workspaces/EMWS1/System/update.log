@@ -1,0 +1,156 @@
+NOTE: “PROCEDURE PRINTTO”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+1 
+Traverser: 已调用 Traverser，MPCONNECT 命令是 sas。 
+Traverser: 开始过程流遍历 
+*------------------------------------------------------------* 
+* 
+* Ids8 : Beginning Update 
+* datetime : 18MAY2013:15:17:14 
+* 
+*------------------------------------------------------------* 
+*------------------------------------------------------------* 
+* 
+* Ids8 : End Update 
+* datetime : 18MAY2013:15:17:14 
+* 
+*------------------------------------------------------------* 
+Traverser: 正在等待节点 MERGE 
+traverser_readyNode_note 
+traverser_readyNode_note 
+traverser_readyNode_note 
+traverser_readyNode_note 
+traverser_readyNode_note 
+traverser_readyNode_note 
+traverser_readyNode_note 
+*------------------------------------------------------------* 
+* 
+* Ids7 : Beginning Update 
+* datetime : 18MAY2013:15:17:15 
+* 
+*------------------------------------------------------------* 
+*------------------------------------------------------------* 
+* 
+* Ids7 : End Update 
+* datetime : 18MAY2013:15:17:15 
+* 
+*------------------------------------------------------------* 
+Traverser: 正在等待节点 MERGE 
+traverser_readyNode_note 
+traverser_readyNode_note 
+traverser_readyNode_note 
+traverser_readyNode_note 
+traverser_readyNode_note 
+traverser_readyNode_note 
+*------------------------------------------------------------* 
+* 
+* Ids6 : Beginning Update 
+* datetime : 18MAY2013:15:17:15 
+* 
+*------------------------------------------------------------* 
+*------------------------------------------------------------* 
+* 
+* Ids6 : End Update 
+* datetime : 18MAY2013:15:17:15 
+* 
+*------------------------------------------------------------* 
+Traverser: 正在等待节点 MERGE 
+traverser_readyNode_note 
+traverser_readyNode_note 
+traverser_readyNode_note 
+traverser_readyNode_note 
+traverser_readyNode_note 
+*------------------------------------------------------------* 
+* 
+* Ids5 : Beginning Update 
+* datetime : 18MAY2013:15:17:16 
+* 
+*------------------------------------------------------------* 
+*------------------------------------------------------------* 
+* 
+* Ids5 : End Update 
+* datetime : 18MAY2013:15:17:16 
+* 
+*------------------------------------------------------------* 
+Traverser: 正在等待节点 MERGE 
+traverser_readyNode_note 
+traverser_readyNode_note 
+traverser_readyNode_note 
+traverser_readyNode_note 
+*------------------------------------------------------------* 
+* 
+* Ids4 : Beginning Update 
+* datetime : 18MAY2013:15:17:16 
+* 
+*------------------------------------------------------------* 
+*------------------------------------------------------------* 
+* 
+* Ids4 : End Update 
+* datetime : 18MAY2013:15:17:16 
+* 
+*------------------------------------------------------------* 
+Traverser: 正在等待节点 MERGE 
+traverser_readyNode_note 
+traverser_readyNode_note 
+traverser_readyNode_note 
+*------------------------------------------------------------* 
+* 
+* Ids3 : Beginning Update 
+* datetime : 18MAY2013:15:17:17 
+* 
+*------------------------------------------------------------* 
+*------------------------------------------------------------* 
+* 
+* Ids3 : End Update 
+* datetime : 18MAY2013:15:17:17 
+* 
+*------------------------------------------------------------* 
+Traverser: 正在等待节点 MERGE 
+traverser_readyNode_note 
+traverser_readyNode_note 
+*------------------------------------------------------------* 
+* 
+* Ids2 : Beginning Update 
+* datetime : 18MAY2013:15:17:17 
+* 
+*------------------------------------------------------------* 
+*------------------------------------------------------------* 
+* 
+* Ids2 : End Update 
+* datetime : 18MAY2013:15:17:17 
+* 
+*------------------------------------------------------------* 
+Traverser: 正在等待节点 MERGE 
+traverser_readyNode_note 
+*------------------------------------------------------------* 
+* 
+* Ids : Beginning Update 
+* datetime : 18MAY2013:15:17:18 
+* 
+*------------------------------------------------------------* 
+*------------------------------------------------------------* 
+* 
+* Ids : End Update 
+* datetime : 18MAY2013:15:17:18 
+* 
+*------------------------------------------------------------* 
+traverser_readyNode_note 
+*------------------------------------------------------------* 
+* 
+* Merge : Beginning Update 
+* datetime : 18MAY2013:15:17:18 
+* 
+*------------------------------------------------------------* 
+*------------------------------------------------------------* 
+* 
+* Merge : End Update 
+* datetime : 18MAY2013:15:17:19 
+* 
+*------------------------------------------------------------* 
+Traverser: 运行完毕 
+22669      proc printto;
+22670      run;
+

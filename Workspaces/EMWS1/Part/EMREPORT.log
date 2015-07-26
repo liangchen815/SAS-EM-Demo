@@ -1,0 +1,403 @@
+*------------------------------------------------------------*
+* 报表日志
+日期:       2013年05月18日
+时间:       15时24分46秒
+*------------------------------------------------------------*
+11271  *------------------------------------------------------------*;
+11272  * Part: 为分类目标变量计算统计量;
+11273  *------------------------------------------------------------*;
+11274  ods listing close;
+11275  ods output onewayfreqs=WORK.TEMPFREQ;
+11276  proc freq data = EMWS1.Filter_TRAIN order=formatted addnames;
+11277  table Technology / missing;
+11278  run;
+
+NOTE: 从数据集 DATA.TECHNOLOGY. 读取了 10953 个观测
+NOTE: 从数据集 DATA.MOVIES. 读取了 45323 个观测
+NOTE: 从数据集 DATA.HOBBIES. 读取了 20367 个观测
+NOTE: 从数据集 DATA.DIRECTORS. 读取了 17603 个观测
+NOTE: 从数据集 DATA.CUSTOMERS. 读取了 3187 个观测
+NOTE: 从数据集 DATA.CRITERIA. 读取了 8749 个观测
+NOTE: 从数据集 DATA.CHANNELS. 读取了 11123 个观测
+NOTE: 从数据集 DATA.ACTORS. 读取了 36523 个观测
+NOTE: 从数据集 EMWS1.IDS_DATA. 读取了 36523 个观测
+NOTE: 从数据集 EMWS1.IDS2_DATA. 读取了 11123 个观测
+NOTE: 从数据集 EMWS1.IDS3_DATA. 读取了 8749 个观测
+NOTE: 从数据集 EMWS1.IDS4_DATA. 读取了 3187 个观测
+NOTE: 从数据集 EMWS1.IDS5_DATA. 读取了 17603 个观测
+NOTE: 从数据集 EMWS1.IDS6_DATA. 读取了 20367 个观测
+NOTE: 从数据集 EMWS1.IDS7_DATA. 读取了 45323 个观测
+NOTE: 从数据集 EMWS1.IDS8_DATA. 读取了 10953 个观测
+NOTE: “视图 EMWS1.FILTER_TRAIN.VIEW”所用时间（总处理时间）:
+      实际时间          1.17 秒
+      CPU 时间          1.06 秒
+      
+NOTE: 从数据集 EMWS1.MERGE_TRAIN. 读取了 45323 个观测
+NOTE: 数据集 WORK.TEMPFREQ 有 14 个观测和 8 个变量。
+NOTE: 从数据集 EMWS1.FILTER_TRAIN. 读取了 2782 个观测
+NOTE: “PROCEDURE FREQ”所用时间（总处理时间）:
+      实际时间          1.19 秒
+      CPU 时间          1.06 秒
+      
+
+11279  quit;
+11280  ods listing;
+11281  data WORK.Part_BAR(keep=_VARIABLE_ TYPE COUNT PERCENT _X_ _XLABEL_);
+11282  label _VARIABLE_ = "%sysfunc(sasmsg(sashelp.dmine, rpt_variable_vlabel, NOQUOTE))" Type = "%sysfunc(sasmsg(sashelp.dmine, rpt_type_vlabel,         NOQUOTE))" _X_ = "%sysfunc(sasmsg(sashelp.dmine, rpt_numValue_vlabel, NOQUOTE))" _XLABEL_ =
+11283     "%sysfunc(sasmsg(sashelp.dmine, rpt_fmtValue_vlabel ,    NOQUOTE))" COUNT = "%sysfunc(sasmsg(sashelp.dmine, rpt_count_vlabel,        NOQUOTE))" PERCENT = "%sysfunc(sasmsg(sashelp.dmine, rpt_percent_vlabel,      NOQUOTE))";
+11284  dsid = open("WORK.TEMPFREQ");
+11285  varnum = varnum(dsid, 'VARIABLE');
+11286  freqnum = varnum(dsid, 'FREQUENCY');
+11287  pvarnum = varnum(dsid, 'PERCENT');
+11288  typenum = varnum(dsid, '_TYPE_');
+11289  length _VARIABLE_ $32 TYPE $1 _XLABEL_ $100;
+11290  do while(^fetch(dsid));
+11291  _VARIABLE_ = strip(getvarc(dsid, varnum));
+11292  count = getvarn(dsid, freqnum);
+11293  percent= getvarn(dsid, pvarnum);
+11294  vvarnum = varnum(dsid, _VARIABLE_);
+11295  type = vartype(dsid, vvarnum);
+11296  fvarnum = varnum(dsid, 'F_'!!substr(_VARIABLE_, 1, 30));
+11297  _XLABEL_ = left(getvarc(dsid, fvarnum));
+11298  _X_ = .;
+11299  if TYPE eq 'N' then _X_ = getvarn(dsid, vvarnum);
+11300  output;
+11301  end;
+11302  dsid = close(dsid);
+11303  run;
+
+NOTE: 数据集 WORK.PART_BAR 有 14 个观测和 6 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.04 秒
+      CPU 时间          0.01 秒
+      
+
+11304  proc sort data=WORK.Part_BAR NOTHREADS;
+11305  by _VARIABLE_;
+11306  run;
+
+NOTE: 从数据集 WORK.PART_BAR. 读取了 14 个观测
+NOTE: 数据集 WORK.PART_BAR 有 14 个观测和 6 个变量。
+NOTE: “PROCEDURE SORT”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.01 秒
+      
+
+11307  proc sort data=WORK.M1ZATZ24;
+11308  by Name;
+11309  run;
+
+NOTE: 从数据集 WORK.M1ZATZ24. 读取了 1 个观测
+NOTE: 数据集 WORK.M1ZATZ24 有 1 个观测和 21 个变量。
+NOTE: “PROCEDURE SORT”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.01 秒
+      
+
+11310  data WORK.Part_BAR;
+11311  merge WORK.Part_BAR(in=_a) WORK.M1ZATZ24(keep=Name Label Role rename=(Name=_Variable_ Label=_Label_));
+11312  by _Variable_;
+11313  label Role = "%sysfunc(sasmsg(sashelp.dmine, meta_role_vlabel ,  NOQUOTE))";
+11314  label Label = "%sysfunc(sasmsg(sashelp.dmine, meta_label_vlabel , NOQUOTE))";
+11315  if _a then output;
+11316  run;
+
+NOTE: 变量 Label 未初始化。
+WARNING: 输入数据集为 BY 变量 _VARIABLE_ 指定了多个长度。这可能导致意外的结果。
+NOTE: 从数据集 WORK.PART_BAR. 读取了 14 个观测
+NOTE: 从数据集 WORK.M1ZATZ24. 读取了 1 个观测
+NOTE: 数据集 WORK.PART_BAR 有 14 个观测和 8 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.01 秒
+      CPU 时间          0.00 秒
+      
+
+11317  data EMWS1.Part_CLASS;
+11318  length DATA $8;
+11319  set WORK.Part_BAR;
+11320  DATA = "DATA";
+11321  run;
+
+NOTE: 从数据集 WORK.PART_BAR. 读取了 14 个观测
+NOTE: 数据集 EMWS1.PART_CLASS 有 14 个观测和 9 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+11322  *------------------------------------------------------------*;
+11323  * Part: 为区间型目标变量计算统计量;
+11324  *------------------------------------------------------------*;
+11325  *------------------------------------------------------------*;
+11326  * Part: 为分类目标变量计算统计量;
+11327  *------------------------------------------------------------*;
+11328  ods listing close;
+11329  ods output onewayfreqs=WORK.TEMPFREQ;
+11330  proc freq data = EMWS1.Part_TRAIN order=formatted addnames;
+11331  table Technology / missing;
+11332  run;
+
+NOTE: 数据集 WORK.TEMPFREQ 有 14 个观测和 8 个变量。
+NOTE: 从数据集 EMWS1.PART_TRAIN. 读取了 2214 个观测
+NOTE: “PROCEDURE FREQ”所用时间（总处理时间）:
+      实际时间          0.01 秒
+      CPU 时间          0.01 秒
+      
+
+11333  quit;
+11334  ods listing;
+11335  data WORK.Part_BAR(keep=_VARIABLE_ TYPE COUNT PERCENT _X_ _XLABEL_);
+11336  label _VARIABLE_ = "%sysfunc(sasmsg(sashelp.dmine, rpt_variable_vlabel, NOQUOTE))" Type = "%sysfunc(sasmsg(sashelp.dmine, rpt_type_vlabel,         NOQUOTE))" _X_ = "%sysfunc(sasmsg(sashelp.dmine, rpt_numValue_vlabel, NOQUOTE))" _XLABEL_ =
+11337     "%sysfunc(sasmsg(sashelp.dmine, rpt_fmtValue_vlabel ,    NOQUOTE))" COUNT = "%sysfunc(sasmsg(sashelp.dmine, rpt_count_vlabel,        NOQUOTE))" PERCENT = "%sysfunc(sasmsg(sashelp.dmine, rpt_percent_vlabel,      NOQUOTE))";
+11338  dsid = open("WORK.TEMPFREQ");
+11339  varnum = varnum(dsid, 'VARIABLE');
+11340  freqnum = varnum(dsid, 'FREQUENCY');
+11341  pvarnum = varnum(dsid, 'PERCENT');
+11342  typenum = varnum(dsid, '_TYPE_');
+11343  length _VARIABLE_ $32 TYPE $1 _XLABEL_ $100;
+11344  do while(^fetch(dsid));
+11345  _VARIABLE_ = strip(getvarc(dsid, varnum));
+11346  count = getvarn(dsid, freqnum);
+11347  percent= getvarn(dsid, pvarnum);
+11348  vvarnum = varnum(dsid, _VARIABLE_);
+11349  type = vartype(dsid, vvarnum);
+11350  fvarnum = varnum(dsid, 'F_'!!substr(_VARIABLE_, 1, 30));
+11351  _XLABEL_ = left(getvarc(dsid, fvarnum));
+11352  _X_ = .;
+11353  if TYPE eq 'N' then _X_ = getvarn(dsid, vvarnum);
+11354  output;
+11355  end;
+11356  dsid = close(dsid);
+11357  run;
+
+NOTE: 数据集 WORK.PART_BAR 有 14 个观测和 6 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.02 秒
+      CPU 时间          0.03 秒
+      
+
+11358  proc sort data=WORK.Part_BAR NOTHREADS;
+11359  by _VARIABLE_;
+11360  run;
+
+NOTE: 从数据集 WORK.PART_BAR. 读取了 14 个观测
+NOTE: 数据集 WORK.PART_BAR 有 14 个观测和 6 个变量。
+NOTE: “PROCEDURE SORT”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+11361  proc sort data=WORK.M1ZATZ24;
+11362  by Name;
+11363  run;
+
+NOTE: 输入数据集已排序，故未进行排序。
+NOTE: “PROCEDURE SORT”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+11364  data WORK.Part_BAR;
+11365  merge WORK.Part_BAR(in=_a) WORK.M1ZATZ24(keep=Name Label Role rename=(Name=_Variable_ Label=_Label_));
+11366  by _Variable_;
+11367  label Role = "%sysfunc(sasmsg(sashelp.dmine, meta_role_vlabel ,  NOQUOTE))";
+11368  label Label = "%sysfunc(sasmsg(sashelp.dmine, meta_label_vlabel , NOQUOTE))";
+11369  if _a then output;
+11370  run;
+
+NOTE: 变量 Label 未初始化。
+WARNING: 输入数据集为 BY 变量 _VARIABLE_ 指定了多个长度。这可能导致意外的结果。
+NOTE: 从数据集 WORK.PART_BAR. 读取了 14 个观测
+NOTE: 从数据集 WORK.M1ZATZ24. 读取了 1 个观测
+NOTE: 数据集 WORK.PART_BAR 有 14 个观测和 8 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.01 秒
+      CPU 时间          0.01 秒
+      
+
+11371  data WORK.Part_BAR;
+11372  length DATA $8;
+11373  set WORK.Part_BAR;
+11374  DATA = "TRAIN";
+11375  run;
+
+NOTE: 从数据集 WORK.PART_BAR. 读取了 14 个观测
+NOTE: 数据集 WORK.PART_BAR 有 14 个观测和 9 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.01 秒
+      
+
+11376  data EMWS1.Part_CLASS;
+11377  set EMWS1.Part_CLASS WORK.Part_BAR;
+11378  run;
+
+NOTE: 从数据集 EMWS1.PART_CLASS. 读取了 14 个观测
+NOTE: 从数据集 WORK.PART_BAR. 读取了 14 个观测
+NOTE: 数据集 EMWS1.PART_CLASS 有 28 个观测和 9 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.01 秒
+      CPU 时间          0.00 秒
+      
+
+11379  *------------------------------------------------------------*;
+11380  * Part: 为区间型目标变量计算统计量;
+11381  *------------------------------------------------------------*;
+11382  *------------------------------------------------------------*;
+11383  * Part: 为分类目标变量计算统计量;
+11384  *------------------------------------------------------------*;
+11385  ods listing close;
+11386  ods output onewayfreqs=WORK.TEMPFREQ;
+11387  proc freq data = EMWS1.Part_VALIDATE order=formatted addnames;
+11388  table Technology / missing;
+11389  run;
+
+NOTE: 数据集 WORK.TEMPFREQ 有 14 个观测和 8 个变量。
+NOTE: 从数据集 EMWS1.PART_VALIDATE. 读取了 568 个观测
+NOTE: “PROCEDURE FREQ”所用时间（总处理时间）:
+      实际时间          0.02 秒
+      CPU 时间          0.03 秒
+      
+
+11390  quit;
+11391  ods listing;
+11392  data WORK.Part_BAR(keep=_VARIABLE_ TYPE COUNT PERCENT _X_ _XLABEL_);
+11393  label _VARIABLE_ = "%sysfunc(sasmsg(sashelp.dmine, rpt_variable_vlabel, NOQUOTE))" Type = "%sysfunc(sasmsg(sashelp.dmine, rpt_type_vlabel,         NOQUOTE))" _X_ = "%sysfunc(sasmsg(sashelp.dmine, rpt_numValue_vlabel, NOQUOTE))" _XLABEL_ =
+11394     "%sysfunc(sasmsg(sashelp.dmine, rpt_fmtValue_vlabel ,    NOQUOTE))" COUNT = "%sysfunc(sasmsg(sashelp.dmine, rpt_count_vlabel,        NOQUOTE))" PERCENT = "%sysfunc(sasmsg(sashelp.dmine, rpt_percent_vlabel,      NOQUOTE))";
+11395  dsid = open("WORK.TEMPFREQ");
+11396  varnum = varnum(dsid, 'VARIABLE');
+11397  freqnum = varnum(dsid, 'FREQUENCY');
+11398  pvarnum = varnum(dsid, 'PERCENT');
+11399  typenum = varnum(dsid, '_TYPE_');
+11400  length _VARIABLE_ $32 TYPE $1 _XLABEL_ $100;
+11401  do while(^fetch(dsid));
+11402  _VARIABLE_ = strip(getvarc(dsid, varnum));
+11403  count = getvarn(dsid, freqnum);
+11404  percent= getvarn(dsid, pvarnum);
+11405  vvarnum = varnum(dsid, _VARIABLE_);
+11406  type = vartype(dsid, vvarnum);
+11407  fvarnum = varnum(dsid, 'F_'!!substr(_VARIABLE_, 1, 30));
+11408  _XLABEL_ = left(getvarc(dsid, fvarnum));
+11409  _X_ = .;
+11410  if TYPE eq 'N' then _X_ = getvarn(dsid, vvarnum);
+11411  output;
+11412  end;
+11413  dsid = close(dsid);
+11414  run;
+
+NOTE: 数据集 WORK.PART_BAR 有 14 个观测和 6 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.02 秒
+      CPU 时间          0.03 秒
+      
+
+11415  proc sort data=WORK.Part_BAR NOTHREADS;
+11416  by _VARIABLE_;
+11417  run;
+
+NOTE: 从数据集 WORK.PART_BAR. 读取了 14 个观测
+NOTE: 数据集 WORK.PART_BAR 有 14 个观测和 6 个变量。
+NOTE: “PROCEDURE SORT”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.01 秒
+      
+
+11418  proc sort data=WORK.M1ZATZ24;
+11419  by Name;
+11420  run;
+
+NOTE: 输入数据集已排序，故未进行排序。
+NOTE: “PROCEDURE SORT”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+11421  data WORK.Part_BAR;
+11422  merge WORK.Part_BAR(in=_a) WORK.M1ZATZ24(keep=Name Label Role rename=(Name=_Variable_ Label=_Label_));
+11423  by _Variable_;
+11424  label Role = "%sysfunc(sasmsg(sashelp.dmine, meta_role_vlabel ,  NOQUOTE))";
+11425  label Label = "%sysfunc(sasmsg(sashelp.dmine, meta_label_vlabel , NOQUOTE))";
+11426  if _a then output;
+11427  run;
+
+NOTE: 变量 Label 未初始化。
+WARNING: 输入数据集为 BY 变量 _VARIABLE_ 指定了多个长度。这可能导致意外的结果。
+NOTE: 从数据集 WORK.PART_BAR. 读取了 14 个观测
+NOTE: 从数据集 WORK.M1ZATZ24. 读取了 1 个观测
+NOTE: 数据集 WORK.PART_BAR 有 14 个观测和 8 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.01 秒
+      CPU 时间          0.01 秒
+      
+
+11428  data WORK.Part_BAR;
+11429  length DATA $8;
+11430  set WORK.Part_BAR;
+11431  DATA = "VALIDATE";
+11432  run;
+
+NOTE: 从数据集 WORK.PART_BAR. 读取了 14 个观测
+NOTE: 数据集 WORK.PART_BAR 有 14 个观测和 9 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+11433  data EMWS1.Part_CLASS;
+11434  set EMWS1.Part_CLASS WORK.Part_BAR;
+11435  run;
+
+NOTE: 从数据集 EMWS1.PART_CLASS. 读取了 28 个观测
+NOTE: 从数据集 WORK.PART_BAR. 读取了 14 个观测
+NOTE: 数据集 EMWS1.PART_CLASS 有 42 个观测和 9 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.01 秒
+      
+
+11436  *------------------------------------------------------------*;
+11437  * Part: 为区间型目标变量计算统计量;
+11438  *------------------------------------------------------------*;
+11439  data EMWS1.Part_CLASS(rename=(_VARIABLE_=VARIABLE _X_=VALUE _XLABEL_=FORMATTEDVALUE));
+11440  label DATA = "%sysfunc(sasmsg(sashelp.dmine, rpt_data_vlabel ,   NOQUOTE))";
+11441  set EMWS1.Part_CLASS;
+11442  drop type role;
+11443  run;
+
+NOTE: 从数据集 EMWS1.PART_CLASS. 读取了 42 个观测
+NOTE: 数据集 EMWS1.PART_CLASS 有 42 个观测和 7 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.01 秒
+      CPU 时间          0.01 秒
+      
+
+11444  proc sort data=EMWS1.Part_CLASS NOTHREADS;
+11445  by DATA;
+11446  run;
+
+NOTE: 从数据集 EMWS1.PART_CLASS. 读取了 42 个观测
+NOTE: 数据集 EMWS1.PART_CLASS 有 42 个观测和 7 个变量。
+NOTE: “PROCEDURE SORT”所用时间（总处理时间）:
+      实际时间          0.01 秒
+      CPU 时间          0.00 秒
+      
+
+11447  %let _cn = %sysfunc(getoption(CENTER));
+11448  %let _nb = %sysfunc(getoption(NUMBER));
+11449  options nonumber nocenter;
+11450  proc print data=EMWS1.Part_CLASS noobs label;
+11451  by DATA;
+11452  title9 ' ';
+11453  title10 "%sysfunc(sasmsg(sashelp.dmine, rpt_classTargetStats_title, NOQUOTE))";
+11454  run;
+
+NOTE: 从数据集 EMWS1.PART_CLASS. 读取了 42 个观测
+NOTE: PROCEDURE PRINT 已打印第 3 页。
+NOTE: “PROCEDURE PRINT”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.01 秒
+      
+
+11455  title10;
+11456  options &_cn &_nb;
+

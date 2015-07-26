@@ -1,0 +1,1626 @@
+*------------------------------------------------------------*
+* 训练日志
+日期:       2013年05月18日
+时间:       15时24分52秒
+*------------------------------------------------------------*
+10564  proc freq data=EMWS1.Tree_VariableSet noprint;
+10565  table ROLE*LEVEL/out=WORK.TreeMETA;
+10566  run;
+
+NOTE: 从数据集 EMWS1.TREE_VARIABLESET. 读取了 25 个观测
+NOTE: 数据集 WORK.TREEMETA 有 3 个观测和 4 个变量。
+NOTE: “PROCEDURE FREQ”所用时间（总处理时间）:
+      实际时间          0.02 秒
+      CPU 时间          0.01 秒
+      
+
+10567  proc print data=WORK.TreeMETA label noobs;
+10568  var ROLE LEVEL COUNT;
+10569  label ROLE = "%sysfunc(sasmsg(sashelp.dmine, meta_role_vlabel, NOQUOTE))" LEVEL = "%sysfunc(sasmsg(sashelp.dmine, meta_level_vlabel, NOQUOTE))" COUNT = "%sysfunc(sasmsg(sashelp.dmine, rpt_count_vlabel, NOQUOTE))";
+10570  title9 ' ';
+10571  title10 "%sysfunc(sasmsg(sashelp.dmine, rpt_varSummary_title  , NOQUOTE))";
+10572  run;
+
+NOTE: 从数据集 WORK.TREEMETA. 读取了 3 个观测
+NOTE: PROCEDURE PRINT 已打印第 1 页。
+NOTE: “PROCEDURE PRINT”所用时间（总处理时间）:
+      实际时间          0.01 秒
+      CPU 时间          0.01 秒
+      
+
+10573  title10;
+
+10574  %let EMNORLEN = %DMNORLEN;
+EMWS1.Part_TRAIN EMWS1.Part_TRAIN 
+EMWS1.Part_TRAIN EMWS1.Part_TRAIN EMWS1 Part_TRAIN 
+EMWS1.Part_TRAIN EMWS1.Part_TRAIN 
+EMWS1.Part_TRAIN EMWS1.Part_TRAIN EMWS1 Part_TRAIN 
+PERFORMANCE  DETAILS
+WORK.EM_DMDB WORK.EM_DMDB 
+WORK.EM_DMDB WORK.EM_DMDB WORK EM_DMDB 
+10695  data WORK.Tree_EVENT(KEEP=VARIABLE LABEL LEVEL EVENT NUMLEVELS ORDER);
+10696  length ORDER $20;
+10697  label VARIABLE = "%sysfunc(sasmsg(sashelp.dmine, rpt_target_vlabel,  NOQUOTE))" EVENT = "%sysfunc(sasmsg(sashelp.dmine, assmt_event_vlabel, NOQUOTE))" NUMLEVELS = "%sysfunc(sasmsg(sashelp.dmine, rpt_numcat_vlabel, NOQUOTE))" LEVEL =
+10698     "%sysfunc(sasmsg(sashelp.dmine, meta_level_vlabel, NOQUOTE))" ORDER = "%sysfunc(sasmsg(sashelp.dmine, meta_order_vlabel, NOQUOTE))" LABEL = "%sysfunc(sasmsg(sashelp.dmine, meta_label_vlabel, NOQUOTE))";
+10699  set EMWS1.TREE_TECHNOLOGY_DM( where=(_TYPE_="TARGET"));
+10700  NumLevels=14;
+10701  select(upcase(ORDER));
+10702  when('DESC') ORDER = 'Descending';
+10703  when('ASC') ORDER = 'Ascending';
+10704  when('FMTDESC') ORDER = 'Formatted Descending';
+10705  when('FMTASC') ORDER = 'Formatted Ascending';
+10706  otherwise ORDER = 'Descending';
+10707  end;
+10708  output;
+10709  run;
+
+NOTE: 从数据集 EMWS1.TREE_TECHNOLOGY_DM. 读取了 1 个观测
+      WHERE _TYPE_='TARGET';
+NOTE: 数据集 WORK.TREE_EVENT 有 1 个观测和 6 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.04 秒
+      CPU 时间          0.03 秒
+      
+
+10710  title9 ' ';
+10711  proc print data=WORK.Tree_EVENT noobs label;
+10712  var VARIABLE EVENT LEVEL NUMLEVELS ORDER LABEL;
+10713  title9 ' ';
+10714  title10 "%sysfunc(sasmsg(sashelp.dmine, rpt_modelEvent_title  , NOQUOTE))";
+10715  run;
+
+NOTE: 从数据集 WORK.TREE_EVENT. 读取了 1 个观测
+NOTE: PROCEDURE PRINT 已打印第 2 页。
+NOTE: “PROCEDURE PRINT”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.01 秒
+      
+
+10716  title10;
+
+"没有为目标 Technology 定义决策。" 
+10717  proc print data = EMWS1.Tree_Technology_DM noobs label;
+10718  var _type_ variable label;
+10719  where _type_ ^in('MATRIX', 'DECISION', 'TRAINPRIOR', 'DATAPRIOR', 'DECPRIOR');
+10720  label _TYPE_ = "%sysfunc(sasmsg(sashelp.dmine, rpt_type_vlabel,     NOQUOTE))" VARIABLE = "%sysfunc(sasmsg(sashelp.dmine, rpt_variable_vlabel, NOQUOTE))" LABEL = "%sysfunc(sasmsg(sashelp.dmine, meta_label_vlabel, NOQUOTE))";
+10721  title9 ' ';
+10722  title10 "%sysfunc(sasmsg(sashelp.dmine, rpt_predDecVars_title  , NOQUOTE))";
+10723  run;
+
+NOTE: 从数据集 EMWS1.TREE_TECHNOLOGY_DM. 读取了 31 个观测
+      WHERE _type_ not in ('DATAPRIOR', 'DECISION', 'DECPRIOR', 'MATRIX', 'TRAINPRIOR');
+NOTE: PROCEDURE PRINT 已打印第 3 页。
+NOTE: “PROCEDURE PRINT”所用时间（总处理时间）:
+      实际时间          0.01 秒
+      CPU 时间          0.00 秒
+      
+
+10724  title10;
+
+10733  data work.Tree_tarmetads;
+10734  set EMWS1.Part_CMeta_TRAIN(where=(ROLE='TARGET'));
+10735  run;
+
+NOTE: 从数据集 EMWS1.PART_CMETA_TRAIN. 读取了 1 个观测
+      WHERE ROLE='TARGET';
+NOTE: 数据集 WORK.TREE_TARMETADS 有 1 个观测和 20 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+10736  data _null_;
+10737  set WORK.M2L7C3UD;
+10738  where role='TARGET' AND use='Y';
+10739  call symput('targetUsed', NAME);
+10740  run;
+
+NOTE: 从数据集 WORK.M2L7C3UD. 读取了 1 个观测
+      WHERE (role='TARGET') and (use='Y');
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+10741  data WORK.M2L7C3UD;
+10742  set WORK.M2L7C3UD end=eof;
+10743  output;
+10744  if eof then do;
+10745  NAME="";
+10746  ROLE="COST";
+10747  LEVEL="INTERVAL";
+10748  TYPE="N";
+10749  output;
+10750  end;
+10751  run;
+
+NOTE: 从数据集 WORK.M2L7C3UD. 读取了 25 个观测
+NOTE: 数据集 WORK.M2L7C3UD 有 26 个观测和 21 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+NOTE: 从数据集 EMWS1.TREE_TECHNOLOGY_DD. 读取了 14 个观测
+NOTE: 数据集 WORK.TECHNOLOGY 有 14 个观测和 19 个变量。
+10752  *------------------------------------------------------------*;
+10753  * Tree: Create decision matrix;
+10754  *------------------------------------------------------------*;
+10755  data WORK.Technology(label="Technology");
+10756    length   Technology                       $  32
+10757             COUNT                                8
+10758             DATAPRIOR                            8
+10759             TRAINPRIOR                           8
+10760             DECPRIOR                             8
+10761             DECISION1                            8
+10762             DECISION2                            8
+10763             DECISION3                            8
+10764             DECISION4                            8
+10765             DECISION5                            8
+10766             DECISION6                            8
+10767             DECISION7                            8
+10768             DECISION8                            8
+10769             DECISION9                            8
+10770             DECISION10                           8
+10771             DECISION11                           8
+10772             DECISION12                           8
+10773             DECISION13                           8
+10774             DECISION14                           8
+10775             ;
+10776  
+10777    label    COUNT="Level Counts"
+10778             DATAPRIOR="Data Proportions"
+10779             TRAINPRIOR="Training Proportions"
+10780             DECPRIOR="Decision Priors"
+10781             DECISION1="VIDEO-CAPABLE AUTOMOBILE"
+10782             DECISION2="VHS"
+10783             DECISION3="SURROUND SOUND"
+10784             DECISION4="REAR PROJECTION TV"
+10785             DECISION5="PVR(TIVO ULTIMATETV REPLAYTV)"
+10786             DECISION6="LASERDISK"
+10787             DECISION7="HDTV"
+10788             DECISION8="FRONT PROJECTION TV"
+10789             DECISION9="FLAT SCREEN TV"
+10790             DECISION10="DIGITAL SATELLITE"
+10791             DECISION11="DVD"
+10792             DECISION12="CONSOLE GAME SYSTEM(E.G. XBOX PS"
+10793             DECISION13="BETAMAX"
+10794             DECISION14="ANALOG SATELLITE"
+10795             ;
+10796  Technology="VIDEO-CAPABLE AUTOMOBILE"; COUNT=19; DATAPRIOR=0.00858175248419; TRAINPRIOR=0.00858175248419; DECPRIOR=.; DECISION1=1; DECISION2=0; DECISION3=0; DECISION4=0; DECISION5=0; DECISION6=0;
+10797  DECISION7=0; DECISION8=0; DECISION9=0; DECISION10=0; DECISION11=0; DECISION12=0; DECISION13=0; DECISION14=0;
+10798  output;
+10799  Technology="VHS"; COUNT=533; DATAPRIOR=0.24074074074074; TRAINPRIOR=0.24074074074074; DECPRIOR=.; DECISION1=0; DECISION2=1; DECISION3=0; DECISION4=0; DECISION5=0; DECISION6=0; DECISION7=0;
+10800  DECISION8=0; DECISION9=0; DECISION10=0; DECISION11=0; DECISION12=0; DECISION13=0; DECISION14=0;
+10801  output;
+10802  Technology="SURROUND SOUND"; COUNT=282; DATAPRIOR=0.12737127371273; TRAINPRIOR=0.12737127371273; DECPRIOR=.; DECISION1=0; DECISION2=0; DECISION3=1; DECISION4=0; DECISION5=0; DECISION6=0; DECISION7=0;
+10803  DECISION8=0; DECISION9=0; DECISION10=0; DECISION11=0; DECISION12=0; DECISION13=0; DECISION14=0;
+10804  output;
+10805  Technology="REAR PROJECTION TV"; COUNT=66; DATAPRIOR=0.02981029810298; TRAINPRIOR=0.02981029810298; DECPRIOR=.; DECISION1=0; DECISION2=0; DECISION3=0; DECISION4=1; DECISION5=0; DECISION6=0;
+10806  DECISION7=0; DECISION8=0; DECISION9=0; DECISION10=0; DECISION11=0; DECISION12=0; DECISION13=0; DECISION14=0;
+10807  output;
+10808  Technology="PVR(TIVO ULTIMATETV REPLAYTV)"; COUNT=76; DATAPRIOR=0.03432700993676; TRAINPRIOR=0.03432700993676; DECPRIOR=.; DECISION1=0; DECISION2=0; DECISION3=0; DECISION4=0; DECISION5=1;
+10809  DECISION6=0; DECISION7=0; DECISION8=0; DECISION9=0; DECISION10=0; DECISION11=0; DECISION12=0; DECISION13=0; DECISION14=0;
+10810  output;
+10811  Technology="LASERDISK"; COUNT=24; DATAPRIOR=0.01084010840108; TRAINPRIOR=0.01084010840108; DECPRIOR=.; DECISION1=0; DECISION2=0; DECISION3=0; DECISION4=0; DECISION5=0; DECISION6=1; DECISION7=0;
+10812  DECISION8=0; DECISION9=0; DECISION10=0; DECISION11=0; DECISION12=0; DECISION13=0; DECISION14=0;
+10813  output;
+10814  Technology="HDTV"; COUNT=70; DATAPRIOR=0.03161698283649; TRAINPRIOR=0.03161698283649; DECPRIOR=.; DECISION1=0; DECISION2=0; DECISION3=0; DECISION4=0; DECISION5=0; DECISION6=0; DECISION7=1;
+10815  DECISION8=0; DECISION9=0; DECISION10=0; DECISION11=0; DECISION12=0; DECISION13=0; DECISION14=0;
+10816  output;
+10817  Technology="FRONT PROJECTION TV"; COUNT=27; DATAPRIOR=0.01219512195121; TRAINPRIOR=0.01219512195121; DECPRIOR=.; DECISION1=0; DECISION2=0; DECISION3=0; DECISION4=0; DECISION5=0; DECISION6=0;
+10818  DECISION7=0; DECISION8=1; DECISION9=0; DECISION10=0; DECISION11=0; DECISION12=0; DECISION13=0; DECISION14=0;
+10819  output;
+10820  Technology="FLAT SCREEN TV"; COUNT=105; DATAPRIOR=0.04742547425474; TRAINPRIOR=0.04742547425474; DECPRIOR=.; DECISION1=0; DECISION2=0; DECISION3=0; DECISION4=0; DECISION5=0; DECISION6=0; DECISION7=0;
+10821  DECISION8=0; DECISION9=1; DECISION10=0; DECISION11=0; DECISION12=0; DECISION13=0; DECISION14=0;
+10822  output;
+10823  Technology="DIGITAL SATELLITE"; COUNT=129; DATAPRIOR=0.05826558265582; TRAINPRIOR=0.05826558265582; DECPRIOR=.; DECISION1=0; DECISION2=0; DECISION3=0; DECISION4=0; DECISION5=0; DECISION6=0;
+10824  DECISION7=0; DECISION8=0; DECISION9=0; DECISION10=1; DECISION11=0; DECISION12=0; DECISION13=0; DECISION14=0;
+10825  output;
+10826  Technology="DVD"; COUNT=539; DATAPRIOR=0.24345076784101; TRAINPRIOR=0.24345076784101; DECPRIOR=.; DECISION1=0; DECISION2=0; DECISION3=0; DECISION4=0; DECISION5=0; DECISION6=0; DECISION7=0;
+10827  DECISION8=0; DECISION9=0; DECISION10=0; DECISION11=1; DECISION12=0; DECISION13=0; DECISION14=0;
+10828  output;
+10829  Technology="CONSOLE GAME SYSTEM(E.G. XBOX PS"; COUNT=322; DATAPRIOR=0.14543812104787; TRAINPRIOR=0.14543812104787; DECPRIOR=.; DECISION1=0; DECISION2=0; DECISION3=0; DECISION4=0; DECISION5=0;
+10830  DECISION6=0; DECISION7=0; DECISION8=0; DECISION9=0; DECISION10=0; DECISION11=0; DECISION12=1; DECISION13=0; DECISION14=0;
+10831  output;
+10832  Technology="BETAMAX"; COUNT=11; DATAPRIOR=0.00496838301716; TRAINPRIOR=0.00496838301716; DECPRIOR=.; DECISION1=0; DECISION2=0; DECISION3=0; DECISION4=0; DECISION5=0; DECISION6=0; DECISION7=0;
+10833  DECISION8=0; DECISION9=0; DECISION10=0; DECISION11=0; DECISION12=0; DECISION13=1; DECISION14=0;
+10834  output;
+10835  Technology="ANALOG SATELLITE"; COUNT=11; DATAPRIOR=0.00496838301716; TRAINPRIOR=0.00496838301716; DECPRIOR=.; DECISION1=0; DECISION2=0; DECISION3=0; DECISION4=0; DECISION5=0; DECISION6=0;
+10836  DECISION7=0; DECISION8=0; DECISION9=0; DECISION10=0; DECISION11=0; DECISION12=0; DECISION13=0; DECISION14=1;
+10837  output;
+10838  ;
+10839  run;
+
+NOTE: 数据集 WORK.TECHNOLOGY 有 14 个观测和 19 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.01 秒
+      CPU 时间          0.01 秒
+      
+
+10840  proc datasets lib=work nolist;
+10841  modify Technology(type=PROFIT label=Technology);
+10842  label DECISION1= 'VIDEO-CAPABLE AUTOMOBILE';
+10843  label DECISION2= 'VHS';
+10844  label DECISION3= 'SURROUND SOUND';
+10845  label DECISION4= 'REAR PROJECTION TV';
+10846  label DECISION5= 'PVR(TIVO ULTIMATETV REPLAYTV)';
+10847  label DECISION6= 'LASERDISK';
+10848  label DECISION7= 'HDTV';
+10849  label DECISION8= 'FRONT PROJECTION TV';
+10850  label DECISION9= 'FLAT SCREEN TV';
+10851  label DECISION10= 'DIGITAL SATELLITE';
+10852  label DECISION11= 'DVD';
+10853  label DECISION12= 'CONSOLE GAME SYSTEM(E.G. XBOX PS';
+10854  label DECISION13= 'BETAMAX';
+10855  label DECISION14= 'ANALOG SATELLITE';
+10856  run;
+
+NOTE: WORK.TECHNOLOGY.DATA 修改成功。
+10857  quit;
+
+NOTE: “PROCEDURE DATASETS”所用时间（总处理时间）:
+      实际时间          0.01 秒
+      CPU 时间          0.01 秒
+      
+
+10858  *------------------------------------------------------------* ;
+10859  * Tree: Tree Variables Macro ;
+10860  *------------------------------------------------------------* ;
+10861  %macro EM_TREEVARS;
+10862      Actor Age CustomerID Director Education_Level Gender Home_Ownership
+10863     Internet_Connection Marital_Status Movie Movie_Selector Num_Bathrooms
+10864     Num_Bedrooms Num_Cars Num_Children Num_TVs PPV_Freq Prerec_Buying_Freq
+10865     Prerec_Format Prerec_Renting_Freq Prerec_Viewing_Freq TV_Movie_Freq TV_Signal
+10866     Theater_Freq
+10867  %mend EM_TREEVARS;
+10868  *------------------------------------------------------------* ;
+10869  * Tree: Tree Targets Macro ;
+10870  *------------------------------------------------------------* ;
+10871  %macro EM_TREETARGETS;
+10872      Technology
+10873  %mend EM_TREETARGETS;
+10874  data EMWS1.EM_Tree / view=EMWS1.EM_Tree;
+10875  set EMWS1.Part_TRAIN(keep=%EM_TREEVARS %EM_TREETARGETS);
+10876  run;
+
+NOTE: DATA STEP 视图已保存在文件 EMWS1.EM_TREE 中。
+NOTE: 存储的 DATA STEP 视图无法在不同的操作系统下运行。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+10877  *------------------------------------------------------------* ;
+10878  * Tree: 区间型输入 Macro ;
+10879  *------------------------------------------------------------* ;
+10880  %macro INTINPUTS;
+10881      Age CustomerID Num_Bathrooms Num_Bedrooms Num_Cars Num_Children Num_TVs
+10882  %mend INTINPUTS;
+10883  *------------------------------------------------------------* ;
+10884  * Tree: 二值型和列名型输入 Macro ;
+10885  *------------------------------------------------------------* ;
+10886  %macro NOMINPUTS;
+10887      Actor Director Education_Level Gender Home_Ownership Internet_Connection
+10888     Marital_Status Movie Movie_Selector PPV_Freq Prerec_Buying_Freq Prerec_Format
+10889     Prerec_Renting_Freq Prerec_Viewing_Freq TV_Movie_Freq TV_Signal Theater_Freq
+10890  %mend NOMINPUTS;
+10891  *------------------------------------------------------------* ;
+10892  * Tree: 序数输入 Macro ;
+10893  *------------------------------------------------------------* ;
+10894  %macro ORDINPUTS;
+10895  
+10896  %mend ORDINPUTS;
+10897  *------------------------------------------------------------*;
+10898  * Tree: 运行 ARBOR 过程;
+10899  *------------------------------------------------------------*;
+
+  
+必须为 AssessMeasure=PROFIT/LOSS 定义利润/损失矩阵 
+“评估测度”的值已重置为 DECISION。 
+  
+10900  proc arbor data=EMWS1.EM_Tree
+10901  Leafsize=5
+10902  Mincatsize = 5
+10903  Maxbranch=2
+10904  Maxdepth=6
+10905  alpha = 0.2
+10906  Padjust=
+10907  CHAIDBEFORE
+10908  DEPTH
+10909  MAXRULES=5
+10910  MAXSURRS=0
+10911  Missing=USEINSEARCH
+10912  Exhaustive=5000
+10913  event='VIDEO-CAPABLE AUTOMOBILE'
+10914  ;
+10915  ;
+10916  input %INTINPUTS
+10917  / level = interval;
+10918  input %NOMINPUTS
+10919  / level=nominal;
+10920  target Technology / level=NOMINAL
+10921  Criterion=PROBCHISQ
+10922  ;
+10923  ;
+10924  Performance DISK
+10925  NodeSize=20000
+10926  ;
+10927  Assess
+10928  Validata=EMWS1.Part_VALIDATE
+10929  measure=MISC
+10930  ;
+NOTE: 1607186 kilobytes of physical memory.
+NOTE: Will use 2214 out of 2214 training cases.
+NOTE: Using memory pool with 523251712 bytes.
+NOTE: Passed training data 5 times.
+NOTE: Training used 1383672 bytes of work memory.
+NOTE: The subtree sequence contains 4 subtrees. The largest has 7 nodes and 4 leaves.
+NOTE: Using subtree with 1 nodes and 1 leaves.
+10931  SUBTREE BEST
+10932  ;
+NOTE: Using subtree with 1 nodes and 1 leaves.
+10933  MAKEMACRO NLEAVES=nleaves;
+NOTE: Created macro variable NLEAVES equal to 1.
+10934  save
+10935  MODEL=EMWS1.Tree_EMTREE
+10936  SEQUENCE=EMWS1.Tree_OUTSEQ
+10937  IMPORTANCE=EMWS1.Tree_OUTIMPORT
+10938  NODESTAT=EMWS1.Tree_OUTNODES
+10939  SUMMARY=EMWS1.Tree_OUTSUMMARY
+10940  STATSBYNODE=EMWS1.Tree_OUTSTATS
+10941  Topology=EMWS1.Tree_OUTTOPOLOGY
+10942  Pathlistnonmissing = EMWS1.Tree_OUTPATH
+10943  Rules = EMWS1.Tree_OUTRULES
+10944  ;
+NOTE: 数据集 EMWS1.TREE_OUTIMPORT 有 24 个观测和 6 个变量。
+NOTE: 数据集 EMWS1.TREE_EMTREE 有 694 个观测和 4 个变量。
+NOTE: 数据集 EMWS1.TREE_OUTNODES 有 1 个观测和 60 个变量。
+NOTE: 数据集 EMWS1.TREE_OUTPATH 有 0 个观测和 7 个变量。
+NOTE: 数据集 EMWS1.TREE_OUTRULES 有 46 个观测和 6 个变量。
+NOTE: 数据集 EMWS1.TREE_OUTSEQ 有 4 个观测和 20 个变量。
+NOTE: 数据集 EMWS1.TREE_OUTSTATS 有 31 个观测和 5 个变量。
+NOTE: 数据集 EMWS1.TREE_OUTSUMMARY 有 120 个观测和 18 个变量。
+NOTE: 数据集 EMWS1.TREE_OUTTOPOLOGY 有 1 个观测和 5 个变量。
+10945  code file="E:\SASWorkSpace\MovieEM\Workspaces\EMWS1\Tree\EMPUBLISHSCORE.sas"
+10946  group=Tree
+10947  ;
+NOTE: External file E:\SASWorkSpace\MovieEM\Workspaces\EMWS1\Tree\EMPUBLISHSCORE.sas opened.
+10948  code file="E:\SASWorkSpace\MovieEM\Workspaces\EMWS1\Tree\EMFLOWSCORE.sas"
+10949  group=Tree
+10950  residual
+10951  ;
+NOTE: External file E:\SASWorkSpace\MovieEM\Workspaces\EMWS1\Tree\EMFLOWSCORE.sas opened.
+10952  score data=EMWS1.EM_Tree out=_NULL_
+NOTE: “视图 EMWS1.EM_TREE.VIEW”所用时间（总处理时间）:
+      实际时间          0.07 秒
+      CPU 时间          0.07 秒
+      
+10953  outfit=WORK.FIT1
+10954  role=TRAIN
+10955  ;
+NOTE: 数据集 WORK.FIT1 有 1 个观测和 10 个变量。
+NOTE: 从数据集 EMWS1.PART_TRAIN. 读取了 2214 个观测
+10956  score data=EMWS1.Part_VALIDATE out=_NULL_
+10957  outfit=WORK.FIT2
+10958  role=VALID
+10959  ;
+NOTE: 数据集 WORK.FIT2 有 1 个观测和 8 个变量。
+10960  run;
+
+10961  quit;
+
+NOTE: “视图 EMWS1.EM_TREE.VIEW”所用时间（总处理时间）:
+      实际时间          1.03 秒
+      CPU 时间          0.89 秒
+      
+NOTE: 从数据集 EMWS1.PART_TRAIN. 读取了 2214 个观测
+NOTE: 从数据集 EMWS1.EM_TREE. 读取了 2214 个观测
+NOTE: 数据集 WORK._NAMEDAT 有 14 个观测和 5 个变量。
+NOTE: “PROCEDURE ARBOR”所用时间（总处理时间）:
+      实际时间          1.05 秒
+      CPU 时间          0.89 秒
+      
+
+10962  %put &nleaves;
+1
+10963  data EMWS1.Tree_OUTFIT;
+10964  merge WORK.FIT1 WORK.FIT2;
+10965  run;
+
+NOTE: 从数据集 WORK.FIT1. 读取了 1 个观测
+NOTE: 从数据集 WORK.FIT2. 读取了 1 个观测
+NOTE: 数据集 EMWS1.TREE_OUTFIT 有 1 个观测和 18 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.01 秒
+      CPU 时间          0.01 秒
+      
+
+10966  data EMWS1.Tree_OUTIMPORT;
+10967  set EMWS1.Tree_OUTIMPORT;
+10968  label NAME = "%sysfunc(sasmsg(sashelp.dmine, meta_name_vlabel, noquote))" LABEL = "%sysfunc(sasmsg(sashelp.dmine, meta_label_vlabel, noquote))" NRULES = "%sysfunc(sasmsg(sashelp.dmine, rpt_nrules_vlabel, noquote))" IMPORTANCE =
+10969     "%sysfunc(sasmsg(sashelp.dmine, rpt_importance_vlabel, noquote))" NSURROGATES = "%sysfunc(sasmsg(sashelp.dmine, rpt_nsurrogates_vlabel, noquote))"
+10970  VIMPORTANCE = "%sysfunc(sasmsg(sashelp.dmine, rpt_vimportance_vlabel, noquote))" RATIO = "%sysfunc(sasmsg(sashelp.dmine, rpt_ratio_vlabel, noquote))"
+10971  ;
+10972  run;
+
+NOTE: 变量 NSURROGATES 未初始化。
+NOTE: 从数据集 EMWS1.TREE_OUTIMPORT. 读取了 24 个观测
+NOTE: 数据集 EMWS1.TREE_OUTIMPORT 有 24 个观测和 6 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.05 秒
+      CPU 时间          0.03 秒
+      
+
+10973  filename x "E:\SASWorkSpace\MovieEM\Workspaces\EMWS1\Tree\OUTDESCRIBE.txt" encoding='utf-8' NOBOM;
+
+10974  data temp;
+10975  length varname $19;
+10976  retain varname;
+10977  set EMWS1.Tree_OUTPATH;
+10978  if ^missing(variable) then varname=variable;
+10979  else if ^missing(var_name) then varname=var_name;
+10980  output;
+10981  run;
+
+NOTE: 从数据集 EMWS1.TREE_OUTPATH. 读取了 0 个观测
+NOTE: 数据集 WORK.TEMP 有 0 个观测和 8 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.01 秒
+      
+
+10982  proc sort data=temp;
+10983  by node;
+10984  run;
+
+NOTE: 输入数据集为空。
+NOTE: 数据集 WORK.TEMP 有 0 个观测和 8 个变量。
+NOTE: “PROCEDURE SORT”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+10985  proc sort data=EMWS1.Tree_OUTNODES out=outnodes;
+10986  by node;
+10987  run;
+
+NOTE: 从数据集 EMWS1.TREE_OUTNODES. 读取了 1 个观测
+NOTE: 数据集 WORK.OUTNODES 有 1 个观测和 60 个变量。
+NOTE: “PROCEDURE SORT”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.01 秒
+      
+
+10988  data temp;
+10989  merge temp(in=_a) outnodes(keep= node
+10990  NPRIORS
+10991  P_TechnologySurround_Sound
+10992  P_TechnologyConsole_Game_System_
+10993  P_TechnologyVideo_capable_Automo
+10994  P_TechnologyVHS
+10995  P_TechnologyFront_Projection_TV
+10996  P_TechnologyLaserdisk
+10997  P_TechnologyRear_Projection_TV
+10998  P_TechnologyHDTV
+10999  P_TechnologyDVD
+11000  P_TechnologyPVR_Tivo_UltimateTV
+11001  P_TechnologyFlat_Screen_TV
+11002  P_TechnologyDigital_Satellite
+11003  P_TechnologyAnalog_Satellite
+11004  P_TechnologyBetamax
+11005  );
+11006  by node;
+11007  if _a;
+11008  run;
+
+NOTE: 从数据集 WORK.TEMP. 读取了 0 个观测
+NOTE: 从数据集 WORK.OUTNODES. 读取了 1 个观测
+NOTE: 数据集 WORK.TEMP 有 0 个观测和 23 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.01 秒
+      CPU 时间          0.00 秒
+      
+
+11009  proc sort data=temp;
+11010  by node descending varname descending numeric_value;
+11011  run;
+
+NOTE: 输入数据集为空。
+NOTE: 数据集 WORK.TEMP 有 0 个观测和 23 个变量。
+NOTE: “PROCEDURE SORT”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+11012  data _null_;
+11013  file x;
+11014  set temp;
+11015  by node descending varname;
+11016  retain origvar oldnode string;
+11017  length origvar $32 oldnode 8 string $200;
+11018  if _n_ = 1 then do;
+11019  origvar = varname;
+11020  oldnode = node;
+11021  end;
+11022  if first.node then do;
+11023  put "&EM_CODEBAR";
+11024  put " Node = " node;
+11025  put "&EM_CODEBAR";
+11026  end;
+11027  if first.varname then do;
+11028  if RELATION ^in ("=", "ISMISSING", "ISNOTMISSING") then do;
+11029  if MISSING(CHARACTER_VALUE) then do;
+11030  if NUMERIC_VALUE ne . then do;
+11031  if ^first.node then do;
+11032  string= "AND "|| strip(varname)||" "||strip(relation)||" "||strip(numeric_value);
+11033  end;
+11034  else do;
+11035  string= "if "|| strip(varname)||" "||strip(relation)||" "||strip(numeric_value);
+11036  end;
+11037  end;
+11038  end;
+11039  else do;
+11040  if ^first.node then do;
+11041  string= "AND "|| strip(varname)||" "||strip(relation)||" "||strip(character_value);
+11042  end;
+11043  else do;
+11044  string= "if "|| strip(varname)||" "||strip(relation)||" "||strip(character_value);
+11045  end;
+11046  end;
+11047  end;
+11048  else if RELATION in ("=") then do;
+11049  if ^first.node then do;
+11050  string = "AND "||strip(varname) ||" IS ONE OF: "||character_value;
+11051  end;
+11052  else do;
+11053  string = "if "|| strip(varname) ||" IS ONE OF: "||character_value;
+11054  end;
+11055  end;
+11056  else if RELATION in ("ISMISSING") then do;
+11057  if ^first.node then do;
+11058  string = " AND "|| strip(varname) || " equals Missing";
+11059  end;
+11060  else do;
+11061  string = "if "|| strip(varname) ||" equals Missing";
+11062  end;
+11063  end;
+11064  else if RELATION in ("ISNOTMISSING") then do;
+11065  if ^first.node then do;
+11066  string = " AND "|| strip(varname) || " equals All Values";
+11067  end;
+11068  else do;
+11069  string = "if "|| strip(varname) ||" equals All Values";
+11070  end;
+11071  end;
+11072  if ^missing(varname) then origvar = varname;
+11073  oldnode=node;
+11074  end;
+11075  else do;
+11076  if RELATION ^in ("=", "ISMISSING", "ISNOTMISSING") then do;
+11077  if MISSING(CHARACTER_VALUE) then do;
+11078  if NUMERIC_VALUE ne . then do;
+11079  if ^MISSING(string) then string= strip(string)||" AND "|| strip(varname)||" "||strip(relation)||" "||strip(numeric_value);
+11080  else string= " if "|| strip(varname)||" "||strip(relation)||" "||strip(numeric_value);
+11081  end;
+11082  end;
+11083  else do;
+11084  if ^MISSING(string) then string= strip(string)||" AND "|| strip(varname)||" "||strip(relation)||" "||strip(character_value);
+11085  else string= " if "|| strip(varname)||" "||strip(relation)||" "||strip(character_value);
+11086  end;
+11087  end;
+11088  else if RELATION in ("=") then do;
+11089  string = strip(string)||", "||strip(character_value);
+11090  end;
+11091  else if RELATION in ("ISMISSING") then do;
+11092  end;
+11093  if ^missing(varname) then origvar = varname;
+11094  oldnode=node;
+11095  end;
+11096  if last.varname then do;
+11097  if RELATION in ("ISMISSING") then do;
+11098  if ^first.varname then do;
+11099  string = strip(string) || " or MISSING";
+11100  end;
+11101  end;
+11102  put string;
+11103  if ^missing(varname) then origvar = varname;
+11104  oldnode=node;
+11105  end;
+11106  if last.node then do;
+11107  put "then ";
+11108  put " Tree Node Identifier   = " node;
+11109  put " Number of Observations = " NPRIORS;
+11110  put " Predicted: Technology=Surround Sound  = " P_TechnologySurround_Sound;
+11111  put " Predicted: Technology=Console Game System(e.g. XBOX PS2 etc)  = " P_TechnologyConsole_Game_System_;
+11112  put " Predicted: Technology=Video-capable Automobile  = " P_TechnologyVideo_capable_Automo;
+11113  put " Predicted: Technology=VHS  = " P_TechnologyVHS;
+11114  put " Predicted: Technology=Front Projection TV  = " P_TechnologyFront_Projection_TV;
+11115  put " Predicted: Technology=Laserdisk  = " P_TechnologyLaserdisk;
+11116  put " Predicted: Technology=Rear Projection TV  = " P_TechnologyRear_Projection_TV;
+11117  put " Predicted: Technology=HDTV  = " P_TechnologyHDTV;
+11118  put " Predicted: Technology=DVD  = " P_TechnologyDVD;
+11119  put " Predicted: Technology=PVR(Tivo UltimateTV ReplayTV)  = " P_TechnologyPVR_Tivo_UltimateTV;
+11120  put " Predicted: Technology=Flat Screen TV  = " P_TechnologyFlat_Screen_TV;
+11121  put " Predicted: Technology=Digital Satellite  = " P_TechnologyDigital_Satellite;
+11122  put " Predicted: Technology=Analog Satellite  = " P_TechnologyAnalog_Satellite;
+11123  put " Predicted: Technology=Betamax  = " P_TechnologyBetamax;
+11124  put " ";
+11125  if ^missing(varname) then origvar = varname;
+11126  oldnode=node;
+11127  end;
+11128  run;
+
+NOTE: 数值已转换为字符值，位置:（行:列）。
+      11032:67    11035:66    11079:108   11080:72    
+NOTE: FILE X 是:
+      文件名=E:\SASWorkSpace\MovieEM\Workspaces\EMWS1\Tree\OUTDESCRIBE.txt,
+      RECFM=V,LRECL=1536,文件大小（字节）=0,
+      上次修改时间=2013年05月18日 15时24分57秒,
+      创建时间=2013年05月18日 15时24分57秒
+
+NOTE: 有 0 条记录写入到 FILE X 中。
+NOTE: 从数据集 WORK.TEMP. 读取了 0 个观测
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.01 秒
+      
+
+11129  filename x;
+NOTE: 已取消文件引用名 X 的分配。
+
+11130  data WORK.M2GPEKIV;
+11131  set WORK.M2GPEKIV;
+11132  where(use = 'Y' or (role = 'INPUT' and use = 'D'));
+11133  if (role = 'REJECTED') then role = 'INPUT';
+11134  run;
+
+NOTE: 从数据集 WORK.M2GPEKIV. 读取了 25 个观测
+      WHERE (use='Y') or ((role='INPUT') and (use='D'));
+NOTE: 数据集 WORK.M2GPEKIV 有 25 个观测和 21 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+11135  data work.Tree_tarmetads;
+11136  set EMWS1.Part_CMeta_TRAIN(where=(ROLE='TARGET'));
+11137  run;
+
+NOTE: 从数据集 EMWS1.PART_CMETA_TRAIN. 读取了 1 个观测
+      WHERE ROLE='TARGET';
+NOTE: 数据集 WORK.TREE_TARMETADS 有 1 个观测和 20 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+11138  title10 "%sysfunc(sasmsg(sashelp.dmine, rpt_variableImportance_title  , NOQUOTE))";
+11139  data EMWS1.Tree_OUTIMPORT;
+11140  set EMWS1.Tree_OUTIMPORT;
+11141  importance=put(importance, 15.4);
+11142  vimportance=put(vimportance, 15.4);
+11143  ratio=put(ratio, 15.4);
+11144  run;
+
+NOTE: 字符值已转换为数值，位置:（行:列）。
+      11141:12   11142:13   11143:7    
+NOTE: 从数据集 EMWS1.TREE_OUTIMPORT. 读取了 24 个观测
+NOTE: 数据集 EMWS1.TREE_OUTIMPORT 有 24 个观测和 6 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+11145  proc print data=EMWS1.Tree_OUTIMPORT(where=(nrules>0));
+11146  run;
+
+NOTE: 没有从数据集 EMWS1.TREE_OUTIMPORT 中选择观测。
+NOTE: 从数据集 EMWS1.TREE_OUTIMPORT. 读取了 0 个观测
+      WHERE nrules>0;
+NOTE: “PROCEDURE PRINT”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+11147  title10;
+
+11148  data EMWS1.Tree_OUTSEQ;
+11149  set EMWS1.Tree_OUTSEQ;
+11150  _ASE_ = put(_ASE_, 15.4);
+11151  _ASSESS_ = put(_ASSESS_, 15.4);
+11152  _MAX_ = put(_MAX_, 15.4);
+11153  _SSE_ = put(_SSE_, 15.4);
+11154  _RASE_ = put(_RASE_, 15.4);
+11155  _MISC_ = put(_MISC_, 15.4);
+11156  _VASE_ = put(_VASE_, 15.4);
+11157  _VASSESS_ = put(_VASSESS_, 15.4);
+11158  _VMAX_ = put(_VMAX_, 15.4);
+11159  _VSSE_ = put(_VSSE_, 15.4);
+11160  _VRASE_ = put(_VRASE_, 15.4);
+11161  _VMISC_ = put(_VMISC_, 15.4);
+11162  run;
+
+NOTE: 字符值已转换为数值，位置:（行:列）。
+      11150:9    11151:12   11152:9    11153:9    11154:10   11155:10   11156:10   11157:13   11158:10   11159:10   11160:11   11161:11   
+NOTE: 从数据集 EMWS1.TREE_OUTSEQ. 读取了 4 个观测
+NOTE: 数据集 EMWS1.TREE_OUTSEQ 有 4 个观测和 20 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.05 秒
+      CPU 时间          0.06 秒
+      
+
+11163  data WORK.M2GPEKIV;
+11164  set WORK.M2GPEKIV end=eof;
+11165  output;
+11166  if eof then do;
+11167  NAME="";
+11168  ROLE="COST";
+11169  LEVEL="INTERVAL";
+11170  TYPE="N";
+11171  output;
+11172  end;
+11173  run;
+
+NOTE: 从数据集 WORK.M2GPEKIV. 读取了 25 个观测
+NOTE: 数据集 WORK.M2GPEKIV 有 26 个观测和 21 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+11174  /* belowtext */
+11175  data templabel;
+11176  set EMWS1.Tree_OUTRULES;
+11177  if ((ROLE="PRIMARY") AND (STAT ="LABEL"));
+11178  rename character_value = belowtext;
+11179  keep NODE character_value;
+11180  run;
+
+NOTE: 从数据集 EMWS1.TREE_OUTRULES. 读取了 46 个观测
+NOTE: 数据集 WORK.TEMPLABEL 有 0 个观测和 2 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+11181  data tempvar;
+11182  set EMWS1.Tree_OUTRULES;
+11183  if ((ROLE="PRIMARY") AND (STAT="VARIABLE"));
+11184  keep NODE character_value;
+11185  run;
+
+NOTE: 从数据集 EMWS1.TREE_OUTRULES. 读取了 46 个观测
+NOTE: 数据集 WORK.TEMPVAR 有 0 个观测和 2 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+11186  proc sort data=templabel;
+11187  by node;
+11188  run;
+
+NOTE: 输入数据集为空。
+NOTE: 数据集 WORK.TEMPLABEL 有 0 个观测和 2 个变量。
+NOTE: “PROCEDURE SORT”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+11189  proc sort data=tempvar;
+11190  by node;
+11191  run;
+
+NOTE: 输入数据集为空。
+NOTE: 数据集 WORK.TEMPVAR 有 0 个观测和 2 个变量。
+NOTE: “PROCEDURE SORT”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+11192  data tempbelow;
+11193  merge templabel tempvar;
+11194  by node;
+11195  if missing(belowtext) then belowtext= character_value;
+11196  keep node belowtext;
+11197  run;
+
+NOTE: 从数据集 WORK.TEMPLABEL. 读取了 0 个观测
+NOTE: 从数据集 WORK.TEMPVAR. 读取了 0 个观测
+NOTE: 数据集 WORK.TEMPBELOW 有 0 个观测和 2 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+11198  proc sort data=tempbelow;
+11199  by node;
+11200  run;
+
+NOTE: 输入数据集为空。
+NOTE: 数据集 WORK.TEMPBELOW 有 0 个观测和 2 个变量。
+NOTE: “PROCEDURE SORT”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+11201  /* abovetext */
+11202  data tempoutrules;
+11203  set EMWS1.Tree_OUTRULES;
+11204  if ((ROLE='PRIMARY') AND(STAT in ("INTERVAL", "ORDINAL", "NOMINAL")));
+11205  run;
+
+NOTE: 从数据集 EMWS1.TREE_OUTRULES. 读取了 46 个观测
+NOTE: 数据集 WORK.TEMPOUTRULES 有 0 个观测和 6 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.01 秒
+      
+
+11206  proc sort data=tempoutrules;
+11207  by node numeric_value;
+11208  run;
+
+NOTE: 输入数据集为空。
+NOTE: 数据集 WORK.TEMPOUTRULES 有 0 个观测和 6 个变量。
+NOTE: “PROCEDURE SORT”所用时间（总处理时间）:
+      实际时间          0.01 秒
+      CPU 时间          0.00 秒
+      
+
+11209  data tempabove;
+11210  set tempoutrules(rename=(node=parent));
+11211  by parent numeric_value;
+11212  retain abovetext tempstring flag branch origval origchar;
+11213  length abovetext tempstring origchar $45;
+11214  if STAT in ("INTERVAL", "ORDINAL") then do;
+11215  if first.parent then do;
+11216  if missing(character_value) then do;
+11217  numeric_value = round(numeric_value, 0.0001);
+11218  abovetext = "< "||strip(NUMERIC_VALUE);
+11219  branch = 1;
+11220  origval = numeric_value;
+11221  output;
+11222  end;
+11223  else do;
+11224  abovetext = "< "||strip(CHARACTER_VALUE);
+11225  branch = 1;
+11226  origchar = character_value;
+11227  output;
+11228  end;
+11229  if first.parent AND last.parent then do;
+11230  if missing(character_value) then do;
+11231  numeric_value = round(numeric_value, 0.0001);
+11232  branch = branch + 1;
+11233  abovetext = ">= "||strip(NUMERIC_VALUE);
+11234  output;
+11235  end;
+11236  else do;
+11237  branch = branch + 1;
+11238  abovetext = ">= "||strip(CHARACTER_VALUE);
+11239  output;
+11240  end;
+11241  end;
+11242  end;
+11243  else if last.parent then do;
+11244  if ( missing(character_value) AND (origval ne numeric_value)) or ( ^missing(character_value) AND (origchar ne character_value)) then do;
+11245  if missing(character_value) then do;
+11246  numeric_value = round(numeric_value, 0.0001);
+11247  abovetext= "[ "||strip(origval)||", "|| strip(numeric_value)||" )";
+11248  end;
+11249  else do;
+11250  abovetext= ">= "||strip(origchar)||" AND < "|| strip(character_value);
+11251  end;
+11252  branch = branch + 1;
+11253  output;
+11254  if missing(character_value) then do;
+11255  numeric_value = round(numeric_value, 0.0001);
+11256  abovetext = ">= "||strip(NUMERIC_VALUE);
+11257  end;
+11258  else do;
+11259  abovetext = ">= "||strip(CHARACTER_VALUE);
+11260  end;
+11261  branch = branch + 1;
+11262  output;
+11263  end;
+11264  else do;
+11265  if missing(character_value) then do;
+11266  numeric_value = round(numeric_value, 0.0001);
+11267  abovetext = ">= "||strip(NUMERIC_VALUE);
+11268  end;
+11269  else do;
+11270  abovetext = ">= "||strip(CHARACTER_VALUE);
+11271  end;
+11272  branch = branch + 1;
+11273  output;
+11274  end;
+11275  end;
+11276  else do;
+11277  if ( missing(character_value) AND (origval ne numeric_value)) or ( ^missing(character_value) AND (origchar ne character_value)) then do;
+11278  if missing(character_value) then do;
+11279  numeric_value = round(numeric_value,0.0001);
+11280  abovetext= "[ "||strip(origval)||", "|| strip(numeric_value)||" )";
+11281  origval = numeric_value;
+11282  end;
+11283  else do;
+11284  abovetext= ">= "||strip(origchar)||" AND < "|| strip(character_value);
+11285  origchar = character_value;
+11286  end;
+11287  branch = branch + 1;
+11288  output;
+11289  end;
+11290  else do;
+11291  if missing(character_value) then do;
+11292  numeric_value = round(numeric_value, 0.0001);
+11293  abovetext = ">= "||strip(NUMERIC_VALUE);
+11294  origval = numeric_value;
+11295  end;
+11296  else do;
+11297  abovetext = ">= "||strip(CHARACTER_VALUE);
+11298  origval = character_value;
+11299  end;
+11300  branch = branch + 1;
+11301  output;
+11302  end;
+11303  end;
+11304  end;
+11305  else do;
+11306  if first.numeric_value then do;
+11307  flag = 0;
+11308  abovetext = CHARACTER_VALUE;
+11309  branch = numeric_value;
+11310  if first.numeric_value AND last.numeric_value then do;
+11311  output;
+11312  end;
+11313  end;
+11314  else if last.numeric_value then do;
+11315  if flag=0 then do;
+11316  tempstring = strip(abovetext)||", "||CHARACTER_VALUE;
+11317  length = length(strip(tempstring));
+11318  if length < 32 then do;
+11319  abovetext = strip(tempstring);
+11320  end;
+11321  else do;
+11322  abovetext = strip(abovetext)||", ...";
+11323  flag = 1;
+11324  end;
+11325  end;
+11326  branch = numeric_value;
+11327  output;
+11328  end;
+11329  else do;
+11330  if flag=0 then do;
+11331  tempstring = strip(abovetext)||", "||CHARACTER_VALUE;
+11332  length = length(strip(tempstring));
+11333  if length < 32 then do;
+11334  abovetext = strip(tempstring);
+11335  end;
+11336  else do;
+11337  abovetext = strip(abovetext)||", ...";
+11338  flag=1;
+11339  end;
+11340  end;
+11341  branch = numeric_value;
+11342  end;
+11343  end;
+11344  keep parent branch abovetext;
+11345  run;
+
+NOTE: 数值已转换为字符值，位置:（行:列）。
+      11218:25   11233:26   11247:24   11247:47   11256:26   11267:26   11280:24   11280:47   11293:26   
+NOTE: 字符值已转换为数值，位置:（行:列）。
+      11298:11   
+NOTE: 从数据集 WORK.TEMPOUTRULES. 读取了 0 个观测
+NOTE: 数据集 WORK.TEMPABOVE 有 0 个观测和 3 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.01 秒
+      CPU 时间          0.01 秒
+      
+
+11346  /* MIssing value to abovetext */
+11347  data tempmissing;
+11348  set EMWS1.Tree_OUTRULES;
+11349  if ((ROLE="PRIMARY") AND (STAT in ("MISSING")));
+11350  rename node=parent numeric_value=branch character_value=misschar;
+11351  run;
+
+NOTE: 从数据集 EMWS1.TREE_OUTRULES. 读取了 46 个观测
+NOTE: 数据集 WORK.TEMPMISSING 有 0 个观测和 6 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.01 秒
+      
+
+11352  proc sort data=work.tempabove;
+11353  by parent branch;
+11354  run;
+
+NOTE: 输入数据集为空。
+NOTE: 数据集 WORK.TEMPABOVE 有 0 个观测和 3 个变量。
+NOTE: “PROCEDURE SORT”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.01 秒
+      
+
+11355  proc sort data=EMWS1.Tree_OUTNODES out=tempoutnodes;
+11356  by parent branch;
+11357  run;
+
+NOTE: 从数据集 EMWS1.TREE_OUTNODES. 读取了 1 个观测
+NOTE: 数据集 WORK.TEMPOUTNODES 有 1 个观测和 60 个变量。
+NOTE: “PROCEDURE SORT”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+11358  proc sort data=tempmissing;
+11359  by parent branch;
+11360  run;
+
+NOTE: 输入数据集为空。
+NOTE: 数据集 WORK.TEMPMISSING 有 0 个观测和 6 个变量。
+NOTE: “PROCEDURE SORT”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.01 秒
+      
+
+11361  data WORK.TREE_27YF3BV_outnodes;
+11362  merge work.tempabove tempoutNodes(drop=abovetext ) tempmissing(in=_a);
+11363  by parent branch;
+11364  length traintotal validtotal 8;
+11365  retain traintotal validtotal;
+11366  if _a then do;
+11367  if ^MISSING(abovetext) then do;
+11368  abovetext= strip(abovetext)||" %sysfunc(sasmsg(sashelp.dmine, tree_ormiss_vlabel, noquote))";
+11369  end;
+11370  else do;
+11371  abovetext = " %sysfunc(sasmsg(sashelp.dmine, tree_missonly_vlabel, noquote))";
+11372  end;
+11373  end;
+11374  if MISSING(abovetext) then abovetext="%sysfunc(sasmsg(sashelp.dmine, tree_nonmiss_vlabel, noquote))";
+11375  if node=1 then do;
+11376  traintotal = N;
+11377  validtotal=VN;
+11378  end;
+11379  drop role rank stat misschar belowtext;
+11380  run;
+
+NOTE: 从数据集 WORK.TEMPABOVE. 读取了 0 个观测
+NOTE: 从数据集 WORK.TEMPOUTNODES. 读取了 1 个观测
+NOTE: 从数据集 WORK.TEMPMISSING. 读取了 0 个观测
+NOTE: 数据集 WORK.TREE_27YF3BV_OUTNODES 有 1 个观测和 61 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.02 秒
+      CPU 时间          0.01 秒
+      
+
+11381  proc sort data=WORK.TREE_27YF3BV_outnodes;
+11382  by node;
+11383  run;
+
+NOTE: 从数据集 WORK.TREE_27YF3BV_OUTNODES. 读取了 1 个观测
+NOTE: 数据集 WORK.TREE_27YF3BV_OUTNODES 有 1 个观测和 61 个变量。
+NOTE: “PROCEDURE SORT”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+11384  proc sort data=tempbelow;
+11385  by node;
+11386  run;
+
+NOTE: 输入数据集已排序，故未进行排序。
+NOTE: “PROCEDURE SORT”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+11387  data WORK.TREE_27YF3BV_outnodes;
+11388  merge WORK.TREE_27YF3BV_outnodes tempbelow;
+11389  by node;
+11390  run;
+
+NOTE: 从数据集 WORK.TREE_27YF3BV_OUTNODES. 读取了 1 个观测
+NOTE: 从数据集 WORK.TEMPBELOW. 读取了 0 个观测
+NOTE: 数据集 WORK.TREE_27YF3BV_OUTNODES 有 1 个观测和 62 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+11391  data tempoutstats;
+11392  set EMWS1.Tree_OUTSTATS;
+11393  length tarlevel $8;
+11394  tarlevel ="NOMINAL";
+11395  run;
+
+NOTE: 从数据集 EMWS1.TREE_OUTSTATS. 读取了 31 个观测
+NOTE: 数据集 WORK.TEMPOUTSTATS 有 31 个观测和 6 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+11396  data EMWS1.Tree_TREE_PLOT;
+11397  length NODETEXT TEXTALL $800 N VN NODECOLOR 8;
+11398  set WORK.TREE_27YF3BV_outnodes;
+11399  label parent = "%sysfunc(sasmsg(sashelp.dmine, rpt_parentID_vlabel, noquote))" depth = "%sysfunc(sasmsg(sashelp.dmine, rpt_depth_vlabel, noquote))" belowtext= "%sysfunc(sasmsg(sashelp.dmine, rpt_belowtext_vlabel, noquote))" abovetext =
+11400     "%sysfunc(sasmsg(sashelp.dmine, rpt_abovetext_vlabel, noquote))" linkwidth = "%sysfunc(sasmsg(sashelp.dmine, rpt_linkwidth_vlabel, noquote))" nodetext = "%sysfunc(sasmsg(sashelp.dmine, rpt_nodetext_vlabel, noquote))" textall =
+11401     "%sysfunc(sasmsg(sashelp.dmine, rpt_textall_vlabel, noquote))" N = "%sysfunc(sasmsg(sashelp.dmine, rpt_trainn_vlabel, noquote))" VN = "%sysfunc(sasmsg(sashelp.dmine, rpt_validn_vlabel, noquote))" nodecolor =
+11402     "%sysfunc(sasmsg(sashelp.dmine, rpt_nodecolor_vlabel, noquote))";
+11403  keep NODE PARENT DEPTH BELOWTEXT ABOVETEXT LINKWIDTH NODETEXT TEXTALL N VN NODECOLOR;
+11404  run;
+
+NOTE: 变量 TEXTALL 未初始化。
+NOTE: 变量 NODECOLOR 未初始化。
+NOTE: 从数据集 WORK.TREE_27YF3BV_OUTNODES. 读取了 1 个观测
+NOTE: 数据集 EMWS1.TREE_TREE_PLOT 有 1 个观测和 11 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.03 秒
+      CPU 时间          0.03 秒
+      
+
+11405  proc sort data=EMWS1.Tree_TREE_PLOT;
+11406  by node;
+11407  run;
+
+NOTE: 从数据集 EMWS1.TREE_TREE_PLOT. 读取了 1 个观测
+NOTE: 数据集 EMWS1.TREE_TREE_PLOT 有 1 个观测和 11 个变量。
+NOTE: “PROCEDURE SORT”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.01 秒
+      
+
+11408  data tempcolor;
+11409  set EMWS1.Tree_OUTSTATS;
+11410  retain eventlevel;
+11411  if STATNAME='PREDICTION' then eventlevel=CATEGORY;
+11412  run;
+
+NOTE: 从数据集 EMWS1.TREE_OUTSTATS. 读取了 31 个观测
+NOTE: 数据集 WORK.TEMPCOLOR 有 31 个观测和 6 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+11413  data tempcolor;
+11414  set tempcolor;
+11415  if 'NOMINAL' ne 'INTERVAL' then do;
+11416  if CATEGORY=EVENTLEVEL AND STATNAME="PROBABILITY";
+11417  end;
+11418  else do;
+11419  if STATNAME="PREDICTION";
+11420  end;
+11421  run;
+
+NOTE: 从数据集 WORK.TEMPCOLOR. 读取了 31 个观测
+NOTE: 数据集 WORK.TEMPCOLOR 有 1 个观测和 6 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.01 秒
+      
+
+11422  data tempcolor;
+11423  set tempcolor;
+11424  length nodecolor 8;
+11425  if 'NOMINAL' ne 'INTERVAL' then do;
+11426  nodecolor = round(100*(STATVALUE), .01);
+11427  end;
+11428  else do;
+11429  nodecolor=round(statvalue, .01);
+11430  end;
+11431  keep node nodecolor;
+11432  run;
+
+NOTE: 从数据集 WORK.TEMPCOLOR. 读取了 1 个观测
+NOTE: 数据集 WORK.TEMPCOLOR 有 1 个观测和 2 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.01 秒
+      
+
+11433  proc sort data=tempoutstats;
+11434  by node statname;
+11435  run;
+
+NOTE: 从数据集 WORK.TEMPOUTSTATS. 读取了 31 个观测
+NOTE: 数据集 WORK.TEMPOUTSTATS 有 31 个观测和 6 个变量。
+NOTE: “PROCEDURE SORT”所用时间（总处理时间）:
+      实际时间          0.01 秒
+      CPU 时间          0.00 秒
+      
+
+11436  proc sort data=tempcolor;
+11437  by node;
+11438  run;
+
+NOTE: 从数据集 WORK.TEMPCOLOR. 读取了 1 个观测
+NOTE: 数据集 WORK.TEMPCOLOR 有 1 个观测和 2 个变量。
+NOTE: “PROCEDURE SORT”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.01 秒
+      
+
+11439  data EMWS1.Tree_TREE_PLOT;
+11440  merge EMWS1.Tree_TREE_PLOT tempoutstats tempcolor;
+11441  length text $800 _RASE_ _VRASE_ 8;
+11442  retain _RASE_ _VRASE_ VN eventlevel;
+11443  by node;
+11444  if STATNAME = 'N' then N=STATVALUE;
+11445  else if STATNAME = 'VALID: N' then VN=STATVALUE;
+11446  if STATNAME='NPRIORS' then N=statvalue;
+11447  else if STATNAME = 'VALID: NPRIORS' then VN=STATVALUE;
+11448  if STATNAME = 'RASE' then _RASE_ = STATVALUE;
+11449  else if STATNAME = 'VALID: RASE' then _VRASE_ = STATVALUE;
+11450  else if STATNAME = 'PREDICTION' then eventlevel=CATEGORY;
+11451  if last.node then output EMWS1.Tree_TREE_PLOT;
+11452  if STATNAME ="N" or STATNAME="VALID: N" or STATNAME="TARGET" or STATNAME="RASE" or STATNAME="VALID: RASE" then delete;
+11453  if STATNAME ="ALTERNATIVE PROFIT" or STATNAME="VALID: ALTERNATIVE PROFIT" then delete;
+11454  if STATNAME ="ALTERNATIVE LOSS" or STATNAME="VALID: ALTERNATIVE LOSS" then delete;
+11455  if STATNAME ="NPRIORS" or STATNAME="VALID: NPRIORS" then delete;
+11456  if tarlevel ^='INTERVAL' then do;
+11457  if STATNAME = "PREDICTION" then delete;
+11458  if STATNAME = "PROPORTION" or STATNAME="VALID: PROPORTION" then delete;
+11459  end;
+11460  label _RASE_ = "%sysfunc(sasmsg(sashelp.dmine, rpt_trase_vlabel, noquote))" _VRASE_ = "%sysfunc(sasmsg(sashelp.dmine, rpt_vrase_vlabel, noquote))";
+11461  drop STATNAME STATVALUE;
+11462  run;
+
+NOTE: 变量 text 未初始化。
+NOTE: 从数据集 EMWS1.TREE_TREE_PLOT. 读取了 1 个观测
+NOTE: 从数据集 WORK.TEMPOUTSTATS. 读取了 31 个观测
+NOTE: 从数据集 WORK.TEMPCOLOR. 读取了 1 个观测
+NOTE: 数据集 EMWS1.TREE_TREE_PLOT 有 1 个观测和 18 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.01 秒
+      CPU 时间          0.01 秒
+      
+
+11463  data tree_temp;
+11464  set tempoutstats;
+11465  if STATNAME^="N" AND STATNAME ^="VALID: N" AND STATNAME^="RASE" AND STATNAME ^="VALID: RASE" AND STATNAME ^="TARGET";
+11466  if STATNAME ="ALTERNATIVE PROFIT" or STATNAME="VALID: ALTERNATIVE PROFIT" then delete;
+11467  if STATNAME ="ALTERNATIVE LOSS" or STATNAME="VALID: ALTERNATIVE LOSS" then delete;
+11468  if STATNAME ="NPRIORS" or STATNAME="VALID: NPRIORS" then delete;
+11469  if TARLEVEL ^="INTERVAL" then do;
+11470  if STATNAME="PREDICTION" then delete;
+11471  if STATNAME = "PROPORTION" or STATNAME="VALID: PROPORTION" then delete;
+11472  end;
+11473  if NODE = . then delete;
+11474  run;
+
+NOTE: 从数据集 WORK.TEMPOUTSTATS. 读取了 31 个观测
+NOTE: 数据集 WORK.TREE_TEMP 有 28 个观测和 6 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.01 秒
+      
+
+11475  proc sort data=tree_temp;
+11476  by node category;
+11477  run;
+
+NOTE: 从数据集 WORK.TREE_TEMP. 读取了 28 个观测
+NOTE: 数据集 WORK.TREE_TEMP 有 28 个观测和 6 个变量。
+NOTE: “PROCEDURE SORT”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.01 秒
+      
+
+11478  data tree_temp;
+11479  merge EMWS1.Tree_TREE_PLOT tree_temp;
+11480  by node;
+11481  run;
+
+NOTE: 从数据集 EMWS1.TREE_TREE_PLOT. 读取了 1 个观测
+NOTE: 从数据集 WORK.TREE_TEMP. 读取了 28 个观测
+NOTE: 数据集 WORK.TREE_TEMP 有 28 个观测和 20 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.01 秒
+      
+
+11482  data EMWS1.Tree_TREE_PLOT;
+11483  merge EMWS1.Tree_TREE_PLOT tree_temp;
+11484  length text textall nodetext stext ntext $800 P_TechnologyVideo_capable_Automo V_TechnologyVideo_capable_Automo 8;
+11485  retain P_TechnologyVideo_capable_Automo V_TechnologyVideo_capable_Automo ntext stext textall;
+11486  by node category;
+11487  _RASE_ = .;
+11488  _VRASE_ = .;
+11489  if tarlevel ^= 'INTERVAL' then do;
+11490  if CATEGORY=EVENTLEVEL AND STATNAME = "PROBABILITY" then do;
+11491  P_TechnologyVideo_capable_Automo = round(STATVALUE, .01);
+11492  end;
+11493  else if CATEGORY=EVENTLEVEL AND STATNAME = "VALID: PROBABILITY" then do;
+11494  V_TechnologyVideo_capable_Automo = round(STATVALUE, .01);
+11495  end;
+11496  if CATEGORY=EVENTLEVEL then do;
+11497  * P_TechnologyVideo_capable_Automo = round(STATVALUE, .01);
+11498  if first.category then do;
+11499  ntext = put(strip(CATEGORY)||':', $32.)|| right(put(STATVALUE, percent13.1));
+11500  end;
+11501  else do;
+11502  ntext=trim(ntext)||right(put(STATVALUE, percent15.1));
+11503  end;
+11504  end;
+11505  if first.node then do;
+11506  stext = put(strip(CATEGORY)||':', $32.)|| right(put(STATVALUE, percent13.1));
+11507  end;
+11508  else do;
+11509  if first.category then do;
+11510  stext=trim(stext)||'0A'x||put(strip(CATEGORY)||':', $32.)||right(put(STATVALUE, percent13.1));
+11511  end;
+11512  else do;
+11513  stext=trim(stext)||right(put(STATVALUE, percent15.1));
+11514  end;
+11515  end;
+11516  if last.node then do;
+11517  nodetext = trim(nodetext)||'0A'x||put("%sysfunc(sasmsg(sashelp.dmine, rpt_rptcount_vlabel, noquote )):", $32.)|| put(N, 13.);
+11518  textall = trim(textall)||'0A'x||put("%sysfunc(sasmsg(sashelp.dmine, rpt_rptcount_vlabel, noquote )):", $32.)|| put(N, 13.);
+11519  textall = put("%sysfunc(sasmsg(sashelp.dmine, rpt_dmneural_label_stat, noquote))", $32.)||right(put("%sysfunc(sasmsg(sashelp.dmine, rpt_train_vlabel, noquote))", $13.))||right(put("%sysfunc(sasmsg(sashelp.dmine, rpt_validate_vlabel
+11520  , noquote))", $15.));
+11521  textall = trim(textall)||'0A'x||trim(stext);
+11522  textall = trim(textall)||'0A'x||put("%sysfunc(sasmsg(sashelp.dmine, rpt_rptcount_vlabel, noquote )):", $32.)|| put(N, 13.)|| put(VN, 15.);
+11523  nodetext= put("%sysfunc(sasmsg(sashelp.dmine, rpt_dmneural_label_stat, noquote))", $32.)||right(put("%sysfunc(sasmsg(sashelp.dmine, rpt_train_vlabel, noquote))" , $13.))||right(put("%sysfunc(sasmsg(sashelp.dmine, rpt_validate_vlabel
+11524   , noquote))" , $15.));
+11525  nodetext= trim(nodetext)||'0A'x||trim(ntext);
+11526  nodetext= trim(nodetext)||'0A'x||put("%sysfunc(sasmsg(sashelp.dmine, rpt_rptcount_vlabel, noquote )):", $32.)|| put(N, 13.)|| put(VN, 15.);
+11527  output EMWS1.Tree_TREE_PLOT;
+11528  end;
+11529  end;
+11530  else do;
+11531  if first.node then do;
+11532  vprobflag = 0;
+11533  if STATNAME = "PREDICTION" then do;
+11534  P_TechnologyVideo_capable_Automo = STATVALUE;
+11535  end;
+11536  else if STATNAME="VALID: PREDICTION" then do;
+11537  V_TechnologyVideo_capable_Automo = STATVALUE;
+11538  end;
+11539  stext = put("%sysfunc(sasmsg(sashelp.dmine, rpt_average_vlabel, noquote))", $32.)|| right(put(STATVALUE, 13.4));
+11540  end;
+11541  else do;
+11542  vprobflag = 0;
+11543  if STATNAME = "PREDICTION" then do;
+11544  P_TechnologyVideo_capable_Automo = STATVALUE;
+11545  end;
+11546  else if STATNAME="VALID: PREDICTION" then do;
+11547  V_TechnologyVideo_capable_Automo = STATVALUE;
+11548  end;
+11549  stext=trim(stext)||right(put(STATVALUE, 13.4));
+11550  vprobflag=1;
+11551  end;
+11552  if last.node then do;
+11553  nodetext = put("%sysfunc(sasmsg(sashelp.dmine, rpt_dmneural_label_stat, noquote))", $32.)||right(put("%sysfunc(sasmsg(sashelp.dmine, rpt_train_vlabel, noquote))", $8.))||right(put("%sysfunc(sasmsg(sashelp.dmine, rpt_validate_vlabel
+11554  , noquote))", $15.));
+11555  if vprobflag eq 0 then do;
+11556  stext=trim(stext)||right(put(0, 13.4));
+11557  end;
+11558  nodetext = trim(nodetext)||'0A'x||trim(stext);
+11559  nodetext = trim(nodetext)||'0A'x||put("%sysfunc(sasmsg(sashelp.dmine, rpt_rptcount_vlabel, noquote )):", $32.)|| put(N, 8.)|| put(VN, 15.);
+11560  textall = nodetext;
+11561  output EMWS1.Tree_TREE_PLOT;
+11562  end;
+11563  end;
+11564  label _RASE_ = "%sysfunc(sasmsg(sashelp.dmine, rpt_trase_vlabel, noquote))" _VRASE_ = "%sysfunc(sasmsg(sashelp.dmine, rpt_vrase_vlabel, noquote))";
+11565  label P_TechnologyVideo_capable_Automo = "%sysfunc(sasmsg(sashelp.dmine, rpt_predictedvar_vlabel, noquote))";
+11566  keep NODE PARENT DEPTH BELOWTEXT ABOVETEXT LINKWIDTH NODETEXT TEXTALL N VN NODECOLOR _RASE_ _VRASE_ P_TechnologyVideo_capable_Automo V_TechnologyVideo_capable_Automo;
+11567  run;
+
+NOTE: 从数据集 EMWS1.TREE_TREE_PLOT. 读取了 1 个观测
+NOTE: 从数据集 WORK.TREE_TEMP. 读取了 28 个观测
+NOTE: 数据集 EMWS1.TREE_TREE_PLOT 有 1 个观测和 15 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.13 秒
+      CPU 时间          0.04 秒
+      
+
+11568  data EMWS1.Tree_TREE_PLOT;
+11569  set EMWS1.Tree_TREE_PLOT;
+11570  if NODE eq . then delete;
+11571  run;
+
+NOTE: 从数据集 EMWS1.TREE_TREE_PLOT. 读取了 1 个观测
+NOTE: 数据集 EMWS1.TREE_TREE_PLOT 有 1 个观测和 15 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+11572  data EMWS1.Tree_TREE_PLOT;
+11573  set EMWS1.Tree_TREE_PLOT;
+11574  textall = "%sysfunc(sasmsg(sashelp.dmine, rpt_nodeId_vlabel, noquote, )):"|| put(Node, 13.)||'0A'x||trim(textall);
+11575  run;
+
+NOTE: 从数据集 EMWS1.TREE_TREE_PLOT. 读取了 1 个观测
+NOTE: 数据集 EMWS1.TREE_TREE_PLOT 有 1 个观测和 15 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.01 秒
+      CPU 时间          0.01 秒
+      
+
+11576  data tempout;
+11577  set WORK.TREE_27YF3BV_outnodes;
+11578  run;
+
+NOTE: 从数据集 WORK.TREE_27YF3BV_OUTNODES. 读取了 1 个观测
+NOTE: 数据集 WORK.TEMPOUT 有 1 个观测和 62 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+11579  proc sort data=tempout;
+11580  by descending P_TechnologyVideo_capable_Automo;
+11581  run;
+
+NOTE: 从数据集 WORK.TEMPOUT. 读取了 1 个观测
+NOTE: 数据集 WORK.TEMPOUT 有 1 个观测和 62 个变量。
+NOTE: “PROCEDURE SORT”所用时间（总处理时间）:
+      实际时间          0.03 秒
+      CPU 时间          0.01 秒
+      
+
+11582  data tree_temp;
+11583  set tempout;
+11584  if LEAF ne .;
+11585  label index="%sysfunc(sasmsg(sashelp.dmine, rpt_leafindex_vlabel  , NOQUOTE))";
+11586  label percevent_train = "%sysfunc(sasmsg(sashelp.dmine, rpt_perc_train_vlabel  , NOQUOTE))";
+11587  label perc_train = "%sysfunc(sasmsg(sashelp.dmine, rpt_percevent_train_vlabel  , NOQUOTE))";
+11588  label tprob="%sysfunc(sasmsg(sashelp.dmine, rpt_prob_vlabel  , NOQUOTE, %nrbquote(VIDEO-CAPABLE AUTOMOBILE)))";
+11589  label vprob = "%sysfunc(sasmsg(sashelp.dmine, rpt_vprob_vlabel  , NOQUOTE, %nrbquote(VIDEO-CAPABLE AUTOMOBILE)))";
+11590  label percevent_valid = "%sysfunc(sasmsg(sashelp.dmine, rpt_perc_valid_vlabel  , NOQUOTE))";
+11591  label perc_valid = "%sysfunc(sasmsg(sashelp.dmine, rpt_percevent_valid_vlabel  , NOQUOTE))";
+11592  vprob = round(V_TechnologyVideo_capable_Automo, .01);
+11593  percevent_valid = round ( vprob*100, .01);
+11594  * perc_valid =round( ( VN / validtotal)*100, .001);
+11595  perc_valid =round( ( VN / validtotal), .01);
+11596  tprob = round(P_TechnologyVideo_capable_Automo, .01);
+11597  percevent_train = round ( tprob*100, .01);
+11598  *perc_train =round( ( N / traintotal)*100, .001);
+11599  perc_train =round( ( N / traintotal), .01);
+11600  if missing(perc_train) then perc_train = round( linkwidth*100, .001);
+11601  index = _n_;
+11602  keep NODE index tprob perc_train percevent_train
+11603  vprob perc_valid percevent_valid
+11604  ;
+11605  run;
+
+NOTE: 从数据集 WORK.TEMPOUT. 读取了 1 个观测
+NOTE: 数据集 WORK.TREE_TEMP 有 1 个观测和 8 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.06 秒
+      CPU 时间          0.03 秒
+      
+
+11606  proc sort data=tree_temp;
+11607  by NODE;
+11608  run;
+
+NOTE: 从数据集 WORK.TREE_TEMP. 读取了 1 个观测
+NOTE: 数据集 WORK.TREE_TEMP 有 1 个观测和 8 个变量。
+NOTE: “PROCEDURE SORT”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+11609  proc sort data=EMWS1.Tree_TREE_PLOT;
+11610  by NODE;
+11611  run;
+
+NOTE: 从数据集 EMWS1.TREE_TREE_PLOT. 读取了 1 个观测
+NOTE: 数据集 EMWS1.TREE_TREE_PLOT 有 1 个观测和 15 个变量。
+NOTE: “PROCEDURE SORT”所用时间（总处理时间）:
+      实际时间          0.01 秒
+      CPU 时间          0.01 秒
+      
+
+11612  data EMWS1.Tree_TREE_PLOT;
+11613  merge EMWS1.Tree_TREE_PLOT tree_temp;
+11614  by NODE;
+11615  run;
+
+NOTE: 从数据集 EMWS1.TREE_TREE_PLOT. 读取了 1 个观测
+NOTE: 从数据集 WORK.TREE_TEMP. 读取了 1 个观测
+NOTE: 数据集 EMWS1.TREE_TREE_PLOT 有 1 个观测和 22 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.01 秒
+      CPU 时间          0.01 秒
+      
+
+11616  proc sort data=EMWS1.Tree_TREE_PLOT;
+11617  by node index;
+11618  run;
+
+NOTE: 从数据集 EMWS1.TREE_TREE_PLOT. 读取了 1 个观测
+NOTE: 数据集 EMWS1.TREE_TREE_PLOT 有 1 个观测和 22 个变量。
+NOTE: “PROCEDURE SORT”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+11619  proc sort data=EMWS1.Tree_TREE_PLOT out=t;
+11620  by descending N;
+11621  run;
+
+NOTE: 从数据集 EMWS1.TREE_TREE_PLOT. 读取了 1 个观测
+NOTE: 数据集 WORK.T 有 1 个观测和 22 个变量。
+NOTE: “PROCEDURE SORT”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.01 秒
+      
+
+11622  data t;
+11623  set t;
+11624  label N="%sysfunc(sasmsg(sashelp.dmine, rpt_trainingobs_vlabel  , NOQUOTE))" DEPTH="%sysfunc(sasmsg(sashelp.dmine, rpt_depth_vlabel  , NOQUOTE))"
+11625  VN="%sysfunc(sasmsg(sashelp.dmine, rpt_validobs_vlabel  , NOQUOTE))"
+11626  ;
+11627  run;
+
+NOTE: 从数据集 WORK.T. 读取了 1 个观测
+NOTE: 数据集 WORK.T 有 1 个观测和 22 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.01 秒
+      CPU 时间          0.01 秒
+      
+
+11628  title8 "%sysfunc(sasmsg(sashelp.dmine, rpt_treeleafreport_title  , NOQUOTE))";
+11629  proc print data=t noobs label;
+11630  where tprob ne .;
+11631  var node depth N tprob
+11632  VN vprob
+11633  ;
+11634  run;
+
+NOTE: 从数据集 WORK.T. 读取了 1 个观测
+      WHERE tprob not = .;
+NOTE: PROCEDURE PRINT 已打印第 4 页。
+NOTE: “PROCEDURE PRINT”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.00 秒
+      
+
+11635  title8;
+
+11636  data EMWS1.Tree_OUTSTATS;
+11637  set EMWS1.Tree_OUTSTATS;
+11638  if STATNAME='TARGET' then delete;
+11639  if STATNAME='PREDICTION' and STATVALUE=. then delete;
+11640  drop LEAF;
+11641  run;
+
+NOTE: 从数据集 EMWS1.TREE_OUTSTATS. 读取了 31 个观测
+NOTE: 数据集 EMWS1.TREE_OUTSTATS 有 30 个观测和 4 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.01 秒
+      
+
+11642  proc arbor inmodel=EMWS1.Tree_EMTREE version=10;
+NOTE: 1658591 kilobytes of physical memory.
+NOTE: The subtree sequence contains 4 subtrees. The largest has 7 nodes and 4 leaves.
+11643  save model = EMWS1.Tree_EXPORTTREE;
+NOTE: 数据集 EMWS1.TREE_EXPORTTREE 有 693 个观测和 4 个变量。
+11644  run;
+
+
+NOTE: “PROCEDURE ARBOR”所用时间（总处理时间）:
+      实际时间          0.05 秒
+      CPU 时间          0.03 秒
+      
+
+11645  data work.Tree_tarmetads;
+11646  set EMWS1.Part_CMeta_TRAIN(where=(ROLE='TARGET'));
+11647  run;
+
+NOTE: 从数据集 EMWS1.PART_CMETA_TRAIN. 读取了 1 个观测
+      WHERE ROLE='TARGET';
+NOTE: 数据集 WORK.TREE_TARMETADS 有 1 个观测和 20 个变量。
+NOTE: “DATA 语句”所用时间（总处理时间）:
+      实际时间          0.00 秒
+      CPU 时间          0.01 秒
+      
+
+NOTE: 该 SAS 会话使用的是 WORK 中的注册表，结束会话时将不会保存任何更改。
